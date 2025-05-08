@@ -1,21 +1,7 @@
-import { getToken } from "next-auth/jwt";
-import { cookies } from "next/headers";
-
 export default async function ProfilePage() {
   // Cookie から JWT を取得（App Router構成ではこれ）
-  const cookieStore = cookies(); // ← 一度変数に代入
-  const token = await getToken({
-    req: { headers: { cookie: cookieStore.toString() } } as any,
-  });
-  if (!token || !token.accessToken) {
-    return <p>ログインしていません。</p>;
-  }
-
-  const res = await fetch("http://localhost:8080/api/profile", {
-    headers: {
-      Authorization: `Bearer ${token.accessToken}`,
-    },
-    cache: "no-store", // 毎回新しい情報を取得
+  const res = await fetch("http://localhost:3000/api/proxy/profile", {
+    cache: "no-store",
   });
 
   if (!res.ok) {
