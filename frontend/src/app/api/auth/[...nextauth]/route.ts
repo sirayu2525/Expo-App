@@ -24,8 +24,8 @@ export const authOptions : NextAuthOptions = {
         profile?: Profile;
       }) {
         if (profile) {
-            token.name = profile.name;
-            token.email = profile.email;
+            token.id = profile.id;
+            token.username = profile.username;
         }
         return token;
       },
@@ -36,8 +36,7 @@ export const authOptions : NextAuthOptions = {
         session: Session;
         token: JWT;
       }) {
-        session.user!.name = token.name as string;
-        session.user!.email = token.email as string;
+        session.user!.id = token.id as string;
         return session;
       }
       
