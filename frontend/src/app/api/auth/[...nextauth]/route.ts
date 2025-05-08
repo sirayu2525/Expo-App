@@ -1,7 +1,11 @@
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import type { JWT } from "next-auth/jwt";
+import type { Profile } from "next-auth";
+import type { Session } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions : NextAuthOptions = {
   providers: [
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID!,
@@ -12,20 +16,31 @@ export const authOptions = {
     strategy: "jwt", // JWT を使用
   },
   callbacks: {
-    async jwt({ token, profile }) {
-      if (profile) {
-        token.discordId = profile.id;
-        token.email = profile.email;
-        token.name = profile.username;
+    async jwt({
+        token,
+        profile,
+      }: {
+        token: JWT;
+        profile?: Profile;
+      }) {
+        if (profile) {
+            token.name = profile.name;
+            token.email = profile.email;
+        }
+        return token;
+      },
+      async session({
+        session,
+        token,
+      }: {
+        session: Session;
+        token: JWT;
+      }) {
+        session.user!.name = token.name as string;
+        session.user!.email = token.email as string;
+        return session;
       }
-      return token;
-    },
-    async session({ session, token }) {
-      session.user.discordId = token.discordId;
-      session.user.email = token.email;
-      session.user.name = token.name;
-      return session;
-    },
+      
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

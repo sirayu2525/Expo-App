@@ -9,7 +9,7 @@ export default function HomePage() {
     <main>
       {session ? (
         <>
-          <p>ログイン済み: {session.user.name}</p>
+          <p>ログイン済み: {session.user!.name}</p>
           <button onClick={() => signOut()}>ログアウト</button>
         </>
       ) : (
