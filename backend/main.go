@@ -51,6 +51,10 @@ func verifyJWT(next echo.HandlerFunc) echo.HandlerFunc {
 func main() {
 	e := echo.New()
 
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Echo server is running.")
+	})
+
 	// CORS対策など（必要に応じて）
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -60,10 +64,10 @@ func main() {
 	api.Use(verifyJWT)
 
 	api.GET("/profile", func(c echo.Context) error {
-		discordId := c.Get("discordId")
+		id := c.Get("id")
 		return c.JSON(http.StatusOK, echo.Map{
 			"message":   "JWT 検証成功",
-			"discordId": discordId,
+			"discordId": id,
 		})
 	})
 
