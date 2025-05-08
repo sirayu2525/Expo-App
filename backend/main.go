@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -24,7 +25,9 @@ func init() {
 
 func verifyJWT(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
+		fmt.Println("JWT verification middleware called")
 		authHeader := c.Request().Header.Get("Authorization")
+		fmt.Println("Authorization header:", authHeader)
 		if !strings.HasPrefix(authHeader, "Bearer ") {
 			return echo.NewHTTPError(http.StatusUnauthorized, "missing token")
 		}
@@ -64,6 +67,7 @@ func main() {
 	api.Use(verifyJWT)
 
 	api.GET("/profile", func(c echo.Context) error {
+		fmt.Println("Profile endpoint called")
 		id := c.Get("id")
 		return c.JSON(http.StatusOK, echo.Map{
 			"message":   "JWT 検証成功",

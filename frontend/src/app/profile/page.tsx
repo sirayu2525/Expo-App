@@ -3,8 +3,10 @@ import { cookies } from "next/headers";
 
 export default async function ProfilePage() {
   // Cookie から JWT を取得（App Router構成ではこれ）
-  const token = await getToken({ req: { headers: { cookie: cookies().toString() } } as any });
-
+  const cookieStore = cookies(); // ← 一度変数に代入
+  const token = await getToken({
+    req: { headers: { cookie: cookieStore.toString() } } as any,
+  });
   if (!token || !token.accessToken) {
     return <p>ログインしていません。</p>;
   }
