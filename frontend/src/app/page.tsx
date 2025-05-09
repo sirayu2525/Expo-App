@@ -11,12 +11,9 @@ export default function HomePage() {
         <>
           <p>ログイン済み: {session.user!.name}</p>
           <button onClick={() => signOut()}>ログアウト</button>
-          <pre>{JSON.stringify(session, null, 2)}</pre>
         </>
       ) : (
-        <>
-          <button onClick={() => signIn('discord')}>Discordでログイン</button>
-        </>   
+        <button onClick={() => signIn('discord')}>Discordでログイン</button>
       )}
     </main>
   );
