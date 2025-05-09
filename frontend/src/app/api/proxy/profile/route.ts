@@ -5,12 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     // Include the secret from your NextAuth configuration
-    const token = await getToken({ 
-      req,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
+    const token = await getToken({ req });
     
-    console.log("Token exists:", !!token);
+    console.log("Token exists:", token);
     if (token) console.log("Token properties:", Object.keys(token));
     
     // Ensure token exists
@@ -24,21 +21,21 @@ export async function GET(req: NextRequest) {
     }
     
     // Make the authenticated request to the backend API
-    const res = await fetch("http://localhost:8080/api/profile", {
-      headers: {
-        Authorization: `Bearer ${token.id}`,
-      },
-      cache: 'no-store',
-    });
+    // const res = await fetch("http://localhost:8080/api/profile", {
+    //   headers: {
+    //     Authorization: `Bearer ${token.id}`,
+    //   },
+    //   cache: 'no-store',
+    // });
     
     // Check if the fetch request was successful
-    if (!res.ok) {
-      const errorData = await res.json().catch(() => ({ error: "Unknown error" }));
-      return NextResponse.json(errorData, { status: res.status });
-    }
+    // if (!res.ok) {
+    //   const errorData = await res.json().catch(() => ({ error: "Unknown error" }));
+    //   return NextResponse.json(errorData, { status: res.status });
+    // }
     
-    const data = await res.json();
-    return NextResponse.json(data);
+    // const data = await token.json();
+    return NextResponse.json(token, { status: 200 });
   } catch (error) {
     console.error("Profile fetch error:", error);
     return NextResponse.json({ error: "サーバーエラー" }, { status: 500 });
