@@ -68,10 +68,10 @@ func main() {
 
 	api.GET("/profile", func(c echo.Context) error {
 		fmt.Println("Profile endpoint called")
-		id := c.Get("id")
+		discordId := c.Get("discordId")
 		return c.JSON(http.StatusOK, echo.Map{
 			"message":   "JWT 検証成功",
-			"discordId": id,
+			"discordId": discordId,
 		})
 	})
 

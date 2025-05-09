@@ -23,14 +23,15 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, profile, account }) {
       if (profile) {
-        console.log("profile", profile);
+        // console.log("profile", profile);
         token.name = profile.name;
         token.email = profile.email;
       }
       if (account) {
-        console.log("account", account);
+        // console.log("account", account);
         token.id = account.providerAccountId;
       }
+      // console.log("token", token);
       return token;
     },
     async session({ session, token }) {
