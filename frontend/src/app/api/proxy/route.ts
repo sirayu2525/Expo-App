@@ -1,4 +1,6 @@
-// app/api/proxy/profile/route.ts
+// src/app/api/proxy/profile/route.ts
+// クライアントページからの場合のJWT処理ベース
+// クライアントからのリクエストでJWTを復号し、クライアントに返す
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,7 +8,6 @@ export async function GET(req: NextRequest) {
   try {
     // Include the secret from your NextAuth configuration
     const token = await getToken({ req });
-    
     console.log("Token exists:", token);
     if (token) console.log("Token properties:", Object.keys(token));
     

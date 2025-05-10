@@ -167,3 +167,23 @@ Go側も同じ `NEXTAUTH_SECRET` を使用することに注意
 * NextAuth.js は OAuthログイン & JWT発行を一括管理
 * Go側は JWT の検証のみを行うシンプルな設計
 * ステートレスなインフラの創出に適している
+
+
+## 第二案
+
+### 全体の流れ
+
+[ユーザー]
+ ↓ Discord OAuth
+[Next.js (NextAuth)]
+ ↓ getToken()で復号
+ ↓ req.body = { userId, eventName }
+POST /api/proxy/reservation
+ ↓
+[Go (Echo)]
+ ↓
+DB.insert(userId, eventName)
+
+ユーザーがDiscordでのログインをする→JWT発行（ブラウザはJWTを持った状態、暗号化済み）
+→クライアントページにアクセスするとJWTがNext.jsに送られて、復号と検証→中身のデータをGoのDBサーバーに送る
+→例えばユーザーIDに基づいた情報をGoがDBから取得し、それをレスポンスとしてNextに返す→それをクライアントに返す

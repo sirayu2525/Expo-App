@@ -11,6 +11,11 @@ export const authOptions: NextAuthOptions = {
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: "identify email",
+        },
+      },
     }),
   ],
   session: {
@@ -57,7 +62,6 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/signin',
     // error: '/auth/error', // Uncomment if you have a custom error page
   },
-  debug: process.env.NODE_ENV === 'development',
   secret: process.env.NEXTAUTH_SECRET,
 };
 
