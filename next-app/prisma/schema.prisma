@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  userId     String             @id @default(uuid())
+  password   String
+  point      Int
+  events     Event[]         @relation("UserEvents")
+  reservations Reservation[]
+
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+model Event {
+  eventId      Int             @id @default(autoincrement())
+  userId       String
+  user         User            @relation("UserEvents", fields: [userId], references: [userId])
+  eventName    String
+  title        String
+  description  String
+  createdAt    DateTime        @default(now())
+  startsAt     DateTime
+  endsAt       DateTime
+  capa         Int
+  reservations Reservation[]
+  isDeleted    Boolean         @default(false)
+
+  updatedAt    DateTime        @updatedAt
+
+  @@map("event_table") // DB上のテーブル名を "event_table" にする
+}
+
+model Reservation {
+  reservationId Int                @id @default(autoincrement())
+  userId        String
+  eventId       Int
+  status        ReservationStatus
+  reservedAt    DateTime           @default(now())
+  canceledAt    DateTime?
+
+  user          User               @relation(fields: [userId], references: [userId])
+  event         Event              @relation(fields: [eventId], references: [eventId])
+
+  @@unique([userId, eventId])      // 重複予約防止
+}
+
+enum ReservationStatus {
+  RESERVED
+  CANCELED
+}
