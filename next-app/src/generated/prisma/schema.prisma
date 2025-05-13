@@ -18,6 +18,7 @@ datasource db {
 model User {
   userId       String        @id @default(uuid())
   password     String
+  email        String
   point        Int
   events       Event[]       @relation("UserEvents")
   reservations Reservation[]

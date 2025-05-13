@@ -1,38 +1,33 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/labstack/echo/v4"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 
-	"my-auth-server/models" // ← go.mod の module 名と合わせる
+	"my-auth-server/handlers"
 )
 
 func main() {
-	// .env 読み込み
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	_ = godotenv.Load()
+	dsn := os.Getenv("DIRECT_URL")
 
-	// 環境変数からDSNを取得
-	dsn := os.Getenv("DATABASE_URL")
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		PrepareStmt: false,
+		Logger:      logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
 		log.Fatal("DB接続失敗:", err)
 	}
 
-	// Userテーブルのデータを取得
-	var users []models.User
-	if err := db.Find(&users).Error; err != nil {
-		log.Fatal("ユーザー取得失敗:", err)
-	}
+	e := echo.New()
 
-	fmt.Println("ユーザー一覧:")
-	for _, u := range users {
-		fmt.Println(u.UserID, u.Point)
-	}
+	e.POST("/signup", handlers.SignupHandler(db))
+
+	e.Logger.Fatal(e.Start(":8080"))
 }

@@ -5,11 +5,12 @@ import (
 )
 
 type User struct {
-	UserID    string    `gorm:"column:user_id;primaryKey"`
+	UserID    string    `gorm:"column:userId;primaryKey"`
 	Password  string    `gorm:"column:password"`
+	Email     string    `gorm:"column:email"`
 	Point     int       `gorm:"column:point"`
-	CreatedAt time.Time `gorm:"column:created_at"`
-	UpdatedAt time.Time `gorm:"column:updated_at"`
+	CreatedAt time.Time `gorm:"column:createdAt"`
+	UpdatedAt time.Time `gorm:"column:updatedAt"`
 }
 
 func (User) TableName() string {
@@ -17,17 +18,17 @@ func (User) TableName() string {
 }
 
 type Event struct {
-	EventID     int       `gorm:"column:event_id;primaryKey;autoIncrement"`
-	UserID      string    `gorm:"column:user_id"`
-	EventName   string    `gorm:"column:event_name"`
+	EventID     int       `gorm:"column:eventId;primaryKey;autoIncrement"`
+	UserID      string    `gorm:"column:userId"`
+	EventName   string    `gorm:"column:eventName"`
 	Title       string    `gorm:"column:title"`
 	Description string    `gorm:"column:description"`
-	CreatedAt   time.Time `gorm:"column:created_at"`
-	StartsAt    time.Time `gorm:"column:starts_at"`
-	EndsAt      time.Time `gorm:"column:ends_at"`
+	CreatedAt   time.Time `gorm:"column:createdAt"`
+	StartsAt    time.Time `gorm:"column:startsAt"`
+	EndsAt      time.Time `gorm:"column:endsAt"`
 	Capa        int       `gorm:"column:capa"`
-	IsDeleted   bool      `gorm:"column:is_deleted"`
-	UpdatedAt   time.Time `gorm:"column:updated_at"`
+	IsDeleted   bool      `gorm:"column:isDeleted"`
+	UpdatedAt   time.Time `gorm:"column:updatedAt"`
 }
 
 func (Event) TableName() string {
@@ -35,12 +36,12 @@ func (Event) TableName() string {
 }
 
 type Reservation struct {
-	ReservationID int        `gorm:"column:reservation_id;primaryKey;autoIncrement"`
-	UserID        string     `gorm:"column:user_id"`
-	EventID       int        `gorm:"column:event_id"`
+	ReservationID int        `gorm:"column:reservationId;primaryKey;autoIncrement"`
+	UserID        string     `gorm:"column:userId"`
+	EventID       int        `gorm:"column:eventId"`
 	Status        string     `gorm:"column:status"`
-	ReservedAt    time.Time  `gorm:"column:reserved_at"`
-	CanceledAt    *time.Time `gorm:"column:canceled_at"` // nullable
+	ReservedAt    time.Time  `gorm:"column:reservedAt"`
+	CanceledAt    *time.Time `gorm:"column:canceledAt"` // nullable
 }
 
 func (Reservation) TableName() string {

@@ -416,3 +416,8 @@ JWT発行/検証	CLIやPostmanで発行・検証ロジックの確認
 Next.jsとの通信	fetch() or Axios でログイン処理確認
 最終的な /me	JWT付きリクエストで想定レスポンスが返ることを確認
 
+
+
+# 苦労点
+jwt認証とOAuth
+pgbouncerとprepared statement
