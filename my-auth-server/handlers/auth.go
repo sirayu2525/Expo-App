@@ -27,9 +27,10 @@ func SignupHandler(db *gorm.DB) echo.HandlerFunc {
 		}
 
 		fmt.Println("受信:", input.Email)
-		if input.Email == "" || input.Password == "" {
-			return c.JSON(http.StatusBadRequest, echo.Map{"error": "email and password are required"})
-		}
+		fmt.Println("受信:", input.Password)
+		// if input.Email == "" || input.Password == "" {
+		// 	return c.JSON(http.StatusBadRequest, echo.Map{"error": "email and password are required"})
+		// }
 
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
 		if err != nil {
