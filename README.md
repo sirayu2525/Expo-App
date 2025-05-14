@@ -422,3 +422,6 @@ Next.jsとの通信	fetch() or Axios でログイン処理確認
 jwt認証とOAuth
 pgbouncerとprepared statement
 ハッシュのソルトとペッパー
+SELECT * FROM "User" WHERE userId = 'e433a55a-ba22-4a40-b2a5-6e99cad5644d' ORDER BY "User"."userId" LIMIT 1
+これでuserIdの大文字が小文字になってしまう・・・
+Where(`"userId" = ?`, userID)これで明示的に指定

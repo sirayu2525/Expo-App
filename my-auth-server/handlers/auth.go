@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -92,5 +93,63 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 		}
 
 		return c.JSON(http.StatusOK, echo.Map{"token": signedToken})
+	}
+}
+
+func ExtractUserIDFromToken(c echo.Context) (string, error) {
+	authHeader := c.Request().Header.Get("Authorization")
+	if authHeader == "" {
+		return "", echo.NewHTTPError(http.StatusUnauthorized, "missing Authorization header")
+	}
+	fmt.Println("受信:", authHeader)
+
+	tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
+	if tokenStr == authHeader {
+		return "", echo.NewHTTPError(http.StatusUnauthorized, "invalid Authorization format")
+	}
+	fmt.Println("受信:", tokenStr)
+
+	secret := os.Getenv("SECRET_KEY")
+	token, err := jwt.Parse(tokenStr, func(t *jwt.Token) (interface{}, error) {
+		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, echo.NewHTTPError(http.StatusUnauthorized, "unexpected signing method")
+		}
+		return []byte(secret), nil
+	})
+	if err != nil || !token.Valid {
+		return "", echo.NewHTTPError(http.StatusUnauthorized, "invalid token")
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || claims["sub"] == nil {
+		return "", echo.NewHTTPError(http.StatusUnauthorized, "invalid claims")
+	}
+
+	userID, ok := claims["sub"].(string)
+	if !ok {
+		return "", echo.NewHTTPError(http.StatusUnauthorized, "userID not string")
+	}
+
+	return userID, nil
+}
+
+func MeHandler(db *gorm.DB) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		userID, err := ExtractUserIDFromToken(c)
+		if err != nil {
+			return err // JWTの問題ならこのままエラーを返す
+		}
+
+		var user models.User
+		if err := db.Table("User").Where(`"userId" = ?`, userID).First(&user).Error; err != nil {
+			return echo.NewHTTPError(http.StatusNotFound, "user not found")
+		}
+
+		return c.JSON(http.StatusOK, echo.Map{
+			"userId":    user.UserID,
+			"email":     user.Email,
+			"point":     user.Point,
+			"createdAt": user.CreatedAt,
+		})
 	}
 }
