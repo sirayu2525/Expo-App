@@ -17,26 +17,17 @@ export default function MePage() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('jwt');
-      if (!token) {
-        setError('未ログインです。ログインしてください。');
-        router.push('/login');
-        return;
-      }
-
       try {
         const res = await fetch('/api/me', {
-          headers: { Authorization: `Bearer ${token}` },
+          credentials: 'include', // ← Cookie送信のため必須
         });
 
         if (!res.ok) throw new Error('Unauthorized');
 
         const data = await res.json();
-        console.log('Decoded JWT:', data);
         setUser(data.user);
       } catch (err) {
         setError('ログイン情報の確認に失敗しました。');
-        localStorage.removeItem('jwt');
         router.push('/login');
       }
     };
@@ -44,8 +35,11 @@ export default function MePage() {
     checkAuth();
   }, [router]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('jwt');
+  const handleLogout = async () => {
+    await fetch('/api/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
     router.push('/login');
   };
 
@@ -61,8 +55,8 @@ export default function MePage() {
             <p><strong>有効期限:</strong> {user.exp ? new Date(user.exp * 1000).toLocaleString() : 'N/A'}</p>
           </div>
           <button
-          onClick={handleLogout}
-          className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+            onClick={handleLogout}
+            className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
           >
             ログアウト
           </button>

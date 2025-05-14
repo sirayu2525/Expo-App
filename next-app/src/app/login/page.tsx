@@ -15,6 +15,7 @@ export default function LoginPage() {
       const res = await fetch('http://localhost:8080/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // ← Cookieを受け取るために必要
         body: JSON.stringify({ email, password }),
       });
 
@@ -24,9 +25,8 @@ export default function LoginPage() {
         return;
       }
 
-      const data = await res.json();
-      localStorage.setItem('jwt', data.token);
-      router.push('/me'); // ログイン後に /me ページへ遷移
+      // Cookieは自動的に保存されるので、何も保存しなくてOK
+      router.push('/me');
     } catch (err) {
       setError('通信エラー');
     }

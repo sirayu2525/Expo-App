@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -75,6 +74,9 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 			return c.JSON(http.StatusUnauthorized, echo.Map{"error": "user not found"})
 		}
 
+		fmt.Println("受信:", input.Email)
+		fmt.Println("受信:", input.Password)
+
 		// パスワード照合
 		if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)); err != nil {
 			return c.JSON(http.StatusUnauthorized, echo.Map{"error": "invalid password"})
@@ -91,22 +93,42 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, echo.Map{"error": "failed to generate token"})
 		}
+		fmt.Println("発行:", signedToken)
 
-		return c.JSON(http.StatusOK, echo.Map{"token": signedToken})
+		cookie := &http.Cookie{
+			Name:     "jwt",
+			Value:    signedToken,
+			HttpOnly: true,
+			Secure:   false, // ローカルならfalse、本番はtrue
+			Path:     "/",
+			SameSite: http.SameSiteLaxMode,
+			MaxAge:   60 * 60 * 24, // 1日
+		}
+		c.SetCookie(cookie)
+		return c.JSON(http.StatusOK, cookie.Value)
+
 	}
 }
 
 func ExtractUserIDFromToken(c echo.Context) (string, error) {
-	authHeader := c.Request().Header.Get("Authorization")
-	if authHeader == "" {
-		return "", echo.NewHTTPError(http.StatusUnauthorized, "missing Authorization header")
-	}
-	fmt.Println("受信:", authHeader)
+	// authHeader := c.Request().Header.Get("Authorization")
+	// if authHeader == "" {
+	// 	return "", echo.NewHTTPError(http.StatusUnauthorized, "missing Authorization header")
+	// }
+	// fmt.Println("受信:", authHeader)
 
-	tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
-	if tokenStr == authHeader {
-		return "", echo.NewHTTPError(http.StatusUnauthorized, "invalid Authorization format")
+	// tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
+	// if tokenStr == authHeader {
+	// 	return "", echo.NewHTTPError(http.StatusUnauthorized, "invalid Authorization format")
+	// }
+	// fmt.Println("受信:", tokenStr)
+
+	cookie, err := c.Cookie("jwt")
+	if err != nil {
+		return "", echo.NewHTTPError(http.StatusUnauthorized, "missing JWT cookie")
 	}
+
+	tokenStr := cookie.Value
 	fmt.Println("受信:", tokenStr)
 
 	secret := os.Getenv("SECRET_KEY")

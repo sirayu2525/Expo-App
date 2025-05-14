@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 
-export async function GET(req: NextRequest) {
-  const authHeader = req.headers.get('authorization');
+export async function GET() {
+  const token = (await cookies()).get('jwt')?.value;
+  console.log('Token:', token);
 
-  if (!authHeader?.startsWith('Bearer ')) {
-    return NextResponse.json({ error: 'Missing or malformed token' }, { status: 401 });
+  if (!token) {
+    return NextResponse.json({ error: 'Missing token' }, { status: 401 });
   }
-
-  const token = authHeader.split(' ')[1];
 
   try {
     const secret = process.env.SECRET_KEY!;
-    const decoded = jwt.verify(token, secret); // ← HS256用の検証
+    const decoded = jwt.verify(token, secret); // HS256で検証
 
     return NextResponse.json({ user: decoded });
   } catch (err) {
