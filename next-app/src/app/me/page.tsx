@@ -44,15 +44,28 @@ export default function MePage() {
     checkAuth();
   }, [router]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    router.push('/login');
+  };
+
   return (
     <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow">
       <h1 className="text-xl font-bold mb-4">マイページ</h1>
       {error && <p className="text-red-500">{error}</p>}
       {!user && !error && <p>読み込み中...</p>}
       {user && (
-        <div className="space-y-2">
-          <p><strong>ユーザーID:</strong> {user.sub}</p>
-          <p><strong>有効期限:</strong> {user.exp ? new Date(user.exp * 1000).toLocaleString() : 'N/A'}</p>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <p><strong>ユーザーID:</strong> {user.sub}</p>
+            <p><strong>有効期限:</strong> {user.exp ? new Date(user.exp * 1000).toLocaleString() : 'N/A'}</p>
+          </div>
+          <button
+          onClick={handleLogout}
+          className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+          >
+            ログアウト
+          </button>
         </div>
       )}
     </div>
