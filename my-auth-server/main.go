@@ -63,6 +63,8 @@ func main() {
 
 	e.POST("/signup", handlers.SignupHandler(db))
 
+	e.POST("/signin", handlers.SigninHandler(db))
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

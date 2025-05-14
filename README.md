@@ -418,6 +418,7 @@ Next.jsとの通信	fetch() or Axios でログイン処理確認
 
 
 
-# 苦労点
+# 苦労点・学び
 jwt認証とOAuth
 pgbouncerとprepared statement
+ハッシュのソルトとペッパー
