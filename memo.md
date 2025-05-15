@@ -425,3 +425,8 @@ pgbouncerとprepared statementで謎のエラー⇒接続先をDIRECT_URLにし�
 SELECT * FROM "User" WHERE userId = 'e433a55a-ba22-4a40-b2a5-6e99cad5644d' ORDER BY "User"."userId" LIMIT 1
 これでuserIdの大文字が小文字になってしまう・・・
 Where(`"userId" = ?`, userID)これで明示的に指定
+質問事項：
+Next.js には サーバーでHTML生成と クライアントでJSによる描画があり、
+App Routerでは server component が SSR、'use client' コンポーネントが CSR を担う。
+必要に応じて静的生成（SSG）や再生成（ISR）も使える。
+その理論でいうと、document.cookiesをuseEffectに囲わなくてもいけるはずだろう。なぜならJavaScriptをブラウザに送ってそこでdocument.を実行するなら成功するはずさ。なのになぜuseEffectで囲わなかったらエラーがでるのか
