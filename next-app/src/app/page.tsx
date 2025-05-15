@@ -22,6 +22,14 @@ export default function HomePage() {
           サインアップ
         </Link>
       </div>
+      <div className="mt-8">
+        <Link
+          href="/dashboard"
+          className="text-blue-600 hover:underline"
+        >
+          ダッシュボードに移動
+        </Link>
+      </div>
     </main>
   );
 }

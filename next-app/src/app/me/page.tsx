@@ -13,13 +13,14 @@ type DecodedUser = {
 export default function MePage() {
   const [user, setUser] = useState<DecodedUser | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const res = await fetch('/api/me', {
-          credentials: 'include', // ← Cookie送信のため必須
+          credentials: 'include',
         });
 
         if (!res.ok) throw new Error('Unauthorized');
@@ -35,6 +36,20 @@ export default function MePage() {
     checkAuth();
   }, [router]);
 
+  useEffect(() => {
+    // CookieからJWTを取り出してリダイレクトURLを生成
+    const cookies = document.cookie;
+    const token = cookies
+      .split('; ')
+      .find((row) => row.startsWith('jwt='))
+      ?.split('=')[1];
+
+    if (token) {
+      const encoded = encodeURIComponent(token);
+      setRedirectUrl(`http://localhost:8000?token=${encoded}`);
+    }
+  }, []);
+
   const handleLogout = async () => {
     await fetch('/api/logout', {
       method: 'POST',
@@ -49,18 +64,28 @@ export default function MePage() {
       {error && <p className="text-red-500">{error}</p>}
       {!user && !error && <p>読み込み中...</p>}
       {user && (
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <p><strong>ユーザーID:</strong> {user.sub}</p>
-            <p><strong>有効期限:</strong> {user.exp ? new Date(user.exp * 1000).toLocaleString() : 'N/A'}</p>
+        <>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <p><strong>ユーザーID:</strong> {user.sub}</p>
+              <p><strong>有効期限:</strong> {user.exp ? new Date(user.exp * 1000).toLocaleString() : 'N/A'}</p>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+            >
+              ログアウト
+            </button>
           </div>
-          <button
-            onClick={handleLogout}
-            className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
-          >
-            ログアウト
-          </button>
-        </div>
+
+          {redirectUrl && (
+            <div className="mt-4">
+              <a href={redirectUrl} className="text-blue-600 hover:underline">
+                他ドメインへ移動（JWT付き）
+              </a>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
