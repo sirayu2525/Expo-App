@@ -55,5 +55,5 @@ async function createEventAction(formData: FormData) {
   }
 
   await prisma.timeSlot.createMany({ data: slots });
-  redirect('/');
+  redirect('/top');
 }
