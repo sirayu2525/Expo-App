@@ -26,7 +26,7 @@ export default function LoginPage() {
       }
 
       // Cookieは自動的に保存されるので、何も保存しなくてOK
-      router.push('/me');
+      router.push('/top');
     } catch (err) {
       setError('通信エラー');
     }
