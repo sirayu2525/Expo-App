@@ -64,3 +64,9 @@ npm run dev 　　// サーバー起動
 next-app/src/app/signup/page.tsx
 ここにサインアップのページ
 
+```
+npx prisma migrate dev  // データベーススキーマの変更
+npx prisma generate     // Prismaクライアントの生成
+npx prisma migrate reset // 必要に応じてデータ消去
+```
+

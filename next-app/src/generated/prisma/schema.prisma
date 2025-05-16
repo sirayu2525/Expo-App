@@ -20,44 +20,54 @@ model User {
   password     String
   email        String
   point        Int
-  events       Event[]       @relation("UserEvents")
+  profile      String?
+  name         String?
+  hostEvents   Event[]       @relation("UserHosts")
   reservations Reservation[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model Event {
-  eventId      Int           @id @default(autoincrement())
-  userId       String
-  user         User          @relation("UserEvents", fields: [userId], references: [userId])
-  eventName    String
-  title        String
-  description  String
-  createdAt    DateTime      @default(now())
-  startsAt     DateTime
-  endsAt       DateTime
-  capa         Int
-  reservations Reservation[]
-  isDeleted    Boolean       @default(false)
-
-  updatedAt DateTime @updatedAt
+  eventId     Int        @id @default(autoincrement())
+  hostId      String
+  host        User       @relation("UserHosts", fields: [hostId], references: [userId])
+  eventName   String
+  title       String
+  description String
+  createdAt   DateTime   @default(now())
+  startsAt    DateTime
+  endsAt      DateTime
+  isDeleted   Boolean    @default(false)
+  updatedAt   DateTime   @updatedAt
+  timeSlots   TimeSlot[]
 
   @@map("event_table") // DB上のテーブル名を "event_table" にする
+}
+
+model TimeSlot {
+  timeSlotId Int      @id @default(autoincrement())
+  eventId    Int
+  startAt    DateTime
+  endAt      DateTime
+  capacity   Int
+
+  event        Event         @relation(fields: [eventId], references: [eventId])
+  reservations Reservation[]
 }
 
 model Reservation {
   reservationId Int               @id @default(autoincrement())
   userId        String
-  eventId       Int
+  timeSlotId    Int
   status        ReservationStatus
   reservedAt    DateTime          @default(now())
   canceledAt    DateTime?
 
-  user  User  @relation(fields: [userId], references: [userId])
-  event Event @relation(fields: [eventId], references: [eventId])
+  user     User     @relation(fields: [userId], references: [userId])
+  timeSlot TimeSlot @relation(fields: [timeSlotId], references: [timeSlotId])
 
-  @@unique([userId, eventId]) // 重複予約防止
+  @@unique([userId, timeSlotId])
 }
 
 enum ReservationStatus {

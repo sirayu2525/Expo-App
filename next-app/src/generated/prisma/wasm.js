@@ -125,28 +125,37 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   email: 'email',
   point: 'point',
+  profile: 'profile',
+  name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
 exports.Prisma.EventScalarFieldEnum = {
   eventId: 'eventId',
-  userId: 'userId',
+  hostId: 'hostId',
   eventName: 'eventName',
   title: 'title',
   description: 'description',
   createdAt: 'createdAt',
   startsAt: 'startsAt',
   endsAt: 'endsAt',
-  capa: 'capa',
   isDeleted: 'isDeleted',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TimeSlotScalarFieldEnum = {
+  timeSlotId: 'timeSlotId',
+  eventId: 'eventId',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  capacity: 'capacity'
 };
 
 exports.Prisma.ReservationScalarFieldEnum = {
   reservationId: 'reservationId',
   userId: 'userId',
-  eventId: 'eventId',
+  timeSlotId: 'timeSlotId',
   status: 'status',
   reservedAt: 'reservedAt',
   canceledAt: 'canceledAt'
@@ -174,6 +183,7 @@ exports.ReservationStatus = exports.$Enums.ReservationStatus = {
 exports.Prisma.ModelName = {
   User: 'User',
   Event: 'Event',
+  TimeSlot: 'TimeSlot',
   Reservation: 'Reservation'
 };
 
