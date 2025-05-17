@@ -5,6 +5,14 @@ import os
 import time
 import datetime
 
+import asyncio
+from agents import Agent, Runner, RunConfig
+from agents.mcp.server import MCPServerStdio
+
+#from agents.mcp.server import MCPServerHttp
+from agents.mcp.server import MCPServer
+from agents.mcp.server import MCPServerStreamableHttp
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -15,6 +23,72 @@ print(params)
 
 jwt_token = params.get("jwt", [None])
 print(jwt_token)
+
+
+def run_async(coro):
+    """Streamlit 上で安全に async 関数を呼び出すためのラッパー"""
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    if loop.is_running():
+        return asyncio.ensure_future(coro)
+    else:
+        return loop.run_until_complete(coro)
+
+
+
+async def suggest_event(user_id):
+    # ──── ① APIキーの存在チェック ────
+    if "OPENAI_API_KEY" not in os.environ:
+        raise RuntimeError("Please set the OPENAI_API_KEY environment variable")
+
+    
+
+#    mcp_server = MCPServerHttp(
+#        base_url='http://127.0.0.1:3333',
+#        cache_tools_list=True
+#    )
+
+    mcp_server = MCPServerStreamableHttp(
+        params={
+           "url": "http://127.0.0.1:3333/mcp",   # ご自身のMCPサーバーURLを設定
+        },
+        cache_tools_list=True,
+        client_session_timeout_seconds=30.0,
+    )
+
+    async with mcp_server:
+        print("Flag0000: MCP server ready")
+
+        # ──── ③ Agent定義 ────
+        agent = Agent(
+            name="EXPO_Agent",
+            instructions=(
+                "あなたは以下のツールを必ず使って回答するアシスタントです。\n"
+                "1) get_post(user_id: str) → 指定ユーザーの過去SNS投稿をリストで返す\n"
+                "2) get_events() → 最新20件のイベント名と詳細を返す\n"
+                "ユーザーIDが渡されたら必ず get_post を呼び出し、その結果を元におすすめイベントを提案してください。"
+            ),
+            mcp_servers=[mcp_server],
+        )
+        print("Flag0001: Agent instantiated")
+
+        prompt = f"ユーザーIDが「{user_id}」のユーザーにおすすめのイベントを紹介してください。また、ユーザーの投稿情報やイベント情報は全て見せてください。エラーが起きたらエラーの内容も見せてください"
+        print("Flag0002: Prompt ready")
+
+        # ──── ④ モデル指定して実行 ────
+        run_cfg = RunConfig(model="gpt-4o")
+        result = await Runner.run(agent, prompt, run_config=run_cfg)
+
+        print("Agent response:\n", result.final_output)
+    return result.final_output
+
+
+
+
 
 
 
@@ -83,7 +157,6 @@ def render_post_card(content: str, good_list: list, time_str: str,user_id: str, 
                 st.write("まだいいねはありません。")
 
 
-st.header("EXPO SNS")
 
 if not login_flag:
     st.subheader("ログインのタイムアウト")
@@ -91,12 +164,13 @@ if not login_flag:
     st.markdown('[ログインページ](http://google.com)')
 else:
     # レイアウト: サイドバー
-    st.sidebar.title("SNS メニュー")
+    st.sidebar.title("サービス一覧")
     #st.sidebar.write(f"ようこそ, {user('userId')}")
-    mode = st.sidebar.radio("画面選択", ['ホーム', 'プロフィール', '設定'])
+    mode = st.sidebar.radio("画面選択", ['SNS', 'おすすめイベント'])
 
 
-    if mode == 'ホーム':
+    if mode == 'SNS':
+        st.header("EXPO SNS")
         PDB = db.PostgresDB()
         #st.subheader("投稿する")
         new_post = st.text_area("投稿内容を入力してください！", height=100)
@@ -124,3 +198,13 @@ else:
                 user_id=user_id,
                 post_id = post[0]
             )
+
+    #response = None
+
+    if mode == 'おすすめイベント':
+        st.header("おすすめイベント")
+        if st.button('AI Suggest'):
+            with st.spinner('AI提案中...'):
+                response = run_async(suggest_event(user_id))
+                #response = suggest_event(user_id)
+            st.write(response)
