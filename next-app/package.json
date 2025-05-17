@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
     "vercel-build": "prisma generate && next build",
-    "prisma:generate": "prisma generate",,
+    "prisma:generate": "prisma generate",
     "postinstall": "npm run prisma:generate"
   },
   "dependencies": {
