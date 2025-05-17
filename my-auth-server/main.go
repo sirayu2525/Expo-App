@@ -58,13 +58,16 @@ func main() {
 
 	e := echo.New()
 
-	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins:     []string{"https://expo-app-pi.vercel.app"}, // ← 明示的に指定！
-		AllowMethods:     []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions},
+	e.Pre(middleware.CORSWithConfig(middleware.CORSConfig{
+		// ワイルドカードではなく明示的に許可する
+		AllowOrigins: []string{
+			"http://localhost:3000",                                  // ローカルで Next.js 等を動かす場合
+			"https://expo-ip2onysml-sirayu2525s-projects.vercel.app", // デプロイ先（本番）
+		},
+		AllowMethods:     []string{http.MethodGet, http.MethodPost, http.MethodOptions},
 		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
-		AllowCredentials: true, // ← これも忘れずに！
+		AllowCredentials: true,
 	}))
-
 	// ミドルウェア設定
 	// e.Use(middleware.Logger())
 	// e.Use(middleware.Recover())
