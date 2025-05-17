@@ -1,91 +1,46 @@
-'use client';
+import { cookies } from 'next/headers';
+import { prisma } from '@/lib/prisma';
+import jwt from 'jsonwebtoken';
+import { redirect } from 'next/navigation';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+export default async function MePage() {
+  const token = (await cookies()).get('jwt')?.value;
+  if (!token) redirect('/login');
 
-type DecodedUser = {
-  sub: string;
-  iat?: number;
-  exp?: number;
-  [key: string]: any;
-};
+  const { sub: userId } = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
 
-export default function MePage() {
-  const [user, setUser] = useState<DecodedUser | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch('/api/me', {
-          credentials: 'include',
-        });
-
-        if (!res.ok) throw new Error('Unauthorized');
-
-        const data = await res.json();
-        setUser(data.user);
-      } catch (err) {
-        setError('ログイン情報の確認に失敗しました。');
-        router.push('/login');
-      }
-    };
-
-    checkAuth();
-  }, [router]);
-
-  useEffect(() => {
-    // CookieからJWTを取り出してリダイレクトURLを生成
-    const cookies = document.cookie;
-    const token = cookies
-      .split('; ')
-      .find((row) => row.startsWith('jwt='))
-      ?.split('=')[1];
-
-    if (token) {
-      const encoded = encodeURIComponent(token);
-      setRedirectUrl(`http://localhost:8000?token=${encoded}`);
-    }
-  }, []);
-
-  const handleLogout = async () => {
-    await fetch('/api/logout', {
-      method: 'POST',
-      credentials: 'include',
-    });
-    router.push('/login');
-  };
+  const reservations = await prisma.reservation.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      timeSlot: {
+        include: {
+          event: true,
+        },
+      },
+    },
+    orderBy: {
+      reservedAt: 'desc',
+    },
+  });
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow">
-      <h1 className="text-xl font-bold mb-4">マイページ</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      {!user && !error && <p>読み込み中...</p>}
-      {user && (
-        <>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <p><strong>ユーザーID:</strong> {user.sub}</p>
-              <p><strong>有効期限:</strong> {user.exp ? new Date(user.exp * 1000).toLocaleString() : 'N/A'}</p>
-            </div>
-            <button
-              onClick={handleLogout}
-              className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
-            >
-              ログアウト
-            </button>
-          </div>
-
-          {redirectUrl && (
-            <div className="mt-4">
-              <a href={redirectUrl} className="text-blue-600 hover:underline">
-                他ドメインへ移動（JWT付き）
-              </a>
-            </div>
-          )}
-        </>
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">自分の予約一覧</h1>
+      {reservations.length === 0 ? (
+        <p>現在、予約はありません。</p>
+      ) : (
+        <ul className="space-y-4">
+          {reservations.map((r) => (
+            <li key={r.reservationId} className="border rounded p-4">
+              <p><strong>イベント:</strong> {r.timeSlot.event.eventName}</p>
+              <p><strong>時間帯:</strong> {new Date(r.timeSlot.startAt).toLocaleString()} - {new Date(r.timeSlot.endAt).toLocaleString()}</p>
+              <p><strong>ステータス:</strong> {r.status === 'RESERVED' ? '予約中' : 'キャンセル済み'}</p>
+              {/* キャンセルアクションは今後追加可能 */}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
