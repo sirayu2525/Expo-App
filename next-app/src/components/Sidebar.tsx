@@ -10,6 +10,7 @@ export function Sidebar() {
 
   const handleExternalRedirect = () => {
     const cookies = document.cookie;
+    console.log('Cookies:', cookies); // デバッグ用
     const token = cookies
       .split('; ')
       .find((row) => row.startsWith('jwt='))
