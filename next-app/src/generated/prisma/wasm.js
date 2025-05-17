@@ -161,7 +161,7 @@ exports.Prisma.ReservationScalarFieldEnum = {
   canceledAt: 'canceledAt'
 };
 
-exports.Prisma.SNSScalarFieldEnum = {
+exports.Prisma.SnsScalarFieldEnum = {
   postId: 'postId',
   userId: 'userId',
   content: 'content',
@@ -193,7 +193,7 @@ exports.Prisma.ModelName = {
   Event: 'Event',
   TimeSlot: 'TimeSlot',
   Reservation: 'Reservation',
-  SNS: 'SNS'
+  sns: 'sns'
 };
 
 /**

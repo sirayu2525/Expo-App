@@ -27,7 +27,7 @@ model User {
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @updatedAt
 
-  sns       SNS[]
+  sns       sns[]
 }
 
 model Event {
@@ -79,7 +79,7 @@ enum ReservationStatus {
   CANCELED
 }
 
-model SNS {
+model sns {
   postId     Int      @id @default(autoincrement())
   userId     String
   user       User     @relation(fields: [userId], references: [userId])

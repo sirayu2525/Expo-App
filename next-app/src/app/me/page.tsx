@@ -38,7 +38,7 @@ export default async function MePage() {
               <p><strong>時間帯:</strong> {new Date(r.timeSlot.startAt).toLocaleString()} - {new Date(r.timeSlot.endAt).toLocaleString()}</p>
               <p><strong>ステータス:</strong> {r.status === 'RESERVED' ? '予約中' : 'キャンセル済み'}</p>
               {r.status === 'RESERVED' && (
-                <form action={cancelReservation} method="POST" className="mt-2">
+                <form action={cancelReservation} className="mt-2">
                   <input type="hidden" name="reservationId" value={r.reservationId} />
                   <button
                     type="submit"
