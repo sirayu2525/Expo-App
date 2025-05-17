@@ -98,7 +98,7 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 		cookie := &http.Cookie{
 			Name:     "jwt",
 			Value:    signedToken,
-			HttpOnly: true,
+			HttpOnly: false,
 			Secure:   true, // ローカルならfalse、本番はtrue
 			Path:     "/",
 			SameSite: http.SameSiteNoneMode,
