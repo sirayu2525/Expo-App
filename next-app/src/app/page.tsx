@@ -6,8 +6,6 @@ export default function HomePage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-800">
       <h1 className="text-3xl font-bold mb-4">ようこそ 👋</h1>
-      <p className="mb-8">このアプリはJWT認証を使ったシンプルなログインシステムです。</p>
-
       <div className="space-x-4">
         <Link
           href="/login"
