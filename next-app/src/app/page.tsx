@@ -49,10 +49,6 @@ export default function HomePage() {
         >
           ダッシュボードに移動
         </Link>
-        <button onClick={handleExternalRedirect} className="text-left hover:underline text-blue-600">
-            外部アプリへ移動
-        </button>
-
       </div>
     </main>
   );

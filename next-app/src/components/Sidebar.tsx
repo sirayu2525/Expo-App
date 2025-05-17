@@ -43,9 +43,9 @@ export function Sidebar() {
           <Link href="/login" className="hover:underline">ログイン</Link>
 
           {/* ✅ 外部ドメインへのリンク */}
-          <button onClick={handleExternalRedirect} className="text-left hover:underline text-blue-600">
+          <Link href="/outside" className="hover:underline">
             外部アプリへ移動
-          </button>
+          </Link>
         </nav>
       </SheetContent>
     </Sheet>
