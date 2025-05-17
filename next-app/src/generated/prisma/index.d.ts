@@ -38,6 +38,16 @@ export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
  * 
  */
 export type sns = $Result.DefaultSelection<Prisma.$snsPayload>
+/**
+ * Model badgeList
+ * 
+ */
+export type badgeList = $Result.DefaultSelection<Prisma.$badgeListPayload>
+/**
+ * Model UserBadge
+ * 
+ */
+export type UserBadge = $Result.DefaultSelection<Prisma.$UserBadgePayload>
 
 /**
  * Enums
@@ -230,6 +240,26 @@ export class PrismaClient<
     * ```
     */
   get sns(): Prisma.snsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.badgeList`: Exposes CRUD operations for the **badgeList** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BadgeLists
+    * const badgeLists = await prisma.badgeList.findMany()
+    * ```
+    */
+  get badgeList(): Prisma.badgeListDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userBadge`: Exposes CRUD operations for the **UserBadge** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserBadges
+    * const userBadges = await prisma.userBadge.findMany()
+    * ```
+    */
+  get userBadge(): Prisma.UserBadgeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -674,7 +704,9 @@ export namespace Prisma {
     Event: 'Event',
     TimeSlot: 'TimeSlot',
     Reservation: 'Reservation',
-    sns: 'sns'
+    sns: 'sns',
+    badgeList: 'badgeList',
+    UserBadge: 'UserBadge'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -693,7 +725,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "event" | "timeSlot" | "reservation" | "sns"
+      modelProps: "user" | "event" | "timeSlot" | "reservation" | "sns" | "badgeList" | "userBadge"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1067,6 +1099,154 @@ export namespace Prisma {
           }
         }
       }
+      badgeList: {
+        payload: Prisma.$badgeListPayload<ExtArgs>
+        fields: Prisma.badgeListFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.badgeListFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.badgeListFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>
+          }
+          findFirst: {
+            args: Prisma.badgeListFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.badgeListFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>
+          }
+          findMany: {
+            args: Prisma.badgeListFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>[]
+          }
+          create: {
+            args: Prisma.badgeListCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>
+          }
+          createMany: {
+            args: Prisma.badgeListCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.badgeListCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>[]
+          }
+          delete: {
+            args: Prisma.badgeListDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>
+          }
+          update: {
+            args: Prisma.badgeListUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>
+          }
+          deleteMany: {
+            args: Prisma.badgeListDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.badgeListUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.badgeListUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>[]
+          }
+          upsert: {
+            args: Prisma.badgeListUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$badgeListPayload>
+          }
+          aggregate: {
+            args: Prisma.BadgeListAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBadgeList>
+          }
+          groupBy: {
+            args: Prisma.badgeListGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BadgeListGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.badgeListCountArgs<ExtArgs>
+            result: $Utils.Optional<BadgeListCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserBadge: {
+        payload: Prisma.$UserBadgePayload<ExtArgs>
+        fields: Prisma.UserBadgeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserBadgeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserBadgeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>
+          }
+          findFirst: {
+            args: Prisma.UserBadgeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserBadgeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>
+          }
+          findMany: {
+            args: Prisma.UserBadgeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>[]
+          }
+          create: {
+            args: Prisma.UserBadgeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>
+          }
+          createMany: {
+            args: Prisma.UserBadgeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserBadgeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>[]
+          }
+          delete: {
+            args: Prisma.UserBadgeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>
+          }
+          update: {
+            args: Prisma.UserBadgeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>
+          }
+          deleteMany: {
+            args: Prisma.UserBadgeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserBadgeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserBadgeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>[]
+          }
+          upsert: {
+            args: Prisma.UserBadgeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserBadgePayload>
+          }
+          aggregate: {
+            args: Prisma.UserBadgeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserBadge>
+          }
+          groupBy: {
+            args: Prisma.UserBadgeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserBadgeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserBadgeCountArgs<ExtArgs>
+            result: $Utils.Optional<UserBadgeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1156,6 +1336,8 @@ export namespace Prisma {
     timeSlot?: TimeSlotOmit
     reservation?: ReservationOmit
     sns?: snsOmit
+    badgeList?: badgeListOmit
+    userBadge?: UserBadgeOmit
   }
 
   /* Types for Logging */
@@ -1253,12 +1435,14 @@ export namespace Prisma {
     hostEvents: number
     reservations: number
     sns: number
+    badges: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     hostEvents?: boolean | UserCountOutputTypeCountHostEventsArgs
     reservations?: boolean | UserCountOutputTypeCountReservationsArgs
     sns?: boolean | UserCountOutputTypeCountSnsArgs
+    badges?: boolean | UserCountOutputTypeCountBadgesArgs
   }
 
   // Custom InputTypes
@@ -1291,6 +1475,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: snsWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBadgesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserBadgeWhereInput
   }
 
 
@@ -1353,6 +1544,37 @@ export namespace Prisma {
    */
   export type TimeSlotCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReservationWhereInput
+  }
+
+
+  /**
+   * Count Type BadgeListCountOutputType
+   */
+
+  export type BadgeListCountOutputType = {
+    users: number
+  }
+
+  export type BadgeListCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | BadgeListCountOutputTypeCountUsersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BadgeListCountOutputType without action
+   */
+  export type BadgeListCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BadgeListCountOutputType
+     */
+    select?: BadgeListCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BadgeListCountOutputType without action
+   */
+  export type BadgeListCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserBadgeWhereInput
   }
 
 
@@ -1585,6 +1807,7 @@ export namespace Prisma {
     hostEvents?: boolean | User$hostEventsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
     sns?: boolean | User$snsArgs<ExtArgs>
+    badges?: boolean | User$badgesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1626,6 +1849,7 @@ export namespace Prisma {
     hostEvents?: boolean | User$hostEventsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
     sns?: boolean | User$snsArgs<ExtArgs>
+    badges?: boolean | User$badgesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1637,6 +1861,7 @@ export namespace Prisma {
       hostEvents: Prisma.$EventPayload<ExtArgs>[]
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
       sns: Prisma.$snsPayload<ExtArgs>[]
+      badges: Prisma.$UserBadgePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: string
@@ -2044,6 +2269,7 @@ export namespace Prisma {
     hostEvents<T extends User$hostEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$hostEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reservations<T extends User$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sns<T extends User$snsArgs<ExtArgs> = {}>(args?: Subset<T, User$snsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$snsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    badges<T extends User$badgesArgs<ExtArgs> = {}>(args?: Subset<T, User$badgesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2541,6 +2767,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.badges
+   */
+  export type User$badgesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    where?: UserBadgeWhereInput
+    orderBy?: UserBadgeOrderByWithRelationInput | UserBadgeOrderByWithRelationInput[]
+    cursor?: UserBadgeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserBadgeScalarFieldEnum | UserBadgeScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2573,10 +2823,12 @@ export namespace Prisma {
 
   export type EventAvgAggregateOutputType = {
     eventId: number | null
+    badgeId: number | null
   }
 
   export type EventSumAggregateOutputType = {
     eventId: number | null
+    badgeId: number | null
   }
 
   export type EventMinAggregateOutputType = {
@@ -2590,6 +2842,7 @@ export namespace Prisma {
     endsAt: Date | null
     isDeleted: boolean | null
     updatedAt: Date | null
+    badgeId: number | null
   }
 
   export type EventMaxAggregateOutputType = {
@@ -2603,6 +2856,7 @@ export namespace Prisma {
     endsAt: Date | null
     isDeleted: boolean | null
     updatedAt: Date | null
+    badgeId: number | null
   }
 
   export type EventCountAggregateOutputType = {
@@ -2616,16 +2870,19 @@ export namespace Prisma {
     endsAt: number
     isDeleted: number
     updatedAt: number
+    badgeId: number
     _all: number
   }
 
 
   export type EventAvgAggregateInputType = {
     eventId?: true
+    badgeId?: true
   }
 
   export type EventSumAggregateInputType = {
     eventId?: true
+    badgeId?: true
   }
 
   export type EventMinAggregateInputType = {
@@ -2639,6 +2896,7 @@ export namespace Prisma {
     endsAt?: true
     isDeleted?: true
     updatedAt?: true
+    badgeId?: true
   }
 
   export type EventMaxAggregateInputType = {
@@ -2652,6 +2910,7 @@ export namespace Prisma {
     endsAt?: true
     isDeleted?: true
     updatedAt?: true
+    badgeId?: true
   }
 
   export type EventCountAggregateInputType = {
@@ -2665,6 +2924,7 @@ export namespace Prisma {
     endsAt?: true
     isDeleted?: true
     updatedAt?: true
+    badgeId?: true
     _all?: true
   }
 
@@ -2765,6 +3025,7 @@ export namespace Prisma {
     endsAt: Date
     isDeleted: boolean
     updatedAt: Date
+    badgeId: number | null
     _count: EventCountAggregateOutputType | null
     _avg: EventAvgAggregateOutputType | null
     _sum: EventSumAggregateOutputType | null
@@ -2797,8 +3058,10 @@ export namespace Prisma {
     endsAt?: boolean
     isDeleted?: boolean
     updatedAt?: boolean
+    badgeId?: boolean
     host?: boolean | UserDefaultArgs<ExtArgs>
     timeSlots?: boolean | Event$timeSlotsArgs<ExtArgs>
+    badge?: boolean | Event$badgeArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
@@ -2813,7 +3076,9 @@ export namespace Prisma {
     endsAt?: boolean
     isDeleted?: boolean
     updatedAt?: boolean
+    badgeId?: boolean
     host?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | Event$badgeArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2827,7 +3092,9 @@ export namespace Prisma {
     endsAt?: boolean
     isDeleted?: boolean
     updatedAt?: boolean
+    badgeId?: boolean
     host?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | Event$badgeArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectScalar = {
@@ -2841,19 +3108,23 @@ export namespace Prisma {
     endsAt?: boolean
     isDeleted?: boolean
     updatedAt?: boolean
+    badgeId?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"eventId" | "hostId" | "eventName" | "title" | "description" | "createdAt" | "startsAt" | "endsAt" | "isDeleted" | "updatedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"eventId" | "hostId" | "eventName" | "title" | "description" | "createdAt" | "startsAt" | "endsAt" | "isDeleted" | "updatedAt" | "badgeId", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     host?: boolean | UserDefaultArgs<ExtArgs>
     timeSlots?: boolean | Event$timeSlotsArgs<ExtArgs>
+    badge?: boolean | Event$badgeArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     host?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | Event$badgeArgs<ExtArgs>
   }
   export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     host?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | Event$badgeArgs<ExtArgs>
   }
 
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2861,6 +3132,7 @@ export namespace Prisma {
     objects: {
       host: Prisma.$UserPayload<ExtArgs>
       timeSlots: Prisma.$TimeSlotPayload<ExtArgs>[]
+      badge: Prisma.$badgeListPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       eventId: number
@@ -2873,6 +3145,7 @@ export namespace Prisma {
       endsAt: Date
       isDeleted: boolean
       updatedAt: Date
+      badgeId: number | null
     }, ExtArgs["result"]["event"]>
     composites: {}
   }
@@ -3269,6 +3542,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     host<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     timeSlots<T extends Event$timeSlotsArgs<ExtArgs> = {}>(args?: Subset<T, Event$timeSlotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    badge<T extends Event$badgeArgs<ExtArgs> = {}>(args?: Subset<T, Event$badgeArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3308,6 +3582,7 @@ export namespace Prisma {
     readonly endsAt: FieldRef<"Event", 'DateTime'>
     readonly isDeleted: FieldRef<"Event", 'Boolean'>
     readonly updatedAt: FieldRef<"Event", 'DateTime'>
+    readonly badgeId: FieldRef<"Event", 'Int'>
   }
     
 
@@ -3725,6 +4000,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TimeSlotScalarFieldEnum | TimeSlotScalarFieldEnum[]
+  }
+
+  /**
+   * Event.badge
+   */
+  export type Event$badgeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    where?: badgeListWhereInput
   }
 
   /**
@@ -6187,7 +6481,7 @@ export namespace Prisma {
     content?: boolean
     good?: boolean
     time?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    maker?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sns"]>
 
   export type snsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6196,7 +6490,7 @@ export namespace Prisma {
     content?: boolean
     good?: boolean
     time?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    maker?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sns"]>
 
   export type snsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6205,7 +6499,7 @@ export namespace Prisma {
     content?: boolean
     good?: boolean
     time?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    maker?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sns"]>
 
   export type snsSelectScalar = {
@@ -6218,19 +6512,19 @@ export namespace Prisma {
 
   export type snsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"postId" | "userId" | "content" | "good" | "time", ExtArgs["result"]["sns"]>
   export type snsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    maker?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type snsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    maker?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type snsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    maker?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $snsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "sns"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      maker: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       postId: number
@@ -6632,7 +6926,7 @@ export namespace Prisma {
    */
   export interface Prisma__snsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    maker<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7082,6 +7376,2198 @@ export namespace Prisma {
 
 
   /**
+   * Model badgeList
+   */
+
+  export type AggregateBadgeList = {
+    _count: BadgeListCountAggregateOutputType | null
+    _avg: BadgeListAvgAggregateOutputType | null
+    _sum: BadgeListSumAggregateOutputType | null
+    _min: BadgeListMinAggregateOutputType | null
+    _max: BadgeListMaxAggregateOutputType | null
+  }
+
+  export type BadgeListAvgAggregateOutputType = {
+    badgeId: number | null
+  }
+
+  export type BadgeListSumAggregateOutputType = {
+    badgeId: number | null
+  }
+
+  export type BadgeListMinAggregateOutputType = {
+    badgeId: number | null
+    name: string | null
+    description: string | null
+    image: string | null
+  }
+
+  export type BadgeListMaxAggregateOutputType = {
+    badgeId: number | null
+    name: string | null
+    description: string | null
+    image: string | null
+  }
+
+  export type BadgeListCountAggregateOutputType = {
+    badgeId: number
+    name: number
+    description: number
+    image: number
+    _all: number
+  }
+
+
+  export type BadgeListAvgAggregateInputType = {
+    badgeId?: true
+  }
+
+  export type BadgeListSumAggregateInputType = {
+    badgeId?: true
+  }
+
+  export type BadgeListMinAggregateInputType = {
+    badgeId?: true
+    name?: true
+    description?: true
+    image?: true
+  }
+
+  export type BadgeListMaxAggregateInputType = {
+    badgeId?: true
+    name?: true
+    description?: true
+    image?: true
+  }
+
+  export type BadgeListCountAggregateInputType = {
+    badgeId?: true
+    name?: true
+    description?: true
+    image?: true
+    _all?: true
+  }
+
+  export type BadgeListAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which badgeList to aggregate.
+     */
+    where?: badgeListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badgeLists to fetch.
+     */
+    orderBy?: badgeListOrderByWithRelationInput | badgeListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: badgeListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badgeLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badgeLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned badgeLists
+    **/
+    _count?: true | BadgeListCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BadgeListAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BadgeListSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BadgeListMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BadgeListMaxAggregateInputType
+  }
+
+  export type GetBadgeListAggregateType<T extends BadgeListAggregateArgs> = {
+        [P in keyof T & keyof AggregateBadgeList]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBadgeList[P]>
+      : GetScalarType<T[P], AggregateBadgeList[P]>
+  }
+
+
+
+
+  export type badgeListGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: badgeListWhereInput
+    orderBy?: badgeListOrderByWithAggregationInput | badgeListOrderByWithAggregationInput[]
+    by: BadgeListScalarFieldEnum[] | BadgeListScalarFieldEnum
+    having?: badgeListScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BadgeListCountAggregateInputType | true
+    _avg?: BadgeListAvgAggregateInputType
+    _sum?: BadgeListSumAggregateInputType
+    _min?: BadgeListMinAggregateInputType
+    _max?: BadgeListMaxAggregateInputType
+  }
+
+  export type BadgeListGroupByOutputType = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+    _count: BadgeListCountAggregateOutputType | null
+    _avg: BadgeListAvgAggregateOutputType | null
+    _sum: BadgeListSumAggregateOutputType | null
+    _min: BadgeListMinAggregateOutputType | null
+    _max: BadgeListMaxAggregateOutputType | null
+  }
+
+  type GetBadgeListGroupByPayload<T extends badgeListGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BadgeListGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BadgeListGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BadgeListGroupByOutputType[P]>
+            : GetScalarType<T[P], BadgeListGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type badgeListSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    badgeId?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
+    users?: boolean | badgeList$usersArgs<ExtArgs>
+    event?: boolean | badgeList$eventArgs<ExtArgs>
+    _count?: boolean | BadgeListCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["badgeList"]>
+
+  export type badgeListSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    badgeId?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
+  }, ExtArgs["result"]["badgeList"]>
+
+  export type badgeListSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    badgeId?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
+  }, ExtArgs["result"]["badgeList"]>
+
+  export type badgeListSelectScalar = {
+    badgeId?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
+  }
+
+  export type badgeListOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"badgeId" | "name" | "description" | "image", ExtArgs["result"]["badgeList"]>
+  export type badgeListInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | badgeList$usersArgs<ExtArgs>
+    event?: boolean | badgeList$eventArgs<ExtArgs>
+    _count?: boolean | BadgeListCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type badgeListIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type badgeListIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $badgeListPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "badgeList"
+    objects: {
+      users: Prisma.$UserBadgePayload<ExtArgs>[]
+      event: Prisma.$EventPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      badgeId: number
+      name: string
+      description: string
+      image: string
+    }, ExtArgs["result"]["badgeList"]>
+    composites: {}
+  }
+
+  type badgeListGetPayload<S extends boolean | null | undefined | badgeListDefaultArgs> = $Result.GetResult<Prisma.$badgeListPayload, S>
+
+  type badgeListCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<badgeListFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BadgeListCountAggregateInputType | true
+    }
+
+  export interface badgeListDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['badgeList'], meta: { name: 'badgeList' } }
+    /**
+     * Find zero or one BadgeList that matches the filter.
+     * @param {badgeListFindUniqueArgs} args - Arguments to find a BadgeList
+     * @example
+     * // Get one BadgeList
+     * const badgeList = await prisma.badgeList.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends badgeListFindUniqueArgs>(args: SelectSubset<T, badgeListFindUniqueArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BadgeList that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {badgeListFindUniqueOrThrowArgs} args - Arguments to find a BadgeList
+     * @example
+     * // Get one BadgeList
+     * const badgeList = await prisma.badgeList.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends badgeListFindUniqueOrThrowArgs>(args: SelectSubset<T, badgeListFindUniqueOrThrowArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BadgeList that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badgeListFindFirstArgs} args - Arguments to find a BadgeList
+     * @example
+     * // Get one BadgeList
+     * const badgeList = await prisma.badgeList.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends badgeListFindFirstArgs>(args?: SelectSubset<T, badgeListFindFirstArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BadgeList that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badgeListFindFirstOrThrowArgs} args - Arguments to find a BadgeList
+     * @example
+     * // Get one BadgeList
+     * const badgeList = await prisma.badgeList.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends badgeListFindFirstOrThrowArgs>(args?: SelectSubset<T, badgeListFindFirstOrThrowArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BadgeLists that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badgeListFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BadgeLists
+     * const badgeLists = await prisma.badgeList.findMany()
+     * 
+     * // Get first 10 BadgeLists
+     * const badgeLists = await prisma.badgeList.findMany({ take: 10 })
+     * 
+     * // Only select the `badgeId`
+     * const badgeListWithBadgeIdOnly = await prisma.badgeList.findMany({ select: { badgeId: true } })
+     * 
+     */
+    findMany<T extends badgeListFindManyArgs>(args?: SelectSubset<T, badgeListFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BadgeList.
+     * @param {badgeListCreateArgs} args - Arguments to create a BadgeList.
+     * @example
+     * // Create one BadgeList
+     * const BadgeList = await prisma.badgeList.create({
+     *   data: {
+     *     // ... data to create a BadgeList
+     *   }
+     * })
+     * 
+     */
+    create<T extends badgeListCreateArgs>(args: SelectSubset<T, badgeListCreateArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BadgeLists.
+     * @param {badgeListCreateManyArgs} args - Arguments to create many BadgeLists.
+     * @example
+     * // Create many BadgeLists
+     * const badgeList = await prisma.badgeList.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends badgeListCreateManyArgs>(args?: SelectSubset<T, badgeListCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BadgeLists and returns the data saved in the database.
+     * @param {badgeListCreateManyAndReturnArgs} args - Arguments to create many BadgeLists.
+     * @example
+     * // Create many BadgeLists
+     * const badgeList = await prisma.badgeList.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BadgeLists and only return the `badgeId`
+     * const badgeListWithBadgeIdOnly = await prisma.badgeList.createManyAndReturn({
+     *   select: { badgeId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends badgeListCreateManyAndReturnArgs>(args?: SelectSubset<T, badgeListCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BadgeList.
+     * @param {badgeListDeleteArgs} args - Arguments to delete one BadgeList.
+     * @example
+     * // Delete one BadgeList
+     * const BadgeList = await prisma.badgeList.delete({
+     *   where: {
+     *     // ... filter to delete one BadgeList
+     *   }
+     * })
+     * 
+     */
+    delete<T extends badgeListDeleteArgs>(args: SelectSubset<T, badgeListDeleteArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BadgeList.
+     * @param {badgeListUpdateArgs} args - Arguments to update one BadgeList.
+     * @example
+     * // Update one BadgeList
+     * const badgeList = await prisma.badgeList.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends badgeListUpdateArgs>(args: SelectSubset<T, badgeListUpdateArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BadgeLists.
+     * @param {badgeListDeleteManyArgs} args - Arguments to filter BadgeLists to delete.
+     * @example
+     * // Delete a few BadgeLists
+     * const { count } = await prisma.badgeList.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends badgeListDeleteManyArgs>(args?: SelectSubset<T, badgeListDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BadgeLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badgeListUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BadgeLists
+     * const badgeList = await prisma.badgeList.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends badgeListUpdateManyArgs>(args: SelectSubset<T, badgeListUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BadgeLists and returns the data updated in the database.
+     * @param {badgeListUpdateManyAndReturnArgs} args - Arguments to update many BadgeLists.
+     * @example
+     * // Update many BadgeLists
+     * const badgeList = await prisma.badgeList.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BadgeLists and only return the `badgeId`
+     * const badgeListWithBadgeIdOnly = await prisma.badgeList.updateManyAndReturn({
+     *   select: { badgeId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends badgeListUpdateManyAndReturnArgs>(args: SelectSubset<T, badgeListUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BadgeList.
+     * @param {badgeListUpsertArgs} args - Arguments to update or create a BadgeList.
+     * @example
+     * // Update or create a BadgeList
+     * const badgeList = await prisma.badgeList.upsert({
+     *   create: {
+     *     // ... data to create a BadgeList
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BadgeList we want to update
+     *   }
+     * })
+     */
+    upsert<T extends badgeListUpsertArgs>(args: SelectSubset<T, badgeListUpsertArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BadgeLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badgeListCountArgs} args - Arguments to filter BadgeLists to count.
+     * @example
+     * // Count the number of BadgeLists
+     * const count = await prisma.badgeList.count({
+     *   where: {
+     *     // ... the filter for the BadgeLists we want to count
+     *   }
+     * })
+    **/
+    count<T extends badgeListCountArgs>(
+      args?: Subset<T, badgeListCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BadgeListCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BadgeList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BadgeListAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BadgeListAggregateArgs>(args: Subset<T, BadgeListAggregateArgs>): Prisma.PrismaPromise<GetBadgeListAggregateType<T>>
+
+    /**
+     * Group by BadgeList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {badgeListGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends badgeListGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: badgeListGroupByArgs['orderBy'] }
+        : { orderBy?: badgeListGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, badgeListGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBadgeListGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the badgeList model
+   */
+  readonly fields: badgeListFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for badgeList.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__badgeListClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends badgeList$usersArgs<ExtArgs> = {}>(args?: Subset<T, badgeList$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    event<T extends badgeList$eventArgs<ExtArgs> = {}>(args?: Subset<T, badgeList$eventArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the badgeList model
+   */
+  interface badgeListFieldRefs {
+    readonly badgeId: FieldRef<"badgeList", 'Int'>
+    readonly name: FieldRef<"badgeList", 'String'>
+    readonly description: FieldRef<"badgeList", 'String'>
+    readonly image: FieldRef<"badgeList", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * badgeList findUnique
+   */
+  export type badgeListFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * Filter, which badgeList to fetch.
+     */
+    where: badgeListWhereUniqueInput
+  }
+
+  /**
+   * badgeList findUniqueOrThrow
+   */
+  export type badgeListFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * Filter, which badgeList to fetch.
+     */
+    where: badgeListWhereUniqueInput
+  }
+
+  /**
+   * badgeList findFirst
+   */
+  export type badgeListFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * Filter, which badgeList to fetch.
+     */
+    where?: badgeListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badgeLists to fetch.
+     */
+    orderBy?: badgeListOrderByWithRelationInput | badgeListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for badgeLists.
+     */
+    cursor?: badgeListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badgeLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badgeLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of badgeLists.
+     */
+    distinct?: BadgeListScalarFieldEnum | BadgeListScalarFieldEnum[]
+  }
+
+  /**
+   * badgeList findFirstOrThrow
+   */
+  export type badgeListFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * Filter, which badgeList to fetch.
+     */
+    where?: badgeListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badgeLists to fetch.
+     */
+    orderBy?: badgeListOrderByWithRelationInput | badgeListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for badgeLists.
+     */
+    cursor?: badgeListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badgeLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badgeLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of badgeLists.
+     */
+    distinct?: BadgeListScalarFieldEnum | BadgeListScalarFieldEnum[]
+  }
+
+  /**
+   * badgeList findMany
+   */
+  export type badgeListFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * Filter, which badgeLists to fetch.
+     */
+    where?: badgeListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of badgeLists to fetch.
+     */
+    orderBy?: badgeListOrderByWithRelationInput | badgeListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing badgeLists.
+     */
+    cursor?: badgeListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` badgeLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` badgeLists.
+     */
+    skip?: number
+    distinct?: BadgeListScalarFieldEnum | BadgeListScalarFieldEnum[]
+  }
+
+  /**
+   * badgeList create
+   */
+  export type badgeListCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * The data needed to create a badgeList.
+     */
+    data: XOR<badgeListCreateInput, badgeListUncheckedCreateInput>
+  }
+
+  /**
+   * badgeList createMany
+   */
+  export type badgeListCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many badgeLists.
+     */
+    data: badgeListCreateManyInput | badgeListCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * badgeList createManyAndReturn
+   */
+  export type badgeListCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * The data used to create many badgeLists.
+     */
+    data: badgeListCreateManyInput | badgeListCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * badgeList update
+   */
+  export type badgeListUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * The data needed to update a badgeList.
+     */
+    data: XOR<badgeListUpdateInput, badgeListUncheckedUpdateInput>
+    /**
+     * Choose, which badgeList to update.
+     */
+    where: badgeListWhereUniqueInput
+  }
+
+  /**
+   * badgeList updateMany
+   */
+  export type badgeListUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update badgeLists.
+     */
+    data: XOR<badgeListUpdateManyMutationInput, badgeListUncheckedUpdateManyInput>
+    /**
+     * Filter which badgeLists to update
+     */
+    where?: badgeListWhereInput
+    /**
+     * Limit how many badgeLists to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * badgeList updateManyAndReturn
+   */
+  export type badgeListUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * The data used to update badgeLists.
+     */
+    data: XOR<badgeListUpdateManyMutationInput, badgeListUncheckedUpdateManyInput>
+    /**
+     * Filter which badgeLists to update
+     */
+    where?: badgeListWhereInput
+    /**
+     * Limit how many badgeLists to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * badgeList upsert
+   */
+  export type badgeListUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * The filter to search for the badgeList to update in case it exists.
+     */
+    where: badgeListWhereUniqueInput
+    /**
+     * In case the badgeList found by the `where` argument doesn't exist, create a new badgeList with this data.
+     */
+    create: XOR<badgeListCreateInput, badgeListUncheckedCreateInput>
+    /**
+     * In case the badgeList was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<badgeListUpdateInput, badgeListUncheckedUpdateInput>
+  }
+
+  /**
+   * badgeList delete
+   */
+  export type badgeListDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+    /**
+     * Filter which badgeList to delete.
+     */
+    where: badgeListWhereUniqueInput
+  }
+
+  /**
+   * badgeList deleteMany
+   */
+  export type badgeListDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which badgeLists to delete
+     */
+    where?: badgeListWhereInput
+    /**
+     * Limit how many badgeLists to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * badgeList.users
+   */
+  export type badgeList$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    where?: UserBadgeWhereInput
+    orderBy?: UserBadgeOrderByWithRelationInput | UserBadgeOrderByWithRelationInput[]
+    cursor?: UserBadgeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserBadgeScalarFieldEnum | UserBadgeScalarFieldEnum[]
+  }
+
+  /**
+   * badgeList.event
+   */
+  export type badgeList$eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+  }
+
+  /**
+   * badgeList without action
+   */
+  export type badgeListDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the badgeList
+     */
+    select?: badgeListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the badgeList
+     */
+    omit?: badgeListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: badgeListInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserBadge
+   */
+
+  export type AggregateUserBadge = {
+    _count: UserBadgeCountAggregateOutputType | null
+    _avg: UserBadgeAvgAggregateOutputType | null
+    _sum: UserBadgeSumAggregateOutputType | null
+    _min: UserBadgeMinAggregateOutputType | null
+    _max: UserBadgeMaxAggregateOutputType | null
+  }
+
+  export type UserBadgeAvgAggregateOutputType = {
+    id: number | null
+    badgeId: number | null
+  }
+
+  export type UserBadgeSumAggregateOutputType = {
+    id: number | null
+    badgeId: number | null
+  }
+
+  export type UserBadgeMinAggregateOutputType = {
+    id: number | null
+    userId: string | null
+    badgeId: number | null
+  }
+
+  export type UserBadgeMaxAggregateOutputType = {
+    id: number | null
+    userId: string | null
+    badgeId: number | null
+  }
+
+  export type UserBadgeCountAggregateOutputType = {
+    id: number
+    userId: number
+    badgeId: number
+    _all: number
+  }
+
+
+  export type UserBadgeAvgAggregateInputType = {
+    id?: true
+    badgeId?: true
+  }
+
+  export type UserBadgeSumAggregateInputType = {
+    id?: true
+    badgeId?: true
+  }
+
+  export type UserBadgeMinAggregateInputType = {
+    id?: true
+    userId?: true
+    badgeId?: true
+  }
+
+  export type UserBadgeMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    badgeId?: true
+  }
+
+  export type UserBadgeCountAggregateInputType = {
+    id?: true
+    userId?: true
+    badgeId?: true
+    _all?: true
+  }
+
+  export type UserBadgeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserBadge to aggregate.
+     */
+    where?: UserBadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBadges to fetch.
+     */
+    orderBy?: UserBadgeOrderByWithRelationInput | UserBadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserBadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBadges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBadges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserBadges
+    **/
+    _count?: true | UserBadgeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserBadgeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserBadgeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserBadgeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserBadgeMaxAggregateInputType
+  }
+
+  export type GetUserBadgeAggregateType<T extends UserBadgeAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserBadge]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserBadge[P]>
+      : GetScalarType<T[P], AggregateUserBadge[P]>
+  }
+
+
+
+
+  export type UserBadgeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserBadgeWhereInput
+    orderBy?: UserBadgeOrderByWithAggregationInput | UserBadgeOrderByWithAggregationInput[]
+    by: UserBadgeScalarFieldEnum[] | UserBadgeScalarFieldEnum
+    having?: UserBadgeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserBadgeCountAggregateInputType | true
+    _avg?: UserBadgeAvgAggregateInputType
+    _sum?: UserBadgeSumAggregateInputType
+    _min?: UserBadgeMinAggregateInputType
+    _max?: UserBadgeMaxAggregateInputType
+  }
+
+  export type UserBadgeGroupByOutputType = {
+    id: number
+    userId: string
+    badgeId: number
+    _count: UserBadgeCountAggregateOutputType | null
+    _avg: UserBadgeAvgAggregateOutputType | null
+    _sum: UserBadgeSumAggregateOutputType | null
+    _min: UserBadgeMinAggregateOutputType | null
+    _max: UserBadgeMaxAggregateOutputType | null
+  }
+
+  type GetUserBadgeGroupByPayload<T extends UserBadgeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserBadgeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserBadgeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserBadgeGroupByOutputType[P]>
+            : GetScalarType<T[P], UserBadgeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserBadgeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    badgeId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | badgeListDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userBadge"]>
+
+  export type UserBadgeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    badgeId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | badgeListDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userBadge"]>
+
+  export type UserBadgeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    badgeId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | badgeListDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userBadge"]>
+
+  export type UserBadgeSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    badgeId?: boolean
+  }
+
+  export type UserBadgeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "badgeId", ExtArgs["result"]["userBadge"]>
+  export type UserBadgeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | badgeListDefaultArgs<ExtArgs>
+  }
+  export type UserBadgeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | badgeListDefaultArgs<ExtArgs>
+  }
+  export type UserBadgeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    badge?: boolean | badgeListDefaultArgs<ExtArgs>
+  }
+
+  export type $UserBadgePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserBadge"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      badge: Prisma.$badgeListPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userId: string
+      badgeId: number
+    }, ExtArgs["result"]["userBadge"]>
+    composites: {}
+  }
+
+  type UserBadgeGetPayload<S extends boolean | null | undefined | UserBadgeDefaultArgs> = $Result.GetResult<Prisma.$UserBadgePayload, S>
+
+  type UserBadgeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserBadgeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserBadgeCountAggregateInputType | true
+    }
+
+  export interface UserBadgeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserBadge'], meta: { name: 'UserBadge' } }
+    /**
+     * Find zero or one UserBadge that matches the filter.
+     * @param {UserBadgeFindUniqueArgs} args - Arguments to find a UserBadge
+     * @example
+     * // Get one UserBadge
+     * const userBadge = await prisma.userBadge.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserBadgeFindUniqueArgs>(args: SelectSubset<T, UserBadgeFindUniqueArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserBadge that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserBadgeFindUniqueOrThrowArgs} args - Arguments to find a UserBadge
+     * @example
+     * // Get one UserBadge
+     * const userBadge = await prisma.userBadge.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserBadgeFindUniqueOrThrowArgs>(args: SelectSubset<T, UserBadgeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserBadge that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBadgeFindFirstArgs} args - Arguments to find a UserBadge
+     * @example
+     * // Get one UserBadge
+     * const userBadge = await prisma.userBadge.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserBadgeFindFirstArgs>(args?: SelectSubset<T, UserBadgeFindFirstArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserBadge that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBadgeFindFirstOrThrowArgs} args - Arguments to find a UserBadge
+     * @example
+     * // Get one UserBadge
+     * const userBadge = await prisma.userBadge.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserBadgeFindFirstOrThrowArgs>(args?: SelectSubset<T, UserBadgeFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserBadges that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBadgeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserBadges
+     * const userBadges = await prisma.userBadge.findMany()
+     * 
+     * // Get first 10 UserBadges
+     * const userBadges = await prisma.userBadge.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userBadgeWithIdOnly = await prisma.userBadge.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserBadgeFindManyArgs>(args?: SelectSubset<T, UserBadgeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserBadge.
+     * @param {UserBadgeCreateArgs} args - Arguments to create a UserBadge.
+     * @example
+     * // Create one UserBadge
+     * const UserBadge = await prisma.userBadge.create({
+     *   data: {
+     *     // ... data to create a UserBadge
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserBadgeCreateArgs>(args: SelectSubset<T, UserBadgeCreateArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserBadges.
+     * @param {UserBadgeCreateManyArgs} args - Arguments to create many UserBadges.
+     * @example
+     * // Create many UserBadges
+     * const userBadge = await prisma.userBadge.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserBadgeCreateManyArgs>(args?: SelectSubset<T, UserBadgeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserBadges and returns the data saved in the database.
+     * @param {UserBadgeCreateManyAndReturnArgs} args - Arguments to create many UserBadges.
+     * @example
+     * // Create many UserBadges
+     * const userBadge = await prisma.userBadge.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserBadges and only return the `id`
+     * const userBadgeWithIdOnly = await prisma.userBadge.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserBadgeCreateManyAndReturnArgs>(args?: SelectSubset<T, UserBadgeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserBadge.
+     * @param {UserBadgeDeleteArgs} args - Arguments to delete one UserBadge.
+     * @example
+     * // Delete one UserBadge
+     * const UserBadge = await prisma.userBadge.delete({
+     *   where: {
+     *     // ... filter to delete one UserBadge
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserBadgeDeleteArgs>(args: SelectSubset<T, UserBadgeDeleteArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserBadge.
+     * @param {UserBadgeUpdateArgs} args - Arguments to update one UserBadge.
+     * @example
+     * // Update one UserBadge
+     * const userBadge = await prisma.userBadge.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserBadgeUpdateArgs>(args: SelectSubset<T, UserBadgeUpdateArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserBadges.
+     * @param {UserBadgeDeleteManyArgs} args - Arguments to filter UserBadges to delete.
+     * @example
+     * // Delete a few UserBadges
+     * const { count } = await prisma.userBadge.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserBadgeDeleteManyArgs>(args?: SelectSubset<T, UserBadgeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserBadges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBadgeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserBadges
+     * const userBadge = await prisma.userBadge.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserBadgeUpdateManyArgs>(args: SelectSubset<T, UserBadgeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserBadges and returns the data updated in the database.
+     * @param {UserBadgeUpdateManyAndReturnArgs} args - Arguments to update many UserBadges.
+     * @example
+     * // Update many UserBadges
+     * const userBadge = await prisma.userBadge.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserBadges and only return the `id`
+     * const userBadgeWithIdOnly = await prisma.userBadge.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserBadgeUpdateManyAndReturnArgs>(args: SelectSubset<T, UserBadgeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserBadge.
+     * @param {UserBadgeUpsertArgs} args - Arguments to update or create a UserBadge.
+     * @example
+     * // Update or create a UserBadge
+     * const userBadge = await prisma.userBadge.upsert({
+     *   create: {
+     *     // ... data to create a UserBadge
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserBadge we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserBadgeUpsertArgs>(args: SelectSubset<T, UserBadgeUpsertArgs<ExtArgs>>): Prisma__UserBadgeClient<$Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserBadges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBadgeCountArgs} args - Arguments to filter UserBadges to count.
+     * @example
+     * // Count the number of UserBadges
+     * const count = await prisma.userBadge.count({
+     *   where: {
+     *     // ... the filter for the UserBadges we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserBadgeCountArgs>(
+      args?: Subset<T, UserBadgeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserBadgeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserBadge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBadgeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserBadgeAggregateArgs>(args: Subset<T, UserBadgeAggregateArgs>): Prisma.PrismaPromise<GetUserBadgeAggregateType<T>>
+
+    /**
+     * Group by UserBadge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserBadgeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserBadgeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserBadgeGroupByArgs['orderBy'] }
+        : { orderBy?: UserBadgeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserBadgeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserBadgeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserBadge model
+   */
+  readonly fields: UserBadgeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserBadge.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserBadgeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    badge<T extends badgeListDefaultArgs<ExtArgs> = {}>(args?: Subset<T, badgeListDefaultArgs<ExtArgs>>): Prisma__badgeListClient<$Result.GetResult<Prisma.$badgeListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserBadge model
+   */
+  interface UserBadgeFieldRefs {
+    readonly id: FieldRef<"UserBadge", 'Int'>
+    readonly userId: FieldRef<"UserBadge", 'String'>
+    readonly badgeId: FieldRef<"UserBadge", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserBadge findUnique
+   */
+  export type UserBadgeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBadge to fetch.
+     */
+    where: UserBadgeWhereUniqueInput
+  }
+
+  /**
+   * UserBadge findUniqueOrThrow
+   */
+  export type UserBadgeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBadge to fetch.
+     */
+    where: UserBadgeWhereUniqueInput
+  }
+
+  /**
+   * UserBadge findFirst
+   */
+  export type UserBadgeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBadge to fetch.
+     */
+    where?: UserBadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBadges to fetch.
+     */
+    orderBy?: UserBadgeOrderByWithRelationInput | UserBadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserBadges.
+     */
+    cursor?: UserBadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBadges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBadges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserBadges.
+     */
+    distinct?: UserBadgeScalarFieldEnum | UserBadgeScalarFieldEnum[]
+  }
+
+  /**
+   * UserBadge findFirstOrThrow
+   */
+  export type UserBadgeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBadge to fetch.
+     */
+    where?: UserBadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBadges to fetch.
+     */
+    orderBy?: UserBadgeOrderByWithRelationInput | UserBadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserBadges.
+     */
+    cursor?: UserBadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBadges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBadges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserBadges.
+     */
+    distinct?: UserBadgeScalarFieldEnum | UserBadgeScalarFieldEnum[]
+  }
+
+  /**
+   * UserBadge findMany
+   */
+  export type UserBadgeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * Filter, which UserBadges to fetch.
+     */
+    where?: UserBadgeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserBadges to fetch.
+     */
+    orderBy?: UserBadgeOrderByWithRelationInput | UserBadgeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserBadges.
+     */
+    cursor?: UserBadgeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserBadges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserBadges.
+     */
+    skip?: number
+    distinct?: UserBadgeScalarFieldEnum | UserBadgeScalarFieldEnum[]
+  }
+
+  /**
+   * UserBadge create
+   */
+  export type UserBadgeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserBadge.
+     */
+    data: XOR<UserBadgeCreateInput, UserBadgeUncheckedCreateInput>
+  }
+
+  /**
+   * UserBadge createMany
+   */
+  export type UserBadgeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserBadges.
+     */
+    data: UserBadgeCreateManyInput | UserBadgeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserBadge createManyAndReturn
+   */
+  export type UserBadgeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserBadges.
+     */
+    data: UserBadgeCreateManyInput | UserBadgeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserBadge update
+   */
+  export type UserBadgeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserBadge.
+     */
+    data: XOR<UserBadgeUpdateInput, UserBadgeUncheckedUpdateInput>
+    /**
+     * Choose, which UserBadge to update.
+     */
+    where: UserBadgeWhereUniqueInput
+  }
+
+  /**
+   * UserBadge updateMany
+   */
+  export type UserBadgeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserBadges.
+     */
+    data: XOR<UserBadgeUpdateManyMutationInput, UserBadgeUncheckedUpdateManyInput>
+    /**
+     * Filter which UserBadges to update
+     */
+    where?: UserBadgeWhereInput
+    /**
+     * Limit how many UserBadges to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserBadge updateManyAndReturn
+   */
+  export type UserBadgeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * The data used to update UserBadges.
+     */
+    data: XOR<UserBadgeUpdateManyMutationInput, UserBadgeUncheckedUpdateManyInput>
+    /**
+     * Filter which UserBadges to update
+     */
+    where?: UserBadgeWhereInput
+    /**
+     * Limit how many UserBadges to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserBadge upsert
+   */
+  export type UserBadgeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserBadge to update in case it exists.
+     */
+    where: UserBadgeWhereUniqueInput
+    /**
+     * In case the UserBadge found by the `where` argument doesn't exist, create a new UserBadge with this data.
+     */
+    create: XOR<UserBadgeCreateInput, UserBadgeUncheckedCreateInput>
+    /**
+     * In case the UserBadge was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserBadgeUpdateInput, UserBadgeUncheckedUpdateInput>
+  }
+
+  /**
+   * UserBadge delete
+   */
+  export type UserBadgeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+    /**
+     * Filter which UserBadge to delete.
+     */
+    where: UserBadgeWhereUniqueInput
+  }
+
+  /**
+   * UserBadge deleteMany
+   */
+  export type UserBadgeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserBadges to delete
+     */
+    where?: UserBadgeWhereInput
+    /**
+     * Limit how many UserBadges to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserBadge without action
+   */
+  export type UserBadgeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserBadge
+     */
+    select?: UserBadgeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserBadge
+     */
+    omit?: UserBadgeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserBadgeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7119,7 +9605,8 @@ export namespace Prisma {
     startsAt: 'startsAt',
     endsAt: 'endsAt',
     isDeleted: 'isDeleted',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    badgeId: 'badgeId'
   };
 
   export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -7157,6 +9644,25 @@ export namespace Prisma {
   };
 
   export type SnsScalarFieldEnum = (typeof SnsScalarFieldEnum)[keyof typeof SnsScalarFieldEnum]
+
+
+  export const BadgeListScalarFieldEnum: {
+    badgeId: 'badgeId',
+    name: 'name',
+    description: 'description',
+    image: 'image'
+  };
+
+  export type BadgeListScalarFieldEnum = (typeof BadgeListScalarFieldEnum)[keyof typeof BadgeListScalarFieldEnum]
+
+
+  export const UserBadgeScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    badgeId: 'badgeId'
+  };
+
+  export type UserBadgeScalarFieldEnum = (typeof UserBadgeScalarFieldEnum)[keyof typeof UserBadgeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7283,6 +9789,7 @@ export namespace Prisma {
     hostEvents?: EventListRelationFilter
     reservations?: ReservationListRelationFilter
     sns?: SnsListRelationFilter
+    badges?: UserBadgeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7297,6 +9804,7 @@ export namespace Prisma {
     hostEvents?: EventOrderByRelationAggregateInput
     reservations?: ReservationOrderByRelationAggregateInput
     sns?: snsOrderByRelationAggregateInput
+    badges?: UserBadgeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7314,6 +9822,7 @@ export namespace Prisma {
     hostEvents?: EventListRelationFilter
     reservations?: ReservationListRelationFilter
     sns?: SnsListRelationFilter
+    badges?: UserBadgeListRelationFilter
   }, "userId">
 
   export type UserOrderByWithAggregationInput = {
@@ -7360,8 +9869,10 @@ export namespace Prisma {
     endsAt?: DateTimeFilter<"Event"> | Date | string
     isDeleted?: BoolFilter<"Event"> | boolean
     updatedAt?: DateTimeFilter<"Event"> | Date | string
+    badgeId?: IntNullableFilter<"Event"> | number | null
     host?: XOR<UserScalarRelationFilter, UserWhereInput>
     timeSlots?: TimeSlotListRelationFilter
+    badge?: XOR<BadgeListNullableScalarRelationFilter, badgeListWhereInput> | null
   }
 
   export type EventOrderByWithRelationInput = {
@@ -7375,12 +9886,15 @@ export namespace Prisma {
     endsAt?: SortOrder
     isDeleted?: SortOrder
     updatedAt?: SortOrder
+    badgeId?: SortOrderInput | SortOrder
     host?: UserOrderByWithRelationInput
     timeSlots?: TimeSlotOrderByRelationAggregateInput
+    badge?: badgeListOrderByWithRelationInput
   }
 
   export type EventWhereUniqueInput = Prisma.AtLeast<{
     eventId?: number
+    badgeId?: number
     AND?: EventWhereInput | EventWhereInput[]
     OR?: EventWhereInput[]
     NOT?: EventWhereInput | EventWhereInput[]
@@ -7395,7 +9909,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     host?: XOR<UserScalarRelationFilter, UserWhereInput>
     timeSlots?: TimeSlotListRelationFilter
-  }, "eventId">
+    badge?: XOR<BadgeListNullableScalarRelationFilter, badgeListWhereInput> | null
+  }, "eventId" | "badgeId">
 
   export type EventOrderByWithAggregationInput = {
     eventId?: SortOrder
@@ -7408,6 +9923,7 @@ export namespace Prisma {
     endsAt?: SortOrder
     isDeleted?: SortOrder
     updatedAt?: SortOrder
+    badgeId?: SortOrderInput | SortOrder
     _count?: EventCountOrderByAggregateInput
     _avg?: EventAvgOrderByAggregateInput
     _max?: EventMaxOrderByAggregateInput
@@ -7429,6 +9945,7 @@ export namespace Prisma {
     endsAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     isDeleted?: BoolWithAggregatesFilter<"Event"> | boolean
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    badgeId?: IntNullableWithAggregatesFilter<"Event"> | number | null
   }
 
   export type TimeSlotWhereInput = {
@@ -7566,7 +10083,7 @@ export namespace Prisma {
     content?: StringFilter<"sns"> | string
     good?: StringNullableListFilter<"sns">
     time?: DateTimeFilter<"sns"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    maker?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type snsOrderByWithRelationInput = {
@@ -7575,7 +10092,7 @@ export namespace Prisma {
     content?: SortOrder
     good?: SortOrder
     time?: SortOrder
-    user?: UserOrderByWithRelationInput
+    maker?: UserOrderByWithRelationInput
   }
 
   export type snsWhereUniqueInput = Prisma.AtLeast<{
@@ -7587,7 +10104,7 @@ export namespace Prisma {
     content?: StringFilter<"sns"> | string
     good?: StringNullableListFilter<"sns">
     time?: DateTimeFilter<"sns"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    maker?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "postId">
 
   export type snsOrderByWithAggregationInput = {
@@ -7614,6 +10131,112 @@ export namespace Prisma {
     time?: DateTimeWithAggregatesFilter<"sns"> | Date | string
   }
 
+  export type badgeListWhereInput = {
+    AND?: badgeListWhereInput | badgeListWhereInput[]
+    OR?: badgeListWhereInput[]
+    NOT?: badgeListWhereInput | badgeListWhereInput[]
+    badgeId?: IntFilter<"badgeList"> | number
+    name?: StringFilter<"badgeList"> | string
+    description?: StringFilter<"badgeList"> | string
+    image?: StringFilter<"badgeList"> | string
+    users?: UserBadgeListRelationFilter
+    event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+  }
+
+  export type badgeListOrderByWithRelationInput = {
+    badgeId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    users?: UserBadgeOrderByRelationAggregateInput
+    event?: EventOrderByWithRelationInput
+  }
+
+  export type badgeListWhereUniqueInput = Prisma.AtLeast<{
+    badgeId?: number
+    AND?: badgeListWhereInput | badgeListWhereInput[]
+    OR?: badgeListWhereInput[]
+    NOT?: badgeListWhereInput | badgeListWhereInput[]
+    name?: StringFilter<"badgeList"> | string
+    description?: StringFilter<"badgeList"> | string
+    image?: StringFilter<"badgeList"> | string
+    users?: UserBadgeListRelationFilter
+    event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+  }, "badgeId">
+
+  export type badgeListOrderByWithAggregationInput = {
+    badgeId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+    _count?: badgeListCountOrderByAggregateInput
+    _avg?: badgeListAvgOrderByAggregateInput
+    _max?: badgeListMaxOrderByAggregateInput
+    _min?: badgeListMinOrderByAggregateInput
+    _sum?: badgeListSumOrderByAggregateInput
+  }
+
+  export type badgeListScalarWhereWithAggregatesInput = {
+    AND?: badgeListScalarWhereWithAggregatesInput | badgeListScalarWhereWithAggregatesInput[]
+    OR?: badgeListScalarWhereWithAggregatesInput[]
+    NOT?: badgeListScalarWhereWithAggregatesInput | badgeListScalarWhereWithAggregatesInput[]
+    badgeId?: IntWithAggregatesFilter<"badgeList"> | number
+    name?: StringWithAggregatesFilter<"badgeList"> | string
+    description?: StringWithAggregatesFilter<"badgeList"> | string
+    image?: StringWithAggregatesFilter<"badgeList"> | string
+  }
+
+  export type UserBadgeWhereInput = {
+    AND?: UserBadgeWhereInput | UserBadgeWhereInput[]
+    OR?: UserBadgeWhereInput[]
+    NOT?: UserBadgeWhereInput | UserBadgeWhereInput[]
+    id?: IntFilter<"UserBadge"> | number
+    userId?: StringFilter<"UserBadge"> | string
+    badgeId?: IntFilter<"UserBadge"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    badge?: XOR<BadgeListScalarRelationFilter, badgeListWhereInput>
+  }
+
+  export type UserBadgeOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    badgeId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    badge?: badgeListOrderByWithRelationInput
+  }
+
+  export type UserBadgeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId_badgeId?: UserBadgeUserIdBadgeIdCompoundUniqueInput
+    AND?: UserBadgeWhereInput | UserBadgeWhereInput[]
+    OR?: UserBadgeWhereInput[]
+    NOT?: UserBadgeWhereInput | UserBadgeWhereInput[]
+    userId?: StringFilter<"UserBadge"> | string
+    badgeId?: IntFilter<"UserBadge"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    badge?: XOR<BadgeListScalarRelationFilter, badgeListWhereInput>
+  }, "id" | "userId_badgeId">
+
+  export type UserBadgeOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    badgeId?: SortOrder
+    _count?: UserBadgeCountOrderByAggregateInput
+    _avg?: UserBadgeAvgOrderByAggregateInput
+    _max?: UserBadgeMaxOrderByAggregateInput
+    _min?: UserBadgeMinOrderByAggregateInput
+    _sum?: UserBadgeSumOrderByAggregateInput
+  }
+
+  export type UserBadgeScalarWhereWithAggregatesInput = {
+    AND?: UserBadgeScalarWhereWithAggregatesInput | UserBadgeScalarWhereWithAggregatesInput[]
+    OR?: UserBadgeScalarWhereWithAggregatesInput[]
+    NOT?: UserBadgeScalarWhereWithAggregatesInput | UserBadgeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"UserBadge"> | number
+    userId?: StringWithAggregatesFilter<"UserBadge"> | string
+    badgeId?: IntWithAggregatesFilter<"UserBadge"> | number
+  }
+
   export type UserCreateInput = {
     userId?: string
     password: string
@@ -7625,7 +10248,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     hostEvents?: EventCreateNestedManyWithoutHostInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
-    sns?: snsCreateNestedManyWithoutUserInput
+    sns?: snsCreateNestedManyWithoutMakerInput
+    badges?: UserBadgeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7639,7 +10263,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     hostEvents?: EventUncheckedCreateNestedManyWithoutHostInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    sns?: snsUncheckedCreateNestedManyWithoutUserInput
+    sns?: snsUncheckedCreateNestedManyWithoutMakerInput
+    badges?: UserBadgeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7653,7 +10278,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUpdateManyWithoutHostNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
-    sns?: snsUpdateManyWithoutUserNestedInput
+    sns?: snsUpdateManyWithoutMakerNestedInput
+    badges?: UserBadgeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7667,7 +10293,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUncheckedUpdateManyWithoutHostNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    sns?: snsUncheckedUpdateManyWithoutUserNestedInput
+    sns?: snsUncheckedUpdateManyWithoutMakerNestedInput
+    badges?: UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7714,6 +10341,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     host: UserCreateNestedOneWithoutHostEventsInput
     timeSlots?: TimeSlotCreateNestedManyWithoutEventInput
+    badge?: badgeListCreateNestedOneWithoutEventInput
   }
 
   export type EventUncheckedCreateInput = {
@@ -7727,6 +10355,7 @@ export namespace Prisma {
     endsAt: Date | string
     isDeleted?: boolean
     updatedAt?: Date | string
+    badgeId?: number | null
     timeSlots?: TimeSlotUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -7741,6 +10370,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     host?: UserUpdateOneRequiredWithoutHostEventsNestedInput
     timeSlots?: TimeSlotUpdateManyWithoutEventNestedInput
+    badge?: badgeListUpdateOneWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
@@ -7754,6 +10384,7 @@ export namespace Prisma {
     endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    badgeId?: NullableIntFieldUpdateOperationsInput | number | null
     timeSlots?: TimeSlotUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -7768,6 +10399,7 @@ export namespace Prisma {
     endsAt: Date | string
     isDeleted?: boolean
     updatedAt?: Date | string
+    badgeId?: number | null
   }
 
   export type EventUpdateManyMutationInput = {
@@ -7792,6 +10424,7 @@ export namespace Prisma {
     endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    badgeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type TimeSlotCreateInput = {
@@ -7912,7 +10545,7 @@ export namespace Prisma {
     content: string
     good?: snsCreategoodInput | string[]
     time?: Date | string
-    user: UserCreateNestedOneWithoutSnsInput
+    maker: UserCreateNestedOneWithoutSnsInput
   }
 
   export type snsUncheckedCreateInput = {
@@ -7927,7 +10560,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     good?: snsUpdategoodInput | string[]
     time?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutSnsNestedInput
+    maker?: UserUpdateOneRequiredWithoutSnsNestedInput
   }
 
   export type snsUncheckedUpdateInput = {
@@ -7958,6 +10591,101 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     good?: snsUpdategoodInput | string[]
     time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type badgeListCreateInput = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+    users?: UserBadgeCreateNestedManyWithoutBadgeInput
+    event?: EventCreateNestedOneWithoutBadgeInput
+  }
+
+  export type badgeListUncheckedCreateInput = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+    users?: UserBadgeUncheckedCreateNestedManyWithoutBadgeInput
+    event?: EventUncheckedCreateNestedOneWithoutBadgeInput
+  }
+
+  export type badgeListUpdateInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    users?: UserBadgeUpdateManyWithoutBadgeNestedInput
+    event?: EventUpdateOneWithoutBadgeNestedInput
+  }
+
+  export type badgeListUncheckedUpdateInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    users?: UserBadgeUncheckedUpdateManyWithoutBadgeNestedInput
+    event?: EventUncheckedUpdateOneWithoutBadgeNestedInput
+  }
+
+  export type badgeListCreateManyInput = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+  }
+
+  export type badgeListUpdateManyMutationInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type badgeListUncheckedUpdateManyInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserBadgeCreateInput = {
+    user: UserCreateNestedOneWithoutBadgesInput
+    badge: badgeListCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserBadgeUncheckedCreateInput = {
+    id?: number
+    userId: string
+    badgeId: number
+  }
+
+  export type UserBadgeUpdateInput = {
+    user?: UserUpdateOneRequiredWithoutBadgesNestedInput
+    badge?: badgeListUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type UserBadgeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    badgeId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserBadgeCreateManyInput = {
+    id?: number
+    userId: string
+    badgeId: number
+  }
+
+  export type UserBadgeUpdateManyMutationInput = {
+
+  }
+
+  export type UserBadgeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    badgeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -8030,6 +10758,12 @@ export namespace Prisma {
     none?: snsWhereInput
   }
 
+  export type UserBadgeListRelationFilter = {
+    every?: UserBadgeWhereInput
+    some?: UserBadgeWhereInput
+    none?: UserBadgeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -8044,6 +10778,10 @@ export namespace Prisma {
   }
 
   export type snsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserBadgeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8159,6 +10897,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -8168,6 +10917,11 @@ export namespace Prisma {
     every?: TimeSlotWhereInput
     some?: TimeSlotWhereInput
     none?: TimeSlotWhereInput
+  }
+
+  export type BadgeListNullableScalarRelationFilter = {
+    is?: badgeListWhereInput | null
+    isNot?: badgeListWhereInput | null
   }
 
   export type TimeSlotOrderByRelationAggregateInput = {
@@ -8185,10 +10939,12 @@ export namespace Prisma {
     endsAt?: SortOrder
     isDeleted?: SortOrder
     updatedAt?: SortOrder
+    badgeId?: SortOrder
   }
 
   export type EventAvgOrderByAggregateInput = {
     eventId?: SortOrder
+    badgeId?: SortOrder
   }
 
   export type EventMaxOrderByAggregateInput = {
@@ -8202,6 +10958,7 @@ export namespace Prisma {
     endsAt?: SortOrder
     isDeleted?: SortOrder
     updatedAt?: SortOrder
+    badgeId?: SortOrder
   }
 
   export type EventMinOrderByAggregateInput = {
@@ -8215,10 +10972,12 @@ export namespace Prisma {
     endsAt?: SortOrder
     isDeleted?: SortOrder
     updatedAt?: SortOrder
+    badgeId?: SortOrder
   }
 
   export type EventSumOrderByAggregateInput = {
     eventId?: SortOrder
+    badgeId?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -8227,6 +10986,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EventScalarRelationFilter = {
@@ -8397,6 +11172,78 @@ export namespace Prisma {
     postId?: SortOrder
   }
 
+  export type EventNullableScalarRelationFilter = {
+    is?: EventWhereInput | null
+    isNot?: EventWhereInput | null
+  }
+
+  export type badgeListCountOrderByAggregateInput = {
+    badgeId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+  }
+
+  export type badgeListAvgOrderByAggregateInput = {
+    badgeId?: SortOrder
+  }
+
+  export type badgeListMaxOrderByAggregateInput = {
+    badgeId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+  }
+
+  export type badgeListMinOrderByAggregateInput = {
+    badgeId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
+  }
+
+  export type badgeListSumOrderByAggregateInput = {
+    badgeId?: SortOrder
+  }
+
+  export type BadgeListScalarRelationFilter = {
+    is?: badgeListWhereInput
+    isNot?: badgeListWhereInput
+  }
+
+  export type UserBadgeUserIdBadgeIdCompoundUniqueInput = {
+    userId: string
+    badgeId: number
+  }
+
+  export type UserBadgeCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    badgeId?: SortOrder
+  }
+
+  export type UserBadgeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    badgeId?: SortOrder
+  }
+
+  export type UserBadgeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    badgeId?: SortOrder
+  }
+
+  export type UserBadgeMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    badgeId?: SortOrder
+  }
+
+  export type UserBadgeSumOrderByAggregateInput = {
+    id?: SortOrder
+    badgeId?: SortOrder
+  }
+
   export type EventCreateNestedManyWithoutHostInput = {
     create?: XOR<EventCreateWithoutHostInput, EventUncheckedCreateWithoutHostInput> | EventCreateWithoutHostInput[] | EventUncheckedCreateWithoutHostInput[]
     connectOrCreate?: EventCreateOrConnectWithoutHostInput | EventCreateOrConnectWithoutHostInput[]
@@ -8411,11 +11258,18 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
-  export type snsCreateNestedManyWithoutUserInput = {
-    create?: XOR<snsCreateWithoutUserInput, snsUncheckedCreateWithoutUserInput> | snsCreateWithoutUserInput[] | snsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: snsCreateOrConnectWithoutUserInput | snsCreateOrConnectWithoutUserInput[]
-    createMany?: snsCreateManyUserInputEnvelope
+  export type snsCreateNestedManyWithoutMakerInput = {
+    create?: XOR<snsCreateWithoutMakerInput, snsUncheckedCreateWithoutMakerInput> | snsCreateWithoutMakerInput[] | snsUncheckedCreateWithoutMakerInput[]
+    connectOrCreate?: snsCreateOrConnectWithoutMakerInput | snsCreateOrConnectWithoutMakerInput[]
+    createMany?: snsCreateManyMakerInputEnvelope
     connect?: snsWhereUniqueInput | snsWhereUniqueInput[]
+  }
+
+  export type UserBadgeCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserBadgeCreateWithoutUserInput, UserBadgeUncheckedCreateWithoutUserInput> | UserBadgeCreateWithoutUserInput[] | UserBadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutUserInput | UserBadgeCreateOrConnectWithoutUserInput[]
+    createMany?: UserBadgeCreateManyUserInputEnvelope
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
   }
 
   export type EventUncheckedCreateNestedManyWithoutHostInput = {
@@ -8432,11 +11286,18 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
-  export type snsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<snsCreateWithoutUserInput, snsUncheckedCreateWithoutUserInput> | snsCreateWithoutUserInput[] | snsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: snsCreateOrConnectWithoutUserInput | snsCreateOrConnectWithoutUserInput[]
-    createMany?: snsCreateManyUserInputEnvelope
+  export type snsUncheckedCreateNestedManyWithoutMakerInput = {
+    create?: XOR<snsCreateWithoutMakerInput, snsUncheckedCreateWithoutMakerInput> | snsCreateWithoutMakerInput[] | snsUncheckedCreateWithoutMakerInput[]
+    connectOrCreate?: snsCreateOrConnectWithoutMakerInput | snsCreateOrConnectWithoutMakerInput[]
+    createMany?: snsCreateManyMakerInputEnvelope
     connect?: snsWhereUniqueInput | snsWhereUniqueInput[]
+  }
+
+  export type UserBadgeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserBadgeCreateWithoutUserInput, UserBadgeUncheckedCreateWithoutUserInput> | UserBadgeCreateWithoutUserInput[] | UserBadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutUserInput | UserBadgeCreateOrConnectWithoutUserInput[]
+    createMany?: UserBadgeCreateManyUserInputEnvelope
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8487,18 +11348,32 @@ export namespace Prisma {
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
   }
 
-  export type snsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<snsCreateWithoutUserInput, snsUncheckedCreateWithoutUserInput> | snsCreateWithoutUserInput[] | snsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: snsCreateOrConnectWithoutUserInput | snsCreateOrConnectWithoutUserInput[]
-    upsert?: snsUpsertWithWhereUniqueWithoutUserInput | snsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: snsCreateManyUserInputEnvelope
+  export type snsUpdateManyWithoutMakerNestedInput = {
+    create?: XOR<snsCreateWithoutMakerInput, snsUncheckedCreateWithoutMakerInput> | snsCreateWithoutMakerInput[] | snsUncheckedCreateWithoutMakerInput[]
+    connectOrCreate?: snsCreateOrConnectWithoutMakerInput | snsCreateOrConnectWithoutMakerInput[]
+    upsert?: snsUpsertWithWhereUniqueWithoutMakerInput | snsUpsertWithWhereUniqueWithoutMakerInput[]
+    createMany?: snsCreateManyMakerInputEnvelope
     set?: snsWhereUniqueInput | snsWhereUniqueInput[]
     disconnect?: snsWhereUniqueInput | snsWhereUniqueInput[]
     delete?: snsWhereUniqueInput | snsWhereUniqueInput[]
     connect?: snsWhereUniqueInput | snsWhereUniqueInput[]
-    update?: snsUpdateWithWhereUniqueWithoutUserInput | snsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: snsUpdateManyWithWhereWithoutUserInput | snsUpdateManyWithWhereWithoutUserInput[]
+    update?: snsUpdateWithWhereUniqueWithoutMakerInput | snsUpdateWithWhereUniqueWithoutMakerInput[]
+    updateMany?: snsUpdateManyWithWhereWithoutMakerInput | snsUpdateManyWithWhereWithoutMakerInput[]
     deleteMany?: snsScalarWhereInput | snsScalarWhereInput[]
+  }
+
+  export type UserBadgeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserBadgeCreateWithoutUserInput, UserBadgeUncheckedCreateWithoutUserInput> | UserBadgeCreateWithoutUserInput[] | UserBadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutUserInput | UserBadgeCreateOrConnectWithoutUserInput[]
+    upsert?: UserBadgeUpsertWithWhereUniqueWithoutUserInput | UserBadgeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserBadgeCreateManyUserInputEnvelope
+    set?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    disconnect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    delete?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    update?: UserBadgeUpdateWithWhereUniqueWithoutUserInput | UserBadgeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserBadgeUpdateManyWithWhereWithoutUserInput | UserBadgeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserBadgeScalarWhereInput | UserBadgeScalarWhereInput[]
   }
 
   export type EventUncheckedUpdateManyWithoutHostNestedInput = {
@@ -8529,18 +11404,32 @@ export namespace Prisma {
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
   }
 
-  export type snsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<snsCreateWithoutUserInput, snsUncheckedCreateWithoutUserInput> | snsCreateWithoutUserInput[] | snsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: snsCreateOrConnectWithoutUserInput | snsCreateOrConnectWithoutUserInput[]
-    upsert?: snsUpsertWithWhereUniqueWithoutUserInput | snsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: snsCreateManyUserInputEnvelope
+  export type snsUncheckedUpdateManyWithoutMakerNestedInput = {
+    create?: XOR<snsCreateWithoutMakerInput, snsUncheckedCreateWithoutMakerInput> | snsCreateWithoutMakerInput[] | snsUncheckedCreateWithoutMakerInput[]
+    connectOrCreate?: snsCreateOrConnectWithoutMakerInput | snsCreateOrConnectWithoutMakerInput[]
+    upsert?: snsUpsertWithWhereUniqueWithoutMakerInput | snsUpsertWithWhereUniqueWithoutMakerInput[]
+    createMany?: snsCreateManyMakerInputEnvelope
     set?: snsWhereUniqueInput | snsWhereUniqueInput[]
     disconnect?: snsWhereUniqueInput | snsWhereUniqueInput[]
     delete?: snsWhereUniqueInput | snsWhereUniqueInput[]
     connect?: snsWhereUniqueInput | snsWhereUniqueInput[]
-    update?: snsUpdateWithWhereUniqueWithoutUserInput | snsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: snsUpdateManyWithWhereWithoutUserInput | snsUpdateManyWithWhereWithoutUserInput[]
+    update?: snsUpdateWithWhereUniqueWithoutMakerInput | snsUpdateWithWhereUniqueWithoutMakerInput[]
+    updateMany?: snsUpdateManyWithWhereWithoutMakerInput | snsUpdateManyWithWhereWithoutMakerInput[]
     deleteMany?: snsScalarWhereInput | snsScalarWhereInput[]
+  }
+
+  export type UserBadgeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserBadgeCreateWithoutUserInput, UserBadgeUncheckedCreateWithoutUserInput> | UserBadgeCreateWithoutUserInput[] | UserBadgeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutUserInput | UserBadgeCreateOrConnectWithoutUserInput[]
+    upsert?: UserBadgeUpsertWithWhereUniqueWithoutUserInput | UserBadgeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserBadgeCreateManyUserInputEnvelope
+    set?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    disconnect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    delete?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    update?: UserBadgeUpdateWithWhereUniqueWithoutUserInput | UserBadgeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserBadgeUpdateManyWithWhereWithoutUserInput | UserBadgeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserBadgeScalarWhereInput | UserBadgeScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutHostEventsInput = {
@@ -8554,6 +11443,12 @@ export namespace Prisma {
     connectOrCreate?: TimeSlotCreateOrConnectWithoutEventInput | TimeSlotCreateOrConnectWithoutEventInput[]
     createMany?: TimeSlotCreateManyEventInputEnvelope
     connect?: TimeSlotWhereUniqueInput | TimeSlotWhereUniqueInput[]
+  }
+
+  export type badgeListCreateNestedOneWithoutEventInput = {
+    create?: XOR<badgeListCreateWithoutEventInput, badgeListUncheckedCreateWithoutEventInput>
+    connectOrCreate?: badgeListCreateOrConnectWithoutEventInput
+    connect?: badgeListWhereUniqueInput
   }
 
   export type TimeSlotUncheckedCreateNestedManyWithoutEventInput = {
@@ -8587,6 +11482,24 @@ export namespace Prisma {
     update?: TimeSlotUpdateWithWhereUniqueWithoutEventInput | TimeSlotUpdateWithWhereUniqueWithoutEventInput[]
     updateMany?: TimeSlotUpdateManyWithWhereWithoutEventInput | TimeSlotUpdateManyWithWhereWithoutEventInput[]
     deleteMany?: TimeSlotScalarWhereInput | TimeSlotScalarWhereInput[]
+  }
+
+  export type badgeListUpdateOneWithoutEventNestedInput = {
+    create?: XOR<badgeListCreateWithoutEventInput, badgeListUncheckedCreateWithoutEventInput>
+    connectOrCreate?: badgeListCreateOrConnectWithoutEventInput
+    upsert?: badgeListUpsertWithoutEventInput
+    disconnect?: badgeListWhereInput | boolean
+    delete?: badgeListWhereInput | boolean
+    connect?: badgeListWhereUniqueInput
+    update?: XOR<XOR<badgeListUpdateToOneWithWhereWithoutEventInput, badgeListUpdateWithoutEventInput>, badgeListUncheckedUpdateWithoutEventInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TimeSlotUncheckedUpdateManyWithoutEventNestedInput = {
@@ -8716,6 +11629,108 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSnsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSnsInput, UserUpdateWithoutSnsInput>, UserUncheckedUpdateWithoutSnsInput>
+  }
+
+  export type UserBadgeCreateNestedManyWithoutBadgeInput = {
+    create?: XOR<UserBadgeCreateWithoutBadgeInput, UserBadgeUncheckedCreateWithoutBadgeInput> | UserBadgeCreateWithoutBadgeInput[] | UserBadgeUncheckedCreateWithoutBadgeInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutBadgeInput | UserBadgeCreateOrConnectWithoutBadgeInput[]
+    createMany?: UserBadgeCreateManyBadgeInputEnvelope
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+  }
+
+  export type EventCreateNestedOneWithoutBadgeInput = {
+    create?: XOR<EventCreateWithoutBadgeInput, EventUncheckedCreateWithoutBadgeInput>
+    connectOrCreate?: EventCreateOrConnectWithoutBadgeInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type UserBadgeUncheckedCreateNestedManyWithoutBadgeInput = {
+    create?: XOR<UserBadgeCreateWithoutBadgeInput, UserBadgeUncheckedCreateWithoutBadgeInput> | UserBadgeCreateWithoutBadgeInput[] | UserBadgeUncheckedCreateWithoutBadgeInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutBadgeInput | UserBadgeCreateOrConnectWithoutBadgeInput[]
+    createMany?: UserBadgeCreateManyBadgeInputEnvelope
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedOneWithoutBadgeInput = {
+    create?: XOR<EventCreateWithoutBadgeInput, EventUncheckedCreateWithoutBadgeInput>
+    connectOrCreate?: EventCreateOrConnectWithoutBadgeInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type UserBadgeUpdateManyWithoutBadgeNestedInput = {
+    create?: XOR<UserBadgeCreateWithoutBadgeInput, UserBadgeUncheckedCreateWithoutBadgeInput> | UserBadgeCreateWithoutBadgeInput[] | UserBadgeUncheckedCreateWithoutBadgeInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutBadgeInput | UserBadgeCreateOrConnectWithoutBadgeInput[]
+    upsert?: UserBadgeUpsertWithWhereUniqueWithoutBadgeInput | UserBadgeUpsertWithWhereUniqueWithoutBadgeInput[]
+    createMany?: UserBadgeCreateManyBadgeInputEnvelope
+    set?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    disconnect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    delete?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    update?: UserBadgeUpdateWithWhereUniqueWithoutBadgeInput | UserBadgeUpdateWithWhereUniqueWithoutBadgeInput[]
+    updateMany?: UserBadgeUpdateManyWithWhereWithoutBadgeInput | UserBadgeUpdateManyWithWhereWithoutBadgeInput[]
+    deleteMany?: UserBadgeScalarWhereInput | UserBadgeScalarWhereInput[]
+  }
+
+  export type EventUpdateOneWithoutBadgeNestedInput = {
+    create?: XOR<EventCreateWithoutBadgeInput, EventUncheckedCreateWithoutBadgeInput>
+    connectOrCreate?: EventCreateOrConnectWithoutBadgeInput
+    upsert?: EventUpsertWithoutBadgeInput
+    disconnect?: EventWhereInput | boolean
+    delete?: EventWhereInput | boolean
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutBadgeInput, EventUpdateWithoutBadgeInput>, EventUncheckedUpdateWithoutBadgeInput>
+  }
+
+  export type UserBadgeUncheckedUpdateManyWithoutBadgeNestedInput = {
+    create?: XOR<UserBadgeCreateWithoutBadgeInput, UserBadgeUncheckedCreateWithoutBadgeInput> | UserBadgeCreateWithoutBadgeInput[] | UserBadgeUncheckedCreateWithoutBadgeInput[]
+    connectOrCreate?: UserBadgeCreateOrConnectWithoutBadgeInput | UserBadgeCreateOrConnectWithoutBadgeInput[]
+    upsert?: UserBadgeUpsertWithWhereUniqueWithoutBadgeInput | UserBadgeUpsertWithWhereUniqueWithoutBadgeInput[]
+    createMany?: UserBadgeCreateManyBadgeInputEnvelope
+    set?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    disconnect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    delete?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    connect?: UserBadgeWhereUniqueInput | UserBadgeWhereUniqueInput[]
+    update?: UserBadgeUpdateWithWhereUniqueWithoutBadgeInput | UserBadgeUpdateWithWhereUniqueWithoutBadgeInput[]
+    updateMany?: UserBadgeUpdateManyWithWhereWithoutBadgeInput | UserBadgeUpdateManyWithWhereWithoutBadgeInput[]
+    deleteMany?: UserBadgeScalarWhereInput | UserBadgeScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateOneWithoutBadgeNestedInput = {
+    create?: XOR<EventCreateWithoutBadgeInput, EventUncheckedCreateWithoutBadgeInput>
+    connectOrCreate?: EventCreateOrConnectWithoutBadgeInput
+    upsert?: EventUpsertWithoutBadgeInput
+    disconnect?: EventWhereInput | boolean
+    delete?: EventWhereInput | boolean
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutBadgeInput, EventUpdateWithoutBadgeInput>, EventUncheckedUpdateWithoutBadgeInput>
+  }
+
+  export type UserCreateNestedOneWithoutBadgesInput = {
+    create?: XOR<UserCreateWithoutBadgesInput, UserUncheckedCreateWithoutBadgesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBadgesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type badgeListCreateNestedOneWithoutUsersInput = {
+    create?: XOR<badgeListCreateWithoutUsersInput, badgeListUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: badgeListCreateOrConnectWithoutUsersInput
+    connect?: badgeListWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBadgesNestedInput = {
+    create?: XOR<UserCreateWithoutBadgesInput, UserUncheckedCreateWithoutBadgesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBadgesInput
+    upsert?: UserUpsertWithoutBadgesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBadgesInput, UserUpdateWithoutBadgesInput>, UserUncheckedUpdateWithoutBadgesInput>
+  }
+
+  export type badgeListUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<badgeListCreateWithoutUsersInput, badgeListUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: badgeListCreateOrConnectWithoutUsersInput
+    upsert?: badgeListUpsertWithoutUsersInput
+    connect?: badgeListWhereUniqueInput
+    update?: XOR<XOR<badgeListUpdateToOneWithWhereWithoutUsersInput, badgeListUpdateWithoutUsersInput>, badgeListUncheckedUpdateWithoutUsersInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8867,6 +11882,33 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumReservationStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ReservationStatus | EnumReservationStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ReservationStatus[] | ListEnumReservationStatusFieldRefInput<$PrismaModel>
@@ -8919,6 +11961,7 @@ export namespace Prisma {
     isDeleted?: boolean
     updatedAt?: Date | string
     timeSlots?: TimeSlotCreateNestedManyWithoutEventInput
+    badge?: badgeListCreateNestedOneWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutHostInput = {
@@ -8931,6 +11974,7 @@ export namespace Prisma {
     endsAt: Date | string
     isDeleted?: boolean
     updatedAt?: Date | string
+    badgeId?: number | null
     timeSlots?: TimeSlotUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -8969,26 +12013,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type snsCreateWithoutUserInput = {
+  export type snsCreateWithoutMakerInput = {
     content: string
     good?: snsCreategoodInput | string[]
     time?: Date | string
   }
 
-  export type snsUncheckedCreateWithoutUserInput = {
+  export type snsUncheckedCreateWithoutMakerInput = {
     postId?: number
     content: string
     good?: snsCreategoodInput | string[]
     time?: Date | string
   }
 
-  export type snsCreateOrConnectWithoutUserInput = {
+  export type snsCreateOrConnectWithoutMakerInput = {
     where: snsWhereUniqueInput
-    create: XOR<snsCreateWithoutUserInput, snsUncheckedCreateWithoutUserInput>
+    create: XOR<snsCreateWithoutMakerInput, snsUncheckedCreateWithoutMakerInput>
   }
 
-  export type snsCreateManyUserInputEnvelope = {
-    data: snsCreateManyUserInput | snsCreateManyUserInput[]
+  export type snsCreateManyMakerInputEnvelope = {
+    data: snsCreateManyMakerInput | snsCreateManyMakerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserBadgeCreateWithoutUserInput = {
+    badge: badgeListCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserBadgeUncheckedCreateWithoutUserInput = {
+    id?: number
+    badgeId: number
+  }
+
+  export type UserBadgeCreateOrConnectWithoutUserInput = {
+    where: UserBadgeWhereUniqueInput
+    create: XOR<UserBadgeCreateWithoutUserInput, UserBadgeUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserBadgeCreateManyUserInputEnvelope = {
+    data: UserBadgeCreateManyUserInput | UserBadgeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -9022,6 +12085,7 @@ export namespace Prisma {
     endsAt?: DateTimeFilter<"Event"> | Date | string
     isDeleted?: BoolFilter<"Event"> | boolean
     updatedAt?: DateTimeFilter<"Event"> | Date | string
+    badgeId?: IntNullableFilter<"Event"> | number | null
   }
 
   export type ReservationUpsertWithWhereUniqueWithoutUserInput = {
@@ -9052,20 +12116,20 @@ export namespace Prisma {
     canceledAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
   }
 
-  export type snsUpsertWithWhereUniqueWithoutUserInput = {
+  export type snsUpsertWithWhereUniqueWithoutMakerInput = {
     where: snsWhereUniqueInput
-    update: XOR<snsUpdateWithoutUserInput, snsUncheckedUpdateWithoutUserInput>
-    create: XOR<snsCreateWithoutUserInput, snsUncheckedCreateWithoutUserInput>
+    update: XOR<snsUpdateWithoutMakerInput, snsUncheckedUpdateWithoutMakerInput>
+    create: XOR<snsCreateWithoutMakerInput, snsUncheckedCreateWithoutMakerInput>
   }
 
-  export type snsUpdateWithWhereUniqueWithoutUserInput = {
+  export type snsUpdateWithWhereUniqueWithoutMakerInput = {
     where: snsWhereUniqueInput
-    data: XOR<snsUpdateWithoutUserInput, snsUncheckedUpdateWithoutUserInput>
+    data: XOR<snsUpdateWithoutMakerInput, snsUncheckedUpdateWithoutMakerInput>
   }
 
-  export type snsUpdateManyWithWhereWithoutUserInput = {
+  export type snsUpdateManyWithWhereWithoutMakerInput = {
     where: snsScalarWhereInput
-    data: XOR<snsUpdateManyMutationInput, snsUncheckedUpdateManyWithoutUserInput>
+    data: XOR<snsUpdateManyMutationInput, snsUncheckedUpdateManyWithoutMakerInput>
   }
 
   export type snsScalarWhereInput = {
@@ -9079,6 +12143,31 @@ export namespace Prisma {
     time?: DateTimeFilter<"sns"> | Date | string
   }
 
+  export type UserBadgeUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserBadgeWhereUniqueInput
+    update: XOR<UserBadgeUpdateWithoutUserInput, UserBadgeUncheckedUpdateWithoutUserInput>
+    create: XOR<UserBadgeCreateWithoutUserInput, UserBadgeUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserBadgeUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserBadgeWhereUniqueInput
+    data: XOR<UserBadgeUpdateWithoutUserInput, UserBadgeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserBadgeUpdateManyWithWhereWithoutUserInput = {
+    where: UserBadgeScalarWhereInput
+    data: XOR<UserBadgeUpdateManyMutationInput, UserBadgeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserBadgeScalarWhereInput = {
+    AND?: UserBadgeScalarWhereInput | UserBadgeScalarWhereInput[]
+    OR?: UserBadgeScalarWhereInput[]
+    NOT?: UserBadgeScalarWhereInput | UserBadgeScalarWhereInput[]
+    id?: IntFilter<"UserBadge"> | number
+    userId?: StringFilter<"UserBadge"> | string
+    badgeId?: IntFilter<"UserBadge"> | number
+  }
+
   export type UserCreateWithoutHostEventsInput = {
     userId?: string
     password: string
@@ -9089,7 +12178,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutUserInput
-    sns?: snsCreateNestedManyWithoutUserInput
+    sns?: snsCreateNestedManyWithoutMakerInput
+    badges?: UserBadgeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHostEventsInput = {
@@ -9102,7 +12192,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    sns?: snsUncheckedCreateNestedManyWithoutUserInput
+    sns?: snsUncheckedCreateNestedManyWithoutMakerInput
+    badges?: UserBadgeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHostEventsInput = {
@@ -9135,6 +12226,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type badgeListCreateWithoutEventInput = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+    users?: UserBadgeCreateNestedManyWithoutBadgeInput
+  }
+
+  export type badgeListUncheckedCreateWithoutEventInput = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+    users?: UserBadgeUncheckedCreateNestedManyWithoutBadgeInput
+  }
+
+  export type badgeListCreateOrConnectWithoutEventInput = {
+    where: badgeListWhereUniqueInput
+    create: XOR<badgeListCreateWithoutEventInput, badgeListUncheckedCreateWithoutEventInput>
+  }
+
   export type UserUpsertWithoutHostEventsInput = {
     update: XOR<UserUpdateWithoutHostEventsInput, UserUncheckedUpdateWithoutHostEventsInput>
     create: XOR<UserCreateWithoutHostEventsInput, UserUncheckedCreateWithoutHostEventsInput>
@@ -9156,7 +12268,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutUserNestedInput
-    sns?: snsUpdateManyWithoutUserNestedInput
+    sns?: snsUpdateManyWithoutMakerNestedInput
+    badges?: UserBadgeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHostEventsInput = {
@@ -9169,7 +12282,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    sns?: snsUncheckedUpdateManyWithoutUserNestedInput
+    sns?: snsUncheckedUpdateManyWithoutMakerNestedInput
+    badges?: UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TimeSlotUpsertWithWhereUniqueWithoutEventInput = {
@@ -9199,6 +12313,33 @@ export namespace Prisma {
     capacity?: IntFilter<"TimeSlot"> | number
   }
 
+  export type badgeListUpsertWithoutEventInput = {
+    update: XOR<badgeListUpdateWithoutEventInput, badgeListUncheckedUpdateWithoutEventInput>
+    create: XOR<badgeListCreateWithoutEventInput, badgeListUncheckedCreateWithoutEventInput>
+    where?: badgeListWhereInput
+  }
+
+  export type badgeListUpdateToOneWithWhereWithoutEventInput = {
+    where?: badgeListWhereInput
+    data: XOR<badgeListUpdateWithoutEventInput, badgeListUncheckedUpdateWithoutEventInput>
+  }
+
+  export type badgeListUpdateWithoutEventInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    users?: UserBadgeUpdateManyWithoutBadgeNestedInput
+  }
+
+  export type badgeListUncheckedUpdateWithoutEventInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    users?: UserBadgeUncheckedUpdateManyWithoutBadgeNestedInput
+  }
+
   export type EventCreateWithoutTimeSlotsInput = {
     eventName: string
     title: string
@@ -9209,6 +12350,7 @@ export namespace Prisma {
     isDeleted?: boolean
     updatedAt?: Date | string
     host: UserCreateNestedOneWithoutHostEventsInput
+    badge?: badgeListCreateNestedOneWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutTimeSlotsInput = {
@@ -9222,6 +12364,7 @@ export namespace Prisma {
     endsAt: Date | string
     isDeleted?: boolean
     updatedAt?: Date | string
+    badgeId?: number | null
   }
 
   export type EventCreateOrConnectWithoutTimeSlotsInput = {
@@ -9275,6 +12418,7 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     host?: UserUpdateOneRequiredWithoutHostEventsNestedInput
+    badge?: badgeListUpdateOneWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutTimeSlotsInput = {
@@ -9288,6 +12432,7 @@ export namespace Prisma {
     endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    badgeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ReservationUpsertWithWhereUniqueWithoutTimeSlotInput = {
@@ -9316,7 +12461,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     hostEvents?: EventCreateNestedManyWithoutHostInput
-    sns?: snsCreateNestedManyWithoutUserInput
+    sns?: snsCreateNestedManyWithoutMakerInput
+    badges?: UserBadgeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReservationsInput = {
@@ -9329,7 +12475,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     hostEvents?: EventUncheckedCreateNestedManyWithoutHostInput
-    sns?: snsUncheckedCreateNestedManyWithoutUserInput
+    sns?: snsUncheckedCreateNestedManyWithoutMakerInput
+    badges?: UserBadgeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReservationsInput = {
@@ -9378,7 +12525,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUpdateManyWithoutHostNestedInput
-    sns?: snsUpdateManyWithoutUserNestedInput
+    sns?: snsUpdateManyWithoutMakerNestedInput
+    badges?: UserBadgeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReservationsInput = {
@@ -9391,7 +12539,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUncheckedUpdateManyWithoutHostNestedInput
-    sns?: snsUncheckedUpdateManyWithoutUserNestedInput
+    sns?: snsUncheckedUpdateManyWithoutMakerNestedInput
+    badges?: UserBadgeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TimeSlotUpsertWithoutReservationsInput = {
@@ -9431,6 +12580,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     hostEvents?: EventCreateNestedManyWithoutHostInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
+    badges?: UserBadgeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSnsInput = {
@@ -9444,6 +12594,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     hostEvents?: EventUncheckedCreateNestedManyWithoutHostInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    badges?: UserBadgeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSnsInput = {
@@ -9473,6 +12624,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUpdateManyWithoutHostNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
+    badges?: UserBadgeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSnsInput = {
@@ -9486,6 +12638,232 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUncheckedUpdateManyWithoutHostNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    badges?: UserBadgeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserBadgeCreateWithoutBadgeInput = {
+    user: UserCreateNestedOneWithoutBadgesInput
+  }
+
+  export type UserBadgeUncheckedCreateWithoutBadgeInput = {
+    id?: number
+    userId: string
+  }
+
+  export type UserBadgeCreateOrConnectWithoutBadgeInput = {
+    where: UserBadgeWhereUniqueInput
+    create: XOR<UserBadgeCreateWithoutBadgeInput, UserBadgeUncheckedCreateWithoutBadgeInput>
+  }
+
+  export type UserBadgeCreateManyBadgeInputEnvelope = {
+    data: UserBadgeCreateManyBadgeInput | UserBadgeCreateManyBadgeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventCreateWithoutBadgeInput = {
+    eventName: string
+    title: string
+    description: string
+    createdAt?: Date | string
+    startsAt: Date | string
+    endsAt: Date | string
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    host: UserCreateNestedOneWithoutHostEventsInput
+    timeSlots?: TimeSlotCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutBadgeInput = {
+    eventId?: number
+    hostId: string
+    eventName: string
+    title: string
+    description: string
+    createdAt?: Date | string
+    startsAt: Date | string
+    endsAt: Date | string
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    timeSlots?: TimeSlotUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutBadgeInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutBadgeInput, EventUncheckedCreateWithoutBadgeInput>
+  }
+
+  export type UserBadgeUpsertWithWhereUniqueWithoutBadgeInput = {
+    where: UserBadgeWhereUniqueInput
+    update: XOR<UserBadgeUpdateWithoutBadgeInput, UserBadgeUncheckedUpdateWithoutBadgeInput>
+    create: XOR<UserBadgeCreateWithoutBadgeInput, UserBadgeUncheckedCreateWithoutBadgeInput>
+  }
+
+  export type UserBadgeUpdateWithWhereUniqueWithoutBadgeInput = {
+    where: UserBadgeWhereUniqueInput
+    data: XOR<UserBadgeUpdateWithoutBadgeInput, UserBadgeUncheckedUpdateWithoutBadgeInput>
+  }
+
+  export type UserBadgeUpdateManyWithWhereWithoutBadgeInput = {
+    where: UserBadgeScalarWhereInput
+    data: XOR<UserBadgeUpdateManyMutationInput, UserBadgeUncheckedUpdateManyWithoutBadgeInput>
+  }
+
+  export type EventUpsertWithoutBadgeInput = {
+    update: XOR<EventUpdateWithoutBadgeInput, EventUncheckedUpdateWithoutBadgeInput>
+    create: XOR<EventCreateWithoutBadgeInput, EventUncheckedCreateWithoutBadgeInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutBadgeInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutBadgeInput, EventUncheckedUpdateWithoutBadgeInput>
+  }
+
+  export type EventUpdateWithoutBadgeInput = {
+    eventName?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    host?: UserUpdateOneRequiredWithoutHostEventsNestedInput
+    timeSlots?: TimeSlotUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutBadgeInput = {
+    eventId?: IntFieldUpdateOperationsInput | number
+    hostId?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeSlots?: TimeSlotUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type UserCreateWithoutBadgesInput = {
+    userId?: string
+    password: string
+    email: string
+    point: number
+    profile?: string | null
+    name?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    hostEvents?: EventCreateNestedManyWithoutHostInput
+    reservations?: ReservationCreateNestedManyWithoutUserInput
+    sns?: snsCreateNestedManyWithoutMakerInput
+  }
+
+  export type UserUncheckedCreateWithoutBadgesInput = {
+    userId?: string
+    password: string
+    email: string
+    point: number
+    profile?: string | null
+    name?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    hostEvents?: EventUncheckedCreateNestedManyWithoutHostInput
+    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    sns?: snsUncheckedCreateNestedManyWithoutMakerInput
+  }
+
+  export type UserCreateOrConnectWithoutBadgesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBadgesInput, UserUncheckedCreateWithoutBadgesInput>
+  }
+
+  export type badgeListCreateWithoutUsersInput = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+    event?: EventCreateNestedOneWithoutBadgeInput
+  }
+
+  export type badgeListUncheckedCreateWithoutUsersInput = {
+    badgeId: number
+    name: string
+    description: string
+    image: string
+    event?: EventUncheckedCreateNestedOneWithoutBadgeInput
+  }
+
+  export type badgeListCreateOrConnectWithoutUsersInput = {
+    where: badgeListWhereUniqueInput
+    create: XOR<badgeListCreateWithoutUsersInput, badgeListUncheckedCreateWithoutUsersInput>
+  }
+
+  export type UserUpsertWithoutBadgesInput = {
+    update: XOR<UserUpdateWithoutBadgesInput, UserUncheckedUpdateWithoutBadgesInput>
+    create: XOR<UserCreateWithoutBadgesInput, UserUncheckedCreateWithoutBadgesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBadgesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBadgesInput, UserUncheckedUpdateWithoutBadgesInput>
+  }
+
+  export type UserUpdateWithoutBadgesInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    point?: IntFieldUpdateOperationsInput | number
+    profile?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostEvents?: EventUpdateManyWithoutHostNestedInput
+    reservations?: ReservationUpdateManyWithoutUserNestedInput
+    sns?: snsUpdateManyWithoutMakerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBadgesInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    point?: IntFieldUpdateOperationsInput | number
+    profile?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostEvents?: EventUncheckedUpdateManyWithoutHostNestedInput
+    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    sns?: snsUncheckedUpdateManyWithoutMakerNestedInput
+  }
+
+  export type badgeListUpsertWithoutUsersInput = {
+    update: XOR<badgeListUpdateWithoutUsersInput, badgeListUncheckedUpdateWithoutUsersInput>
+    create: XOR<badgeListCreateWithoutUsersInput, badgeListUncheckedCreateWithoutUsersInput>
+    where?: badgeListWhereInput
+  }
+
+  export type badgeListUpdateToOneWithWhereWithoutUsersInput = {
+    where?: badgeListWhereInput
+    data: XOR<badgeListUpdateWithoutUsersInput, badgeListUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type badgeListUpdateWithoutUsersInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    event?: EventUpdateOneWithoutBadgeNestedInput
+  }
+
+  export type badgeListUncheckedUpdateWithoutUsersInput = {
+    badgeId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    event?: EventUncheckedUpdateOneWithoutBadgeNestedInput
   }
 
   export type EventCreateManyHostInput = {
@@ -9498,6 +12876,7 @@ export namespace Prisma {
     endsAt: Date | string
     isDeleted?: boolean
     updatedAt?: Date | string
+    badgeId?: number | null
   }
 
   export type ReservationCreateManyUserInput = {
@@ -9508,11 +12887,16 @@ export namespace Prisma {
     canceledAt?: Date | string | null
   }
 
-  export type snsCreateManyUserInput = {
+  export type snsCreateManyMakerInput = {
     postId?: number
     content: string
     good?: snsCreategoodInput | string[]
     time?: Date | string
+  }
+
+  export type UserBadgeCreateManyUserInput = {
+    id?: number
+    badgeId: number
   }
 
   export type EventUpdateWithoutHostInput = {
@@ -9525,6 +12909,7 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     timeSlots?: TimeSlotUpdateManyWithoutEventNestedInput
+    badge?: badgeListUpdateOneWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutHostInput = {
@@ -9537,6 +12922,7 @@ export namespace Prisma {
     endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    badgeId?: NullableIntFieldUpdateOperationsInput | number | null
     timeSlots?: TimeSlotUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -9550,6 +12936,7 @@ export namespace Prisma {
     endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    badgeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ReservationUpdateWithoutUserInput = {
@@ -9575,24 +12962,38 @@ export namespace Prisma {
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type snsUpdateWithoutUserInput = {
+  export type snsUpdateWithoutMakerInput = {
     content?: StringFieldUpdateOperationsInput | string
     good?: snsUpdategoodInput | string[]
     time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type snsUncheckedUpdateWithoutUserInput = {
+  export type snsUncheckedUpdateWithoutMakerInput = {
     postId?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     good?: snsUpdategoodInput | string[]
     time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type snsUncheckedUpdateManyWithoutUserInput = {
+  export type snsUncheckedUpdateManyWithoutMakerInput = {
     postId?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     good?: snsUpdategoodInput | string[]
     time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserBadgeUpdateWithoutUserInput = {
+    badge?: badgeListUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type UserBadgeUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    badgeId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserBadgeUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    badgeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type TimeSlotCreateManyEventInput = {
@@ -9653,6 +13054,25 @@ export namespace Prisma {
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     reservedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UserBadgeCreateManyBadgeInput = {
+    id?: number
+    userId: string
+  }
+
+  export type UserBadgeUpdateWithoutBadgeInput = {
+    user?: UserUpdateOneRequiredWithoutBadgesNestedInput
+  }
+
+  export type UserBadgeUncheckedUpdateWithoutBadgeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserBadgeUncheckedUpdateManyWithoutBadgeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
 

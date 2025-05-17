@@ -141,7 +141,8 @@ exports.Prisma.EventScalarFieldEnum = {
   startsAt: 'startsAt',
   endsAt: 'endsAt',
   isDeleted: 'isDeleted',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  badgeId: 'badgeId'
 };
 
 exports.Prisma.TimeSlotScalarFieldEnum = {
@@ -169,6 +170,19 @@ exports.Prisma.SnsScalarFieldEnum = {
   time: 'time'
 };
 
+exports.Prisma.BadgeListScalarFieldEnum = {
+  badgeId: 'badgeId',
+  name: 'name',
+  description: 'description',
+  image: 'image'
+};
+
+exports.Prisma.UserBadgeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  badgeId: 'badgeId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -193,7 +207,9 @@ exports.Prisma.ModelName = {
   Event: 'Event',
   TimeSlot: 'TimeSlot',
   Reservation: 'Reservation',
-  sns: 'sns'
+  sns: 'sns',
+  badgeList: 'badgeList',
+  UserBadge: 'UserBadge'
 };
 
 /**

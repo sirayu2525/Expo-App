@@ -27,7 +27,8 @@ model User {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 
-  sns sns[]
+  sns    sns[]
+  badges UserBadge[]
 }
 
 model Event {
@@ -43,6 +44,9 @@ model Event {
   isDeleted   Boolean    @default(false)
   updatedAt   DateTime   @updatedAt
   timeSlots   TimeSlot[]
+
+  badgeId Int?       @unique // ← 外部キー（1対1用）
+  badge   badgeList? @relation(fields: [badgeId], references: [badgeId])
 
   @@map("event_table") // DB上のテーブル名を "event_table" にする
 }
@@ -80,8 +84,29 @@ enum ReservationStatus {
 model sns {
   postId  Int      @id @default(autoincrement())
   userId  String
-  user    User     @relation(fields: [userId], references: [userId])
+  maker   User     @relation(fields: [userId], references: [userId])
   content String
   good    String[] // goodを誰がしたかの配列
   time    DateTime @default(now())
+}
+
+model badgeList {
+  badgeId     Int    @id
+  name        String
+  description String
+  image       String
+
+  users UserBadge[]
+  event Event? // ← 1対1の逆側（optional にしておくと安全）
+}
+
+model UserBadge {
+  id      Int    @id @default(autoincrement())
+  userId  String
+  badgeId Int
+
+  user  User      @relation(fields: [userId], references: [userId])
+  badge badgeList @relation(fields: [badgeId], references: [badgeId])
+
+  @@unique([userId, badgeId])
 }
