@@ -1,0 +1,7 @@
+# .eslintignore
+node_modules/
+.next/
+public/
+
+# Prisma の生成コードを除外
+src/generated/

@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-800">
       <h1 className="text-3xl font-bold mb-4">ようこそ 👋</h1>
-      <img src="/src/app/images/myakumyaku.png" alt="Logo" className="w-32 h-32 mb-4" />
+      {/* <img src="/src/app/images/myakumyaku.png" alt="Logo" className="w-32 h-32 mb-4" /> */}
       <div className="space-x-4">
         <Link
           href="/login"
