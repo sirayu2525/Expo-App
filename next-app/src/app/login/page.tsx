@@ -18,12 +18,20 @@ export default function LoginPage() {
         credentials: 'include', // ← Cookieを受け取るために必要
         body: JSON.stringify({ email, password }),
       });
+      const { token } = await res.json();
+      if (!token) {
+        setError('トークンが取得できませんでした');
+        return;
+      }
 
       if (!res.ok) {
         const err = await res.json();
         setError(err.error || 'ログインに失敗しました');
         return;
       }
+
+      document.cookie = `jwt=${token}; path=/; SameSite=None; Secure`;
+
 
       // Cookieは自動的に保存されるので、何も保存しなくてOK
       router.push('/top');
