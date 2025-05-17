@@ -96,14 +96,14 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 		fmt.Println("発行:", signedToken)
 
 		cookie := &http.Cookie{
-			Name:        "jwt",
-			Value:       signedToken,
-			HttpOnly:    false,
-			Secure:      true, // ローカルならfalse、本番はtrue
-			Path:        "/",
-			SameSite:    http.SameSiteNoneMode,
-			Partitioned: true,
-			MaxAge:      60 * 60 * 24, // 1日
+			Name:     "jwt",
+			Value:    signedToken,
+			HttpOnly: true,
+			Secure:   true, // ローカルならfalse、本番はtrue
+			Path:     "/",
+			SameSite: http.SameSiteNoneMode,
+			// Partitioned: true,
+			MaxAge: 60 * 60 * 24, // 1日
 		}
 		c.SetCookie(cookie)
 		return c.JSON(http.StatusOK, cookie.Value)

@@ -43,12 +43,12 @@ export default function HomePage() {
         </Link>
       </div>
       <div className="mt-8">
-        <Link
+        {/* <Link
           href="/dashboard"
           className="text-blue-600 hover:underline"
         >
           ダッシュボードに移動
-        </Link>
+        </Link> */}
       </div>
     </main>
   );
