@@ -91,7 +91,7 @@ model sns {
 }
 
 model badgeList {
-  badgeId     Int    @id
+  badgeId     Int    @id @default(autoincrement())
   name        String
   description String
   image       String

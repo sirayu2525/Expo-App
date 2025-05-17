@@ -10594,7 +10594,6 @@ export namespace Prisma {
   }
 
   export type badgeListCreateInput = {
-    badgeId: number
     name: string
     description: string
     image: string
@@ -10603,7 +10602,7 @@ export namespace Prisma {
   }
 
   export type badgeListUncheckedCreateInput = {
-    badgeId: number
+    badgeId?: number
     name: string
     description: string
     image: string
@@ -10612,7 +10611,6 @@ export namespace Prisma {
   }
 
   export type badgeListUpdateInput = {
-    badgeId?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
@@ -10630,14 +10628,13 @@ export namespace Prisma {
   }
 
   export type badgeListCreateManyInput = {
-    badgeId: number
+    badgeId?: number
     name: string
     description: string
     image: string
   }
 
   export type badgeListUpdateManyMutationInput = {
-    badgeId?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
@@ -12227,7 +12224,6 @@ export namespace Prisma {
   }
 
   export type badgeListCreateWithoutEventInput = {
-    badgeId: number
     name: string
     description: string
     image: string
@@ -12235,7 +12231,7 @@ export namespace Prisma {
   }
 
   export type badgeListUncheckedCreateWithoutEventInput = {
-    badgeId: number
+    badgeId?: number
     name: string
     description: string
     image: string
@@ -12325,7 +12321,6 @@ export namespace Prisma {
   }
 
   export type badgeListUpdateWithoutEventInput = {
-    badgeId?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
@@ -12780,7 +12775,6 @@ export namespace Prisma {
   }
 
   export type badgeListCreateWithoutUsersInput = {
-    badgeId: number
     name: string
     description: string
     image: string
@@ -12788,7 +12782,7 @@ export namespace Prisma {
   }
 
   export type badgeListUncheckedCreateWithoutUsersInput = {
-    badgeId: number
+    badgeId?: number
     name: string
     description: string
     image: string
@@ -12851,7 +12845,6 @@ export namespace Prisma {
   }
 
   export type badgeListUpdateWithoutUsersInput = {
-    badgeId?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string

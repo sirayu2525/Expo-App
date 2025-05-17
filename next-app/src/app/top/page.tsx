@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { getUserFromCookie } from '@/lib/auth';
 import { redirect } from 'next/navigation';
+import Image from 'next/image';
 
 export default async function HomePage() {
     const user = getUserFromCookie()
@@ -16,9 +17,10 @@ export default async function HomePage() {
         },
         },
         include: {
-        timeSlots: {
-            orderBy: { startAt: 'asc' },
-        },
+            timeSlots: {
+                orderBy: { startAt: 'asc' },
+            },
+            badge : true,
         },
         orderBy: { startsAt: 'asc' },
     });
@@ -30,6 +32,19 @@ export default async function HomePage() {
         {events.length === 0 && <p>現在、予約可能なイベントはありません。</p>}
         {events.map((event) => (
             <div key={event.eventId} className="mb-8 p-4 border rounded">
+                          {/* バッジ表示 */}
+            {event.badge && (
+                <div className="mb-4 flex items-center">
+                    <Image
+                    src={event.badge.image}
+                    alt={event.badge.name}
+                    width={48}
+                    height={48}
+                    className="rounded-full mr-3"
+                    />
+                </div>
+            )}
+
             <h2 className="text-xl font-semibold">{event.eventName}</h2>
             <p className="text-gray-700 mb-2">{event.title}</p>
             <p className="text-sm text-gray-500 mb-2">{event.description}</p>
