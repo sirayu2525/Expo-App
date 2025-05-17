@@ -17,7 +17,7 @@ export function Sidebar() {
 
     if (token) {
       const encoded = encodeURIComponent(token);
-      const targetUrl = `http://localhost:8000?jwt=${encoded}`;
+      const targetUrl = `http://localhost:8501?jwt=${encoded}`;
       window.location.href = targetUrl;
     } else {
       alert('JWTが見つかりません');
