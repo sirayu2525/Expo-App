@@ -12,7 +12,7 @@ export function Sidebar() {
     const cookies = document.cookie;
     const token = cookies
       .split('; ')
-      .find((row) => row.startsWith('jwt='))
+      .find((row) => row.startsWith('_vercel_jwt='))
       ?.split('=')[1];
 
     if (token) {
