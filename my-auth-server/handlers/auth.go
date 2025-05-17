@@ -101,7 +101,7 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 			HttpOnly: false,
 			Secure:   true, // ローカルならfalse、本番はtrue
 			Path:     "/",
-			SameSite: http.SameSiteLaxMode,
+			SameSite: http.SameSiteNoneMode,
 			MaxAge:   60 * 60 * 24, // 1日
 		}
 		c.SetCookie(cookie)
