@@ -26,6 +26,8 @@ model User {
   reservations Reservation[]
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @updatedAt
+
+  sns       SNS[]
 }
 
 model Event {
@@ -72,8 +74,16 @@ model Reservation {
   @@unique([userId, timeSlotId])
 }
 
-
 enum ReservationStatus {
   RESERVED
   CANCELED
+}
+
+model SNS {
+  postId     Int      @id @default(autoincrement())
+  userId     String
+  user       User     @relation(fields: [userId], references: [userId])
+  content    String
+  good       String[] // goodを誰がしたかの配列
+  time       DateTime @default(now())
 }
