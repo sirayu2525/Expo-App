@@ -3,14 +3,14 @@ import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import { redirect } from 'next/navigation';
 
-interface Props {
-  params: { timeSlotId: string };
-}
 
-export default async function ReservePage({ params }: Props) {
-  const slotId = Number(params.timeSlotId);
+
+export default async function ReservePage({ params }: {  params : Promise<{timeSlotId : number } > }) {
+  const { timeSlotId } = await params;
+
+  if (!timeSlotId) return <div>timeスロットが見つかりません</div>;
   const slot = await prisma.timeSlot.findUnique({
-    where: { timeSlotId: slotId },
+    where: { timeSlotId: Number(timeSlotId) },
     include: {
       event: true,
       reservations: true,
@@ -18,7 +18,6 @@ export default async function ReservePage({ params }: Props) {
   });
 
   if (!slot) return <div>スロットが見つかりません</div>;
-
   const token = (await cookies()).get('jwt')?.value;
   if (!token) redirect('/login');
   const { sub: userId } = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
@@ -38,7 +37,7 @@ export default async function ReservePage({ params }: Props) {
 
       {!isAlreadyReserved && !isFull && (
         <form action={reserveAction} className="mt-6">
-          <input type="hidden" name="timeSlotId" value={slotId} />
+          <input type="hidden" name="timeSlotId" value={timeSlotId} />
           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             予約する
           </button>
