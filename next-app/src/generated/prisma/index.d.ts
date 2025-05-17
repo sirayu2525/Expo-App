@@ -33,6 +33,11 @@ export type TimeSlot = $Result.DefaultSelection<Prisma.$TimeSlotPayload>
  * 
  */
 export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
+/**
+ * Model SNS
+ * 
+ */
+export type SNS = $Result.DefaultSelection<Prisma.$SNSPayload>
 
 /**
  * Enums
@@ -215,6 +220,16 @@ export class PrismaClient<
     * ```
     */
   get reservation(): Prisma.ReservationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sNS`: Exposes CRUD operations for the **SNS** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SNS
+    * const sNS = await prisma.sNS.findMany()
+    * ```
+    */
+  get sNS(): Prisma.SNSDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -658,7 +673,8 @@ export namespace Prisma {
     User: 'User',
     Event: 'Event',
     TimeSlot: 'TimeSlot',
-    Reservation: 'Reservation'
+    Reservation: 'Reservation',
+    SNS: 'SNS'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -677,7 +693,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "event" | "timeSlot" | "reservation"
+      modelProps: "user" | "event" | "timeSlot" | "reservation" | "sNS"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -977,6 +993,80 @@ export namespace Prisma {
           }
         }
       }
+      SNS: {
+        payload: Prisma.$SNSPayload<ExtArgs>
+        fields: Prisma.SNSFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SNSFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SNSFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>
+          }
+          findFirst: {
+            args: Prisma.SNSFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SNSFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>
+          }
+          findMany: {
+            args: Prisma.SNSFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>[]
+          }
+          create: {
+            args: Prisma.SNSCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>
+          }
+          createMany: {
+            args: Prisma.SNSCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SNSCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>[]
+          }
+          delete: {
+            args: Prisma.SNSDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>
+          }
+          update: {
+            args: Prisma.SNSUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>
+          }
+          deleteMany: {
+            args: Prisma.SNSDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SNSUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SNSUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>[]
+          }
+          upsert: {
+            args: Prisma.SNSUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SNSPayload>
+          }
+          aggregate: {
+            args: Prisma.SNSAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSNS>
+          }
+          groupBy: {
+            args: Prisma.SNSGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SNSGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SNSCountArgs<ExtArgs>
+            result: $Utils.Optional<SNSCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1065,6 +1155,7 @@ export namespace Prisma {
     event?: EventOmit
     timeSlot?: TimeSlotOmit
     reservation?: ReservationOmit
+    sNS?: SNSOmit
   }
 
   /* Types for Logging */
@@ -1161,11 +1252,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     hostEvents: number
     reservations: number
+    sns: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     hostEvents?: boolean | UserCountOutputTypeCountHostEventsArgs
     reservations?: boolean | UserCountOutputTypeCountReservationsArgs
+    sns?: boolean | UserCountOutputTypeCountSnsArgs
   }
 
   // Custom InputTypes
@@ -1191,6 +1284,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReservationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SNSWhereInput
   }
 
 
@@ -1484,6 +1584,7 @@ export namespace Prisma {
     updatedAt?: boolean
     hostEvents?: boolean | User$hostEventsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
+    sns?: boolean | User$snsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1524,6 +1625,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     hostEvents?: boolean | User$hostEventsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
+    sns?: boolean | User$snsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1534,6 +1636,7 @@ export namespace Prisma {
     objects: {
       hostEvents: Prisma.$EventPayload<ExtArgs>[]
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
+      sns: Prisma.$SNSPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: string
@@ -1940,6 +2043,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     hostEvents<T extends User$hostEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$hostEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reservations<T extends User$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sns<T extends User$snsArgs<ExtArgs> = {}>(args?: Subset<T, User$snsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2410,6 +2514,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * User.sns
+   */
+  export type User$snsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    where?: SNSWhereInput
+    orderBy?: SNSOrderByWithRelationInput | SNSOrderByWithRelationInput[]
+    cursor?: SNSWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SNSScalarFieldEnum | SNSScalarFieldEnum[]
   }
 
   /**
@@ -5866,6 +5994,1094 @@ export namespace Prisma {
 
 
   /**
+   * Model SNS
+   */
+
+  export type AggregateSNS = {
+    _count: SNSCountAggregateOutputType | null
+    _avg: SNSAvgAggregateOutputType | null
+    _sum: SNSSumAggregateOutputType | null
+    _min: SNSMinAggregateOutputType | null
+    _max: SNSMaxAggregateOutputType | null
+  }
+
+  export type SNSAvgAggregateOutputType = {
+    postId: number | null
+  }
+
+  export type SNSSumAggregateOutputType = {
+    postId: number | null
+  }
+
+  export type SNSMinAggregateOutputType = {
+    postId: number | null
+    userId: string | null
+    content: string | null
+    time: Date | null
+  }
+
+  export type SNSMaxAggregateOutputType = {
+    postId: number | null
+    userId: string | null
+    content: string | null
+    time: Date | null
+  }
+
+  export type SNSCountAggregateOutputType = {
+    postId: number
+    userId: number
+    content: number
+    good: number
+    time: number
+    _all: number
+  }
+
+
+  export type SNSAvgAggregateInputType = {
+    postId?: true
+  }
+
+  export type SNSSumAggregateInputType = {
+    postId?: true
+  }
+
+  export type SNSMinAggregateInputType = {
+    postId?: true
+    userId?: true
+    content?: true
+    time?: true
+  }
+
+  export type SNSMaxAggregateInputType = {
+    postId?: true
+    userId?: true
+    content?: true
+    time?: true
+  }
+
+  export type SNSCountAggregateInputType = {
+    postId?: true
+    userId?: true
+    content?: true
+    good?: true
+    time?: true
+    _all?: true
+  }
+
+  export type SNSAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SNS to aggregate.
+     */
+    where?: SNSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SNS to fetch.
+     */
+    orderBy?: SNSOrderByWithRelationInput | SNSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SNSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SNS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SNS
+    **/
+    _count?: true | SNSCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SNSAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SNSSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SNSMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SNSMaxAggregateInputType
+  }
+
+  export type GetSNSAggregateType<T extends SNSAggregateArgs> = {
+        [P in keyof T & keyof AggregateSNS]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSNS[P]>
+      : GetScalarType<T[P], AggregateSNS[P]>
+  }
+
+
+
+
+  export type SNSGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SNSWhereInput
+    orderBy?: SNSOrderByWithAggregationInput | SNSOrderByWithAggregationInput[]
+    by: SNSScalarFieldEnum[] | SNSScalarFieldEnum
+    having?: SNSScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SNSCountAggregateInputType | true
+    _avg?: SNSAvgAggregateInputType
+    _sum?: SNSSumAggregateInputType
+    _min?: SNSMinAggregateInputType
+    _max?: SNSMaxAggregateInputType
+  }
+
+  export type SNSGroupByOutputType = {
+    postId: number
+    userId: string
+    content: string
+    good: string[]
+    time: Date
+    _count: SNSCountAggregateOutputType | null
+    _avg: SNSAvgAggregateOutputType | null
+    _sum: SNSSumAggregateOutputType | null
+    _min: SNSMinAggregateOutputType | null
+    _max: SNSMaxAggregateOutputType | null
+  }
+
+  type GetSNSGroupByPayload<T extends SNSGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SNSGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SNSGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SNSGroupByOutputType[P]>
+            : GetScalarType<T[P], SNSGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SNSSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    postId?: boolean
+    userId?: boolean
+    content?: boolean
+    good?: boolean
+    time?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sNS"]>
+
+  export type SNSSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    postId?: boolean
+    userId?: boolean
+    content?: boolean
+    good?: boolean
+    time?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sNS"]>
+
+  export type SNSSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    postId?: boolean
+    userId?: boolean
+    content?: boolean
+    good?: boolean
+    time?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sNS"]>
+
+  export type SNSSelectScalar = {
+    postId?: boolean
+    userId?: boolean
+    content?: boolean
+    good?: boolean
+    time?: boolean
+  }
+
+  export type SNSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"postId" | "userId" | "content" | "good" | "time", ExtArgs["result"]["sNS"]>
+  export type SNSInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SNSIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SNSIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SNSPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SNS"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      postId: number
+      userId: string
+      content: string
+      good: string[]
+      time: Date
+    }, ExtArgs["result"]["sNS"]>
+    composites: {}
+  }
+
+  type SNSGetPayload<S extends boolean | null | undefined | SNSDefaultArgs> = $Result.GetResult<Prisma.$SNSPayload, S>
+
+  type SNSCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SNSFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SNSCountAggregateInputType | true
+    }
+
+  export interface SNSDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SNS'], meta: { name: 'SNS' } }
+    /**
+     * Find zero or one SNS that matches the filter.
+     * @param {SNSFindUniqueArgs} args - Arguments to find a SNS
+     * @example
+     * // Get one SNS
+     * const sNS = await prisma.sNS.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SNSFindUniqueArgs>(args: SelectSubset<T, SNSFindUniqueArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SNS that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SNSFindUniqueOrThrowArgs} args - Arguments to find a SNS
+     * @example
+     * // Get one SNS
+     * const sNS = await prisma.sNS.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SNSFindUniqueOrThrowArgs>(args: SelectSubset<T, SNSFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SNS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SNSFindFirstArgs} args - Arguments to find a SNS
+     * @example
+     * // Get one SNS
+     * const sNS = await prisma.sNS.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SNSFindFirstArgs>(args?: SelectSubset<T, SNSFindFirstArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SNS that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SNSFindFirstOrThrowArgs} args - Arguments to find a SNS
+     * @example
+     * // Get one SNS
+     * const sNS = await prisma.sNS.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SNSFindFirstOrThrowArgs>(args?: SelectSubset<T, SNSFindFirstOrThrowArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SNS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SNSFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SNS
+     * const sNS = await prisma.sNS.findMany()
+     * 
+     * // Get first 10 SNS
+     * const sNS = await prisma.sNS.findMany({ take: 10 })
+     * 
+     * // Only select the `postId`
+     * const sNSWithPostIdOnly = await prisma.sNS.findMany({ select: { postId: true } })
+     * 
+     */
+    findMany<T extends SNSFindManyArgs>(args?: SelectSubset<T, SNSFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SNS.
+     * @param {SNSCreateArgs} args - Arguments to create a SNS.
+     * @example
+     * // Create one SNS
+     * const SNS = await prisma.sNS.create({
+     *   data: {
+     *     // ... data to create a SNS
+     *   }
+     * })
+     * 
+     */
+    create<T extends SNSCreateArgs>(args: SelectSubset<T, SNSCreateArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SNS.
+     * @param {SNSCreateManyArgs} args - Arguments to create many SNS.
+     * @example
+     * // Create many SNS
+     * const sNS = await prisma.sNS.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SNSCreateManyArgs>(args?: SelectSubset<T, SNSCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SNS and returns the data saved in the database.
+     * @param {SNSCreateManyAndReturnArgs} args - Arguments to create many SNS.
+     * @example
+     * // Create many SNS
+     * const sNS = await prisma.sNS.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SNS and only return the `postId`
+     * const sNSWithPostIdOnly = await prisma.sNS.createManyAndReturn({
+     *   select: { postId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SNSCreateManyAndReturnArgs>(args?: SelectSubset<T, SNSCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SNS.
+     * @param {SNSDeleteArgs} args - Arguments to delete one SNS.
+     * @example
+     * // Delete one SNS
+     * const SNS = await prisma.sNS.delete({
+     *   where: {
+     *     // ... filter to delete one SNS
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SNSDeleteArgs>(args: SelectSubset<T, SNSDeleteArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SNS.
+     * @param {SNSUpdateArgs} args - Arguments to update one SNS.
+     * @example
+     * // Update one SNS
+     * const sNS = await prisma.sNS.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SNSUpdateArgs>(args: SelectSubset<T, SNSUpdateArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SNS.
+     * @param {SNSDeleteManyArgs} args - Arguments to filter SNS to delete.
+     * @example
+     * // Delete a few SNS
+     * const { count } = await prisma.sNS.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SNSDeleteManyArgs>(args?: SelectSubset<T, SNSDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SNS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SNSUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SNS
+     * const sNS = await prisma.sNS.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SNSUpdateManyArgs>(args: SelectSubset<T, SNSUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SNS and returns the data updated in the database.
+     * @param {SNSUpdateManyAndReturnArgs} args - Arguments to update many SNS.
+     * @example
+     * // Update many SNS
+     * const sNS = await prisma.sNS.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SNS and only return the `postId`
+     * const sNSWithPostIdOnly = await prisma.sNS.updateManyAndReturn({
+     *   select: { postId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SNSUpdateManyAndReturnArgs>(args: SelectSubset<T, SNSUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SNS.
+     * @param {SNSUpsertArgs} args - Arguments to update or create a SNS.
+     * @example
+     * // Update or create a SNS
+     * const sNS = await prisma.sNS.upsert({
+     *   create: {
+     *     // ... data to create a SNS
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SNS we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SNSUpsertArgs>(args: SelectSubset<T, SNSUpsertArgs<ExtArgs>>): Prisma__SNSClient<$Result.GetResult<Prisma.$SNSPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SNS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SNSCountArgs} args - Arguments to filter SNS to count.
+     * @example
+     * // Count the number of SNS
+     * const count = await prisma.sNS.count({
+     *   where: {
+     *     // ... the filter for the SNS we want to count
+     *   }
+     * })
+    **/
+    count<T extends SNSCountArgs>(
+      args?: Subset<T, SNSCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SNSCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SNS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SNSAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SNSAggregateArgs>(args: Subset<T, SNSAggregateArgs>): Prisma.PrismaPromise<GetSNSAggregateType<T>>
+
+    /**
+     * Group by SNS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SNSGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SNSGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SNSGroupByArgs['orderBy'] }
+        : { orderBy?: SNSGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SNSGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSNSGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SNS model
+   */
+  readonly fields: SNSFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SNS.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SNSClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SNS model
+   */
+  interface SNSFieldRefs {
+    readonly postId: FieldRef<"SNS", 'Int'>
+    readonly userId: FieldRef<"SNS", 'String'>
+    readonly content: FieldRef<"SNS", 'String'>
+    readonly good: FieldRef<"SNS", 'String[]'>
+    readonly time: FieldRef<"SNS", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SNS findUnique
+   */
+  export type SNSFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * Filter, which SNS to fetch.
+     */
+    where: SNSWhereUniqueInput
+  }
+
+  /**
+   * SNS findUniqueOrThrow
+   */
+  export type SNSFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * Filter, which SNS to fetch.
+     */
+    where: SNSWhereUniqueInput
+  }
+
+  /**
+   * SNS findFirst
+   */
+  export type SNSFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * Filter, which SNS to fetch.
+     */
+    where?: SNSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SNS to fetch.
+     */
+    orderBy?: SNSOrderByWithRelationInput | SNSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SNS.
+     */
+    cursor?: SNSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SNS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SNS.
+     */
+    distinct?: SNSScalarFieldEnum | SNSScalarFieldEnum[]
+  }
+
+  /**
+   * SNS findFirstOrThrow
+   */
+  export type SNSFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * Filter, which SNS to fetch.
+     */
+    where?: SNSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SNS to fetch.
+     */
+    orderBy?: SNSOrderByWithRelationInput | SNSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SNS.
+     */
+    cursor?: SNSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SNS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SNS.
+     */
+    distinct?: SNSScalarFieldEnum | SNSScalarFieldEnum[]
+  }
+
+  /**
+   * SNS findMany
+   */
+  export type SNSFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * Filter, which SNS to fetch.
+     */
+    where?: SNSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SNS to fetch.
+     */
+    orderBy?: SNSOrderByWithRelationInput | SNSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SNS.
+     */
+    cursor?: SNSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SNS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SNS.
+     */
+    skip?: number
+    distinct?: SNSScalarFieldEnum | SNSScalarFieldEnum[]
+  }
+
+  /**
+   * SNS create
+   */
+  export type SNSCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SNS.
+     */
+    data: XOR<SNSCreateInput, SNSUncheckedCreateInput>
+  }
+
+  /**
+   * SNS createMany
+   */
+  export type SNSCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SNS.
+     */
+    data: SNSCreateManyInput | SNSCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SNS createManyAndReturn
+   */
+  export type SNSCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * The data used to create many SNS.
+     */
+    data: SNSCreateManyInput | SNSCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SNS update
+   */
+  export type SNSUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SNS.
+     */
+    data: XOR<SNSUpdateInput, SNSUncheckedUpdateInput>
+    /**
+     * Choose, which SNS to update.
+     */
+    where: SNSWhereUniqueInput
+  }
+
+  /**
+   * SNS updateMany
+   */
+  export type SNSUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SNS.
+     */
+    data: XOR<SNSUpdateManyMutationInput, SNSUncheckedUpdateManyInput>
+    /**
+     * Filter which SNS to update
+     */
+    where?: SNSWhereInput
+    /**
+     * Limit how many SNS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SNS updateManyAndReturn
+   */
+  export type SNSUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * The data used to update SNS.
+     */
+    data: XOR<SNSUpdateManyMutationInput, SNSUncheckedUpdateManyInput>
+    /**
+     * Filter which SNS to update
+     */
+    where?: SNSWhereInput
+    /**
+     * Limit how many SNS to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SNS upsert
+   */
+  export type SNSUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SNS to update in case it exists.
+     */
+    where: SNSWhereUniqueInput
+    /**
+     * In case the SNS found by the `where` argument doesn't exist, create a new SNS with this data.
+     */
+    create: XOR<SNSCreateInput, SNSUncheckedCreateInput>
+    /**
+     * In case the SNS was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SNSUpdateInput, SNSUncheckedUpdateInput>
+  }
+
+  /**
+   * SNS delete
+   */
+  export type SNSDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+    /**
+     * Filter which SNS to delete.
+     */
+    where: SNSWhereUniqueInput
+  }
+
+  /**
+   * SNS deleteMany
+   */
+  export type SNSDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SNS to delete
+     */
+    where?: SNSWhereInput
+    /**
+     * Limit how many SNS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SNS without action
+   */
+  export type SNSDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SNS
+     */
+    select?: SNSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SNS
+     */
+    omit?: SNSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SNSInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5930,6 +7146,17 @@ export namespace Prisma {
   };
 
   export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
+
+
+  export const SNSScalarFieldEnum: {
+    postId: 'postId',
+    userId: 'userId',
+    content: 'content',
+    good: 'good',
+    time: 'time'
+  };
+
+  export type SNSScalarFieldEnum = (typeof SNSScalarFieldEnum)[keyof typeof SNSScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6055,6 +7282,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     hostEvents?: EventListRelationFilter
     reservations?: ReservationListRelationFilter
+    sns?: SNSListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6068,6 +7296,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     hostEvents?: EventOrderByRelationAggregateInput
     reservations?: ReservationOrderByRelationAggregateInput
+    sns?: SNSOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6084,6 +7313,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     hostEvents?: EventListRelationFilter
     reservations?: ReservationListRelationFilter
+    sns?: SNSListRelationFilter
   }, "userId">
 
   export type UserOrderByWithAggregationInput = {
@@ -6327,6 +7557,63 @@ export namespace Prisma {
     canceledAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
   }
 
+  export type SNSWhereInput = {
+    AND?: SNSWhereInput | SNSWhereInput[]
+    OR?: SNSWhereInput[]
+    NOT?: SNSWhereInput | SNSWhereInput[]
+    postId?: IntFilter<"SNS"> | number
+    userId?: StringFilter<"SNS"> | string
+    content?: StringFilter<"SNS"> | string
+    good?: StringNullableListFilter<"SNS">
+    time?: DateTimeFilter<"SNS"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type SNSOrderByWithRelationInput = {
+    postId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    good?: SortOrder
+    time?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type SNSWhereUniqueInput = Prisma.AtLeast<{
+    postId?: number
+    AND?: SNSWhereInput | SNSWhereInput[]
+    OR?: SNSWhereInput[]
+    NOT?: SNSWhereInput | SNSWhereInput[]
+    userId?: StringFilter<"SNS"> | string
+    content?: StringFilter<"SNS"> | string
+    good?: StringNullableListFilter<"SNS">
+    time?: DateTimeFilter<"SNS"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "postId">
+
+  export type SNSOrderByWithAggregationInput = {
+    postId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    good?: SortOrder
+    time?: SortOrder
+    _count?: SNSCountOrderByAggregateInput
+    _avg?: SNSAvgOrderByAggregateInput
+    _max?: SNSMaxOrderByAggregateInput
+    _min?: SNSMinOrderByAggregateInput
+    _sum?: SNSSumOrderByAggregateInput
+  }
+
+  export type SNSScalarWhereWithAggregatesInput = {
+    AND?: SNSScalarWhereWithAggregatesInput | SNSScalarWhereWithAggregatesInput[]
+    OR?: SNSScalarWhereWithAggregatesInput[]
+    NOT?: SNSScalarWhereWithAggregatesInput | SNSScalarWhereWithAggregatesInput[]
+    postId?: IntWithAggregatesFilter<"SNS"> | number
+    userId?: StringWithAggregatesFilter<"SNS"> | string
+    content?: StringWithAggregatesFilter<"SNS"> | string
+    good?: StringNullableListFilter<"SNS">
+    time?: DateTimeWithAggregatesFilter<"SNS"> | Date | string
+  }
+
   export type UserCreateInput = {
     userId?: string
     password: string
@@ -6338,6 +7625,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     hostEvents?: EventCreateNestedManyWithoutHostInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
+    sns?: SNSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6351,6 +7639,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     hostEvents?: EventUncheckedCreateNestedManyWithoutHostInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    sns?: SNSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6364,6 +7653,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUpdateManyWithoutHostNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
+    sns?: SNSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6377,6 +7667,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUncheckedUpdateManyWithoutHostNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    sns?: SNSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6617,6 +7908,58 @@ export namespace Prisma {
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type SNSCreateInput = {
+    content: string
+    good?: SNSCreategoodInput | string[]
+    time?: Date | string
+    user: UserCreateNestedOneWithoutSnsInput
+  }
+
+  export type SNSUncheckedCreateInput = {
+    postId?: number
+    userId: string
+    content: string
+    good?: SNSCreategoodInput | string[]
+    time?: Date | string
+  }
+
+  export type SNSUpdateInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    good?: SNSUpdategoodInput | string[]
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSnsNestedInput
+  }
+
+  export type SNSUncheckedUpdateInput = {
+    postId?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    good?: SNSUpdategoodInput | string[]
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SNSCreateManyInput = {
+    postId?: number
+    userId: string
+    content: string
+    good?: SNSCreategoodInput | string[]
+    time?: Date | string
+  }
+
+  export type SNSUpdateManyMutationInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    good?: SNSUpdategoodInput | string[]
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SNSUncheckedUpdateManyInput = {
+    postId?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    good?: SNSUpdategoodInput | string[]
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6681,6 +8024,12 @@ export namespace Prisma {
     none?: ReservationWhereInput
   }
 
+  export type SNSListRelationFilter = {
+    every?: SNSWhereInput
+    some?: SNSWhereInput
+    none?: SNSWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6691,6 +8040,10 @@ export namespace Prisma {
   }
 
   export type ReservationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SNSOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7006,6 +8359,44 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type SNSCountOrderByAggregateInput = {
+    postId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    good?: SortOrder
+    time?: SortOrder
+  }
+
+  export type SNSAvgOrderByAggregateInput = {
+    postId?: SortOrder
+  }
+
+  export type SNSMaxOrderByAggregateInput = {
+    postId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    time?: SortOrder
+  }
+
+  export type SNSMinOrderByAggregateInput = {
+    postId?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    time?: SortOrder
+  }
+
+  export type SNSSumOrderByAggregateInput = {
+    postId?: SortOrder
+  }
+
   export type EventCreateNestedManyWithoutHostInput = {
     create?: XOR<EventCreateWithoutHostInput, EventUncheckedCreateWithoutHostInput> | EventCreateWithoutHostInput[] | EventUncheckedCreateWithoutHostInput[]
     connectOrCreate?: EventCreateOrConnectWithoutHostInput | EventCreateOrConnectWithoutHostInput[]
@@ -7020,6 +8411,13 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
+  export type SNSCreateNestedManyWithoutUserInput = {
+    create?: XOR<SNSCreateWithoutUserInput, SNSUncheckedCreateWithoutUserInput> | SNSCreateWithoutUserInput[] | SNSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SNSCreateOrConnectWithoutUserInput | SNSCreateOrConnectWithoutUserInput[]
+    createMany?: SNSCreateManyUserInputEnvelope
+    connect?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+  }
+
   export type EventUncheckedCreateNestedManyWithoutHostInput = {
     create?: XOR<EventCreateWithoutHostInput, EventUncheckedCreateWithoutHostInput> | EventCreateWithoutHostInput[] | EventUncheckedCreateWithoutHostInput[]
     connectOrCreate?: EventCreateOrConnectWithoutHostInput | EventCreateOrConnectWithoutHostInput[]
@@ -7032,6 +8430,13 @@ export namespace Prisma {
     connectOrCreate?: ReservationCreateOrConnectWithoutUserInput | ReservationCreateOrConnectWithoutUserInput[]
     createMany?: ReservationCreateManyUserInputEnvelope
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type SNSUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SNSCreateWithoutUserInput, SNSUncheckedCreateWithoutUserInput> | SNSCreateWithoutUserInput[] | SNSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SNSCreateOrConnectWithoutUserInput | SNSCreateOrConnectWithoutUserInput[]
+    createMany?: SNSCreateManyUserInputEnvelope
+    connect?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7082,6 +8487,20 @@ export namespace Prisma {
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
   }
 
+  export type SNSUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SNSCreateWithoutUserInput, SNSUncheckedCreateWithoutUserInput> | SNSCreateWithoutUserInput[] | SNSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SNSCreateOrConnectWithoutUserInput | SNSCreateOrConnectWithoutUserInput[]
+    upsert?: SNSUpsertWithWhereUniqueWithoutUserInput | SNSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SNSCreateManyUserInputEnvelope
+    set?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    disconnect?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    delete?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    connect?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    update?: SNSUpdateWithWhereUniqueWithoutUserInput | SNSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SNSUpdateManyWithWhereWithoutUserInput | SNSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SNSScalarWhereInput | SNSScalarWhereInput[]
+  }
+
   export type EventUncheckedUpdateManyWithoutHostNestedInput = {
     create?: XOR<EventCreateWithoutHostInput, EventUncheckedCreateWithoutHostInput> | EventCreateWithoutHostInput[] | EventUncheckedCreateWithoutHostInput[]
     connectOrCreate?: EventCreateOrConnectWithoutHostInput | EventCreateOrConnectWithoutHostInput[]
@@ -7108,6 +8527,20 @@ export namespace Prisma {
     update?: ReservationUpdateWithWhereUniqueWithoutUserInput | ReservationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ReservationUpdateManyWithWhereWithoutUserInput | ReservationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type SNSUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SNSCreateWithoutUserInput, SNSUncheckedCreateWithoutUserInput> | SNSCreateWithoutUserInput[] | SNSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SNSCreateOrConnectWithoutUserInput | SNSCreateOrConnectWithoutUserInput[]
+    upsert?: SNSUpsertWithWhereUniqueWithoutUserInput | SNSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SNSCreateManyUserInputEnvelope
+    set?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    disconnect?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    delete?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    connect?: SNSWhereUniqueInput | SNSWhereUniqueInput[]
+    update?: SNSUpdateWithWhereUniqueWithoutUserInput | SNSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SNSUpdateManyWithWhereWithoutUserInput | SNSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SNSScalarWhereInput | SNSScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutHostEventsInput = {
@@ -7260,6 +8693,29 @@ export namespace Prisma {
     upsert?: TimeSlotUpsertWithoutReservationsInput
     connect?: TimeSlotWhereUniqueInput
     update?: XOR<XOR<TimeSlotUpdateToOneWithWhereWithoutReservationsInput, TimeSlotUpdateWithoutReservationsInput>, TimeSlotUncheckedUpdateWithoutReservationsInput>
+  }
+
+  export type SNSCreategoodInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutSnsInput = {
+    create?: XOR<UserCreateWithoutSnsInput, UserUncheckedCreateWithoutSnsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSnsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SNSUpdategoodInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateOneRequiredWithoutSnsNestedInput = {
+    create?: XOR<UserCreateWithoutSnsInput, UserUncheckedCreateWithoutSnsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSnsInput
+    upsert?: UserUpsertWithoutSnsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSnsInput, UserUpdateWithoutSnsInput>, UserUncheckedUpdateWithoutSnsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7513,6 +8969,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SNSCreateWithoutUserInput = {
+    content: string
+    good?: SNSCreategoodInput | string[]
+    time?: Date | string
+  }
+
+  export type SNSUncheckedCreateWithoutUserInput = {
+    postId?: number
+    content: string
+    good?: SNSCreategoodInput | string[]
+    time?: Date | string
+  }
+
+  export type SNSCreateOrConnectWithoutUserInput = {
+    where: SNSWhereUniqueInput
+    create: XOR<SNSCreateWithoutUserInput, SNSUncheckedCreateWithoutUserInput>
+  }
+
+  export type SNSCreateManyUserInputEnvelope = {
+    data: SNSCreateManyUserInput | SNSCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EventUpsertWithWhereUniqueWithoutHostInput = {
     where: EventWhereUniqueInput
     update: XOR<EventUpdateWithoutHostInput, EventUncheckedUpdateWithoutHostInput>
@@ -7573,6 +9052,33 @@ export namespace Prisma {
     canceledAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
   }
 
+  export type SNSUpsertWithWhereUniqueWithoutUserInput = {
+    where: SNSWhereUniqueInput
+    update: XOR<SNSUpdateWithoutUserInput, SNSUncheckedUpdateWithoutUserInput>
+    create: XOR<SNSCreateWithoutUserInput, SNSUncheckedCreateWithoutUserInput>
+  }
+
+  export type SNSUpdateWithWhereUniqueWithoutUserInput = {
+    where: SNSWhereUniqueInput
+    data: XOR<SNSUpdateWithoutUserInput, SNSUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SNSUpdateManyWithWhereWithoutUserInput = {
+    where: SNSScalarWhereInput
+    data: XOR<SNSUpdateManyMutationInput, SNSUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SNSScalarWhereInput = {
+    AND?: SNSScalarWhereInput | SNSScalarWhereInput[]
+    OR?: SNSScalarWhereInput[]
+    NOT?: SNSScalarWhereInput | SNSScalarWhereInput[]
+    postId?: IntFilter<"SNS"> | number
+    userId?: StringFilter<"SNS"> | string
+    content?: StringFilter<"SNS"> | string
+    good?: StringNullableListFilter<"SNS">
+    time?: DateTimeFilter<"SNS"> | Date | string
+  }
+
   export type UserCreateWithoutHostEventsInput = {
     userId?: string
     password: string
@@ -7583,6 +9089,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutUserInput
+    sns?: SNSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHostEventsInput = {
@@ -7595,6 +9102,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    sns?: SNSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHostEventsInput = {
@@ -7648,6 +9156,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutUserNestedInput
+    sns?: SNSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHostEventsInput = {
@@ -7660,6 +9169,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    sns?: SNSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TimeSlotUpsertWithWhereUniqueWithoutEventInput = {
@@ -7806,6 +9316,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     hostEvents?: EventCreateNestedManyWithoutHostInput
+    sns?: SNSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReservationsInput = {
@@ -7818,6 +9329,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     hostEvents?: EventUncheckedCreateNestedManyWithoutHostInput
+    sns?: SNSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReservationsInput = {
@@ -7866,6 +9378,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUpdateManyWithoutHostNestedInput
+    sns?: SNSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReservationsInput = {
@@ -7878,6 +9391,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hostEvents?: EventUncheckedUpdateManyWithoutHostNestedInput
+    sns?: SNSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TimeSlotUpsertWithoutReservationsInput = {
@@ -7906,6 +9420,74 @@ export namespace Prisma {
     capacity?: IntFieldUpdateOperationsInput | number
   }
 
+  export type UserCreateWithoutSnsInput = {
+    userId?: string
+    password: string
+    email: string
+    point: number
+    profile?: string | null
+    name?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    hostEvents?: EventCreateNestedManyWithoutHostInput
+    reservations?: ReservationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSnsInput = {
+    userId?: string
+    password: string
+    email: string
+    point: number
+    profile?: string | null
+    name?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    hostEvents?: EventUncheckedCreateNestedManyWithoutHostInput
+    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSnsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSnsInput, UserUncheckedCreateWithoutSnsInput>
+  }
+
+  export type UserUpsertWithoutSnsInput = {
+    update: XOR<UserUpdateWithoutSnsInput, UserUncheckedUpdateWithoutSnsInput>
+    create: XOR<UserCreateWithoutSnsInput, UserUncheckedCreateWithoutSnsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSnsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSnsInput, UserUncheckedUpdateWithoutSnsInput>
+  }
+
+  export type UserUpdateWithoutSnsInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    point?: IntFieldUpdateOperationsInput | number
+    profile?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostEvents?: EventUpdateManyWithoutHostNestedInput
+    reservations?: ReservationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSnsInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    point?: IntFieldUpdateOperationsInput | number
+    profile?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hostEvents?: EventUncheckedUpdateManyWithoutHostNestedInput
+    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type EventCreateManyHostInput = {
     eventId?: number
     eventName: string
@@ -7924,6 +9506,13 @@ export namespace Prisma {
     status: $Enums.ReservationStatus
     reservedAt?: Date | string
     canceledAt?: Date | string | null
+  }
+
+  export type SNSCreateManyUserInput = {
+    postId?: number
+    content: string
+    good?: SNSCreategoodInput | string[]
+    time?: Date | string
   }
 
   export type EventUpdateWithoutHostInput = {
@@ -7984,6 +9573,26 @@ export namespace Prisma {
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     reservedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     canceledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SNSUpdateWithoutUserInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    good?: SNSUpdategoodInput | string[]
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SNSUncheckedUpdateWithoutUserInput = {
+    postId?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    good?: SNSUpdategoodInput | string[]
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SNSUncheckedUpdateManyWithoutUserInput = {
+    postId?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    good?: SNSUpdategoodInput | string[]
+    time?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TimeSlotCreateManyEventInput = {

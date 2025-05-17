@@ -161,6 +161,14 @@ exports.Prisma.ReservationScalarFieldEnum = {
   canceledAt: 'canceledAt'
 };
 
+exports.Prisma.SNSScalarFieldEnum = {
+  postId: 'postId',
+  userId: 'userId',
+  content: 'content',
+  good: 'good',
+  time: 'time'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -184,7 +192,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Event: 'Event',
   TimeSlot: 'TimeSlot',
-  Reservation: 'Reservation'
+  Reservation: 'Reservation',
+  SNS: 'SNS'
 };
 
 /**
