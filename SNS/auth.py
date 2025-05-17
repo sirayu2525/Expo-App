@@ -1,6 +1,6 @@
 import jwt
 from typing import Any, Dict
-
+import time
 
 class JWTDecoder:
     """
@@ -50,9 +50,11 @@ class JWTDecoder:
 
 # 使用例
 if __name__ == "__main__":
+    import os
+
     # 環境変数や設定ファイルからシークレットを取得することを推奨
-    SECRET_KEY = "your-secret-key"
-    token = "<JWTトークン文字列>"
+    SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc1MzczNjcsInN1YiI6IjgxMTUyNTM3LWFlZjctNDhlOS04NjIzLWUxZTk1ZGNmYTVlZCJ9.wZbtEL8TwudVj0SttW3AkeRSXXNw3mktF1uQh50ekzc"
 
     decoder = JWTDecoder(SECRET_KEY)
     try:
@@ -60,5 +62,9 @@ if __name__ == "__main__":
         exp = decoder.get_expiration(token)
         print(f"ユーザーID: {user_id}")
         print(f"有効期限 (exp): {exp}")
+
+        print(time.time())
+        print(time.time() > exp)
+        print(type(exp))
     except jwt.PyJWTError as e:
         print(f"JWTのデコードに失敗しました: {e}")

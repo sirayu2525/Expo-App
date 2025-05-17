@@ -1,5 +1,6 @@
 from supabase import create_client, Client
 import requests
+import time
 
 class SupabaseDB:
     """
@@ -109,6 +110,24 @@ class SupabaseDB:
         for col, val in filters.items():
             query = query.eq(col, val)
         return query.execute()
+    
+    def get_if_exists(self, table: str, column: str, value):
+        """
+        指定テーブルの指定列に指定値が存在するかチェック。
+        存在しなければ None、存在すればそのレコード（辞書）を返します。
+
+        :param table: 対象テーブル名
+        :param column: チェック対象の列名
+        :param value: 存在を確認したい値
+        :return: レコード(dict) または None
+        """
+        # 該当列と同じ名前でフィルター
+        resp = self.select(table, columns='*', filters={column: value})
+        # supabase-py の実行結果は .data にレコードのリストが入る
+        if hasattr(resp, 'data') and resp.data:
+            # 最初のレコードを返す
+            return resp.data[0]
+        return None
 
 # --- 使用例 ---
 # from supabase_db_module import SupabaseDB
@@ -125,4 +144,4 @@ if __name__ == "__main__":
     supabase_url = os.getenv("SUPABASE_URL")
     supabase_key = os.getenv("SUPABASE_KEY")   
     SDB = SupabaseDB(supabase_url, supabase_key)
-    
+    print(SDB.get_if_exists('User','userId','1debc827-5ca3-480e-a78c-1519396bed43'))
