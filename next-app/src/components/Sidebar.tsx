@@ -1,11 +1,29 @@
-// src/components/Sidebar.tsx
 'use client';
 
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export function Sidebar() {
+  const router = useRouter();
+
+  const handleExternalRedirect = () => {
+    const cookies = document.cookie;
+    const token = cookies
+      .split('; ')
+      .find((row) => row.startsWith('jwt='))
+      ?.split('=')[1];
+
+    if (token) {
+      const encoded = encodeURIComponent(token);
+      const targetUrl = `http://localhost:8000?jwt=${encoded}`;
+      window.location.href = targetUrl;
+    } else {
+      alert('JWTが見つかりません');
+    }
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -18,6 +36,11 @@ export function Sidebar() {
           <Link href="/create" className="hover:underline">イベント作成</Link>
           <Link href="/me" className="hover:underline">マイページ</Link>
           <Link href="/login" className="hover:underline">ログイン</Link>
+
+          {/* ✅ 外部ドメインへのリンク */}
+          <button onClick={handleExternalRedirect} className="text-left hover:underline text-blue-600">
+            外部アプリへ移動
+          </button>
         </nav>
       </SheetContent>
     </Sheet>
