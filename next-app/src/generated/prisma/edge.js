@@ -169,7 +169,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/tyyti/Projects/Expo-App/next-app/src/generated/prisma",
+      "value": "/Users/siraiyuto/Projects/Expo-App/next-app/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -178,12 +178,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/tyyti/Projects/Expo-App/next-app/prisma/schema.prisma",
+    "sourceFilePath": "/Users/siraiyuto/Projects/Expo-App/next-app/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
