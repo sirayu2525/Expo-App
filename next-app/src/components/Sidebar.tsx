@@ -11,6 +11,10 @@ export function Sidebar() {
   const handleExternalRedirect = () => {
     const cookies = document.cookie;
     console.log('Cookies:', cookies); // デバッグ用
+    if (!cookies) {
+      alert('Cookieが見つかりません');
+      return;
+    }
     const token = cookies
       .split('; ')
       .find((row) => row.startsWith('jwt='))
