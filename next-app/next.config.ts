@@ -11,8 +11,6 @@ const nextConfig: NextConfig = {
   },
   // React の Strict Mode を無効にする
   reactStrictMode: false,
-  // SWC のコンパイラを使用する
-  swcMinify: true,
   // 既存の画像ドメイン設定
   images: {
     domains: [
