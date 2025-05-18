@@ -12,17 +12,18 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('https://my-go-app-4-3-440582633184.asia-northeast2.run.app/signin', {
+      const res = await fetch('https://my-go-app-4-5-440582633184.asia-northeast2.run.app/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // ← Cookieを受け取るために必要
         body: JSON.stringify({ email, password }),
       });
-      const { token } = await res.json();
-      if (!token) {
-        setError('トークンが取得できませんでした');
-        return;
-      }
+      // console.log('Response:', res); // デバッグ用
+      // const { token } = await res.json();
+      // if (!token) {
+      //   setError('トークンが取得できませんでした');
+      //   return;
+      // }
 
       if (!res.ok) {
         const err = await res.json();
@@ -30,7 +31,7 @@ export default function LoginPage() {
         return;
       }
 
-      document.cookie = `jwt=${token}; path=/; SameSite=None; Secure`;
+      // document.cookie = `jwt=${token}; path=/; SameSite=None; Secure`;
 
 
       // Cookieは自動的に保存されるので、何も保存しなくてOK

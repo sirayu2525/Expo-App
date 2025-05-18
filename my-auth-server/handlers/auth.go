@@ -99,9 +99,9 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 			Name:     "jwt",
 			Value:    signedToken,
 			HttpOnly: false,
-			Secure:   true, // ローカルならfalse、本番はtrue
-			Path:     "/",
-			SameSite: http.SameSiteNoneMode,
+			Secure:   false, // ローカルならfalse、本番はtrue
+			Path:     "/top",
+			// SameSite: http.SameSiteNoneMode,
 			// Partitioned: true,
 			MaxAge: 60 * 60 * 24, // 1日
 		}

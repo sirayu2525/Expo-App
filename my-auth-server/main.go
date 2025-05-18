@@ -61,7 +61,7 @@ func main() {
 	e := echo.New()
 
 	// CORS 設定（プリフライトもこのミドルウェアでハンドル）
-	e.Pre(middleware.CORSWithConfig(middleware.CORSConfig{
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOriginFunc: func(origin string) (bool, error) {
 			// origin が空なら拒否
 			if origin == "" {
