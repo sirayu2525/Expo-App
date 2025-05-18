@@ -3,8 +3,9 @@ import { prisma } from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
 import { redirect } from 'next/navigation';
 
-export default async function MePage() {
-  const token = (await cookies()).get('jwt')?.value;
+export default async function MePage({ searchParams }: { searchParams: Promise<{ jwt: string }> }) {
+
+  const token = (await searchParams).jwt;
   if (!token) redirect('/login');
 
   const { sub: userId } = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };

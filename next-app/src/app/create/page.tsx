@@ -1,13 +1,29 @@
-import { cookies } from 'next/headers';
+// app/create/page.tsx
 import { prisma } from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
 import { redirect } from 'next/navigation';
 
-export default async function CreateEventPage() {
+export default async function CreateEventPage({
+  searchParams,
+}: {
+  searchParams: { jwt?: string };
+}) {
+  const token = searchParams.jwt;
+  if (!token) redirect('/login');
+
+  let userId: string;
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
+    userId = decoded.sub;
+  } catch {
+    redirect('/login');
+  }
+
   return (
     <div className="max-w-xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">イベント作成</h1>
       <form action={createEventAction} className="space-y-4">
+        <input type="hidden" name="jwt" value={token} />
         <input type="text" name="eventName" placeholder="イベント名" required className="w-full border rounded px-3 py-2" />
         <input type="text" name="title" placeholder="タイトル" required className="w-full border rounded px-3 py-2" />
         <textarea name="description" placeholder="詳細" required className="w-full border rounded px-3 py-2" />
@@ -20,15 +36,21 @@ export default async function CreateEventPage() {
   );
 }
 
+// サーバーアクション
 async function createEventAction(formData: FormData) {
   'use server';
 
-  // 1. ログインチェック
-  const token = (await cookies()).get('jwt')?.value;
+  const token = formData.get('jwt') as string;
   if (!token) redirect('/login');
-  const { sub: userId } = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
 
-  // フォームの値取得
+  let userId: string;
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
+    userId = decoded.sub;
+  } catch {
+    redirect('/login');
+  }
+
   const eventName   = formData.get('eventName') as string;
   const title       = formData.get('title') as string;
   const description = formData.get('description') as string;
@@ -36,7 +58,6 @@ async function createEventAction(formData: FormData) {
   const endsAt      = new Date(formData.get('endsAt') as string);
   const capacity    = parseInt(formData.get('capacity') as string);
 
-  // 2. バッジを作成
   const badge = await prisma.badgeList.create({
     data: {
       name:        eventName,
@@ -45,7 +66,6 @@ async function createEventAction(formData: FormData) {
     },
   });
 
-  // 3. イベント作成（badgeId を紐づけ）
   const event = await prisma.event.create({
     data: {
       hostId: userId,
@@ -54,34 +74,32 @@ async function createEventAction(formData: FormData) {
       description,
       startsAt,
       endsAt,
-      badgeId: badge.badgeId, 
+      badgeId: badge.badgeId,
     },
   });
 
-  // 4. タイムスロット作成
   const slots = [];
   const cur = new Date(startsAt);
   while (cur < endsAt) {
     const end = new Date(cur.getTime() + 60 * 60 * 1000);
     if (end > endsAt) break;
     slots.push({
-      eventId:  event.eventId,
-      startAt:  new Date(cur),
-      endAt:    new Date(end),
+      eventId: event.eventId,
+      startAt: new Date(cur),
+      endAt: new Date(end),
       capacity,
     });
     cur.setHours(cur.getHours() + 1);
   }
+
   await prisma.timeSlot.createMany({ data: slots });
 
-  // 5. 作成者にバッジを付与
   await prisma.userBadge.create({
     data: {
-      userId:  userId,
+      userId,
       badgeId: badge.badgeId,
     },
   });
 
-  // 6. 完了後トップへリダイレクト
-  redirect('/top');
+  redirect('/top?jwt=' + token);
 }

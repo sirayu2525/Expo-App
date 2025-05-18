@@ -1,16 +1,32 @@
 import { prisma } from '@/lib/prisma';
-import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
+export default async function ReservePage({
+  searchParams,
+  params,
+}: {
+  searchParams: Promise<{ jwt: string }>;
+  params: Promise<{ timeSlotId: string }>;
+}) {
+  const { jwt: token } = await searchParams;
+  const { timeSlotId: timeSlotIdStr } = await params;
+  const timeSlotId = Number(timeSlotIdStr);
 
+  if (isNaN(timeSlotId)) return <div>不正なスロットIDです</div>;
 
-export default async function ReservePage({ params }: {  params : Promise<{timeSlotId : number } > }) {
-  const { timeSlotId } = await params;
+  let userId: string;
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
+    userId = decoded.sub;
+  } catch (err) {
+    console.error('JWT検証失敗:', err);
+    redirect('/login');
+  }
 
-  if (!timeSlotId) return <div>timeスロットが見つかりません</div>;
   const slot = await prisma.timeSlot.findUnique({
-    where: { timeSlotId: Number(timeSlotId) },
+    where: { timeSlotId },
     include: {
       event: true,
       reservations: true,
@@ -18,9 +34,6 @@ export default async function ReservePage({ params }: {  params : Promise<{timeS
   });
 
   if (!slot) return <div>スロットが見つかりません</div>;
-  const token = (await cookies()).get('jwt')?.value;
-  if (!token) redirect('/login');
-  const { sub: userId } = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
 
   const isAlreadyReserved = slot.reservations.some((r) => r.userId === userId);
   const isFull = slot.reservations.length >= slot.capacity;
@@ -38,6 +51,7 @@ export default async function ReservePage({ params }: {  params : Promise<{timeS
       {!isAlreadyReserved && !isFull && (
         <form action={reserveAction} className="mt-6">
           <input type="hidden" name="timeSlotId" value={timeSlotId} />
+          <input type="hidden" name="jwt" value={token} />
           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             予約する
           </button>
@@ -50,19 +64,21 @@ export default async function ReservePage({ params }: {  params : Promise<{timeS
 async function reserveAction(formData: FormData) {
   'use server';
 
-  const token = (await cookies()).get('jwt')?.value;
-  if (!token) redirect('/login');
-  const { sub: userId } = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
-
+  const token = formData.get('jwt') as string;
   const timeSlotId = Number(formData.get('timeSlotId'));
-  const slot = await prisma.timeSlot.findUnique({
-    where: { timeSlotId },
-    include: { reservations: true },
-  });
 
-  if (!slot) throw new Error('スロットが存在しません');
-  if (slot.reservations.some((r) => r.userId === userId)) return;
-  if (slot.reservations.length >= slot.capacity) return;
+  if (!token || isNaN(timeSlotId)) {
+    redirect('/login');
+  }
+
+  let userId: string;
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
+    userId = decoded.sub;
+  } catch (err) {
+    console.error('JWTエラー:', err);
+    redirect('/login');
+  }
 
   await prisma.reservation.create({
     data: {
@@ -72,5 +88,6 @@ async function reserveAction(formData: FormData) {
     },
   });
 
-  redirect('/me');
+  revalidatePath('/top');
+  redirect(`/me?jwt=${encodeURIComponent(token)}`);
 }

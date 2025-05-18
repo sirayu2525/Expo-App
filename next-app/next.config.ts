@@ -28,16 +28,7 @@ const nextConfig = {
     ],
   },
 
-  // Cloud Run へのリライト設定
-  async rewrites() {
-    const apiOrigin = "https://my-go-app-4-6-440582633184.asia-northeast1.run.app";
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${apiOrigin}/:path*`, // :path* は Next.js が自動展開
-      },
-    ];
-  },
+
 };
 
 module.exports = nextConfig;

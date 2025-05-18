@@ -1,12 +1,10 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
-import { getUserFromCookie } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import Image from 'next/image';
 
-export default async function HomePage() {
-    const user = getUserFromCookie()
-    if(!user) redirect("/login")
+export default async function HomePage({ searchParams }: { searchParams: Promise<{ jwt: string }> }) {
+    const { jwt } = await searchParams;
+    console.log(jwt)
 
     const now = new Date();
     const events = await prisma.event.findMany({
@@ -24,7 +22,7 @@ export default async function HomePage() {
         },
         orderBy: { startsAt: 'asc' },
     });
-    // console.log(events)
+    console.log(events)
 
     return (
         <div className="max-w-4xl mx-auto p-6">
@@ -56,7 +54,7 @@ export default async function HomePage() {
                 <div key={slot.timeSlotId} className="flex justify-between items-center border px-3 py-2 rounded">
                     <span>{new Date(slot.startAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(slot.endAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                     <Link
-                    href={`/reserve/${slot.timeSlotId}`}
+                    href={`/reserve/${slot.timeSlotId}?jwt=${jwt}`}
                     className="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                     >
                     予約する

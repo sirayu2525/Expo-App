@@ -12,11 +12,13 @@ export default function SignupPage() {
 
   const handleSignup = async () => {
     try {
-      const res = await fetch('https://my-go-app-4-6-440582633184.asia-northeast1.run.app/signup', {
+      const res = await fetch('http://localhost:8080/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
+
+      
 
       if (!res.ok) {
         const err = await res.json();

@@ -74,9 +74,6 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 			return c.JSON(http.StatusUnauthorized, echo.Map{"error": "user not found"})
 		}
 
-		fmt.Println("受信:", input.Email)
-		fmt.Println("受信:", input.Password)
-
 		// パスワード照合
 		if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)); err != nil {
 			return c.JSON(http.StatusUnauthorized, echo.Map{"error": "invalid password"})
@@ -85,7 +82,7 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 		// JWT発行
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"sub": user.UserID,
-			"exp": time.Now().Add(time.Hour * 24).Unix(),
+			"exp": time.Now().Add(24 * time.Hour).Unix(),
 		})
 
 		secret := os.Getenv("SECRET_KEY")
@@ -93,21 +90,11 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, echo.Map{"error": "failed to generate token"})
 		}
-		fmt.Println("発行:", signedToken)
 
-		cookie := &http.Cookie{
-			Name:     "jwt",
-			Value:    signedToken,
-			HttpOnly: true,
-			Secure:   true, // ローカルならfalse、本番はtrue
-			Path:     "/",
-			SameSite: http.SameSiteLaxMode,
-			// Partitioned: true,
-			MaxAge: 60 * 60 * 24, // 1日
-		}
-		c.SetCookie(cookie)
-		return c.JSON(http.StatusOK, cookie.Value)
-
+		// JSONでJWTを返す
+		return c.JSON(http.StatusOK, echo.Map{
+			"token": signedToken,
+		})
 	}
 }
 

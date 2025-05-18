@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('https://my-go-app-4-6-440582633184.asia-northeast1.run.app/signin', {
+      const res = await fetch('http://localhost:8080/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // ← Cookieを受け取るために必要
@@ -31,11 +32,18 @@ export default function LoginPage() {
         return;
       }
 
+      const data = await res.json();
+      const { token } = data;
+
+      router.push(`/top?jwt=${token}`);
+
+
+
       // document.cookie = `jwt=${token}; path=/; SameSite=None; Secure`;
 
 
       // Cookieは自動的に保存されるので、何も保存しなくてOK
-      router.push('/top');
+      // router.push('/top');
     } catch (err) {
       setError('通信エラー');
     }
@@ -68,7 +76,7 @@ export default function LoginPage() {
         </button>
         <p className="text-sm text-center mt-4">
           アカウントをお持ちでない方は{' '}
-          <Link href="/signup" className="text-blue-500 hover:underline">
+          <Link href={'/signup'} className="text-blue-500 hover:underline">
             新規登録
           </Link>
         </p>

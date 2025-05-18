@@ -3,31 +3,8 @@
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export function Sidebar() {
-  const router = useRouter();
-
-  const handleExternalRedirect = () => {
-    const cookies = document.cookie;
-    console.log('Cookies:', cookies); // デバッグ用
-    if (!cookies) {
-      alert('Cookieが見つかりません');
-      return;
-    }
-    const token = cookies
-      .split('; ')
-      .find((row) => row.startsWith('jwt='))
-      ?.split('=')[1];
-
-    if (token) {
-      const encoded = encodeURIComponent(token);
-      const targetUrl = `http://localhost:8501?jwt=${encoded}`;
-      window.location.href = targetUrl;
-    } else {
-      alert('JWTが見つかりません');
-    }
-  };
 
   return (
     <Sheet>
