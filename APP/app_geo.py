@@ -23,6 +23,12 @@ from agents.mcp.server import MCPServerStreamableHttp
 import requests
 from PIL import Image
 
+from streamlit_geolocation import geolocation
+
+import pydeck as pdk
+from shapely.geometry import Point, Polygon
+
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -204,9 +210,77 @@ def set_bg_and_overlay(png_file, text):
 
 
 
+# Define Geofence Polygon (Longitude, Latitude)
+geofence_coords = [
+    (135.436, 34.656), 
+    (135.440, 34.656), 
+    (135.440, 34.660), 
+    (135.436, 34.660)
+]
+geofence_polygon = Polygon(geofence_coords)
 
+# Obtain real-time location via streamlit-geolocation
+location_data = geolocation(
+    api_key="",           # 必要に応じて MapboxなどのAPIキー
+    accuracy=100,         # 精度（メートル）
+    update_interval=1000  # 更新間隔（ミリ秒）
+)
 
+# Default values
+lat, lon = None, None
+if location_data and "coords" in location_data:
+    lat = location_data["coords"]["latitude"]
+    lon = location_data["coords"]["longitude"]
 
+# Check geofence inclusion
+inside = False
+if lat and lon:
+    user_point = Point(lon, lat)
+    inside = geofence_polygon.contains(user_point)
+
+# Display map with Geofence and Real-time Location
+st.subheader("現在地とジオフェンスエリア (リアルタイム)")
+
+if lat and lon:
+    polygon_layer = pdk.Layer(
+        "PolygonLayer",
+        data=[{"polygon": geofence_coords}],
+        get_polygon="polygon",
+        get_fill_color=[200, 30, 0, 50],
+        get_line_color=[200, 30, 0],
+        stroked=True,
+        filled=True,
+    )
+    marker_layer = pdk.Layer(
+        "ScatterplotLayer",
+        data=[{"position": [lon, lat]}],
+        get_position="position",
+        get_color=[0, 0, 200],
+        get_radius=50,
+    )
+    view_state = pdk.ViewState(latitude=lat, longitude=lon, zoom=15, pitch=0)
+    deck = pdk.Deck(
+        layers=[polygon_layer, marker_layer],
+        initial_view_state=view_state,
+        map_style="mapbox://styles/mapbox/light-v9"
+    )
+    st.pydeck_chart(deck)
+else:
+    st.info("位置情報を取得中... ブラウザの許可を確認してください。")
+
+# Quest Status
+st.subheader("クエストステータス")
+if lat and lon:
+    if inside:
+        st.success("🎉 ジオフェンス内に入りました！新クエスト「ARスタンプ収集」がアンロック！")
+    else:
+        st.warning("❌ まだジオフェンス外です。エリア内に入るとクエストがアンロックされます。")
+else:
+    st.write("位置情報待ちです...")
+
+# Show Geofence Coordinates
+with st.expander("ジオフェンスの座標を表示"):
+    st.write(geofence_coords)
 
 
 
