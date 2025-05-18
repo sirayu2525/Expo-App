@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('https://my-go-app-4-5-440582633184.asia-northeast2.run.app/signin', {
+      const res = await fetch('https://my-go-app-4-6-440582633184.asia-northeast1.run.app/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // ← Cookieを受け取るために必要

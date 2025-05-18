@@ -30,7 +30,7 @@ const nextConfig = {
 
   // Cloud Run へのリライト設定
   async rewrites() {
-    const apiOrigin = "https://my-go-app-4-5-440582633184.asia-northeast2.run.app";
+    const apiOrigin = "https://my-go-app-4-6-440582633184.asia-northeast1.run.app";
     return [
       {
         source: "/api/:path*",
