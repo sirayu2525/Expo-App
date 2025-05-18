@@ -154,7 +154,7 @@ else:
         st.image(
             img,
             caption=str(now_badge[1]),  # キャプション（省略可）
-            use_column_width=True,                  # カラム幅に合わせてリサイズ
+            use_container_width=True,                  # カラム幅に合わせてリサイズ
             clamp=True                              # 色値オーバー／アンダーをクリップ
         )
 

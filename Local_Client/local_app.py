@@ -60,7 +60,7 @@ except Exception as e:
     login_flag = False
 
 
-def badge_draw(name, image_url):
+def badge_draw(name, image_url,id):
     response = requests.get(image_url)
     # 2. バイト列を BytesIO にラップして PIL で読み込む
     img = Image.open(BytesIO(response.content))
@@ -68,12 +68,17 @@ def badge_draw(name, image_url):
     st.write(name)
     st.image(
         img,
-        caption="これはPILで読み込んだ画像です",  # キャプション（省略可）
-        use_column_width=True,                  # カラム幅に合わせてリサイズ
+        caption=name,  # キャプション（省略可）
+        use_container_width=True,                  # カラム幅に合わせてリサイズ
         clamp=True                              # 色値オーバー／アンダーをクリップ
     )
-    if st.button('印刷'):
-        MAX_WIDTH = 512  # お使いのプリンタの最大ドット幅に合わせる
+    btn_key = f"print_{name}_{(image_url)}_{(id)}"
+    print('==FLAG__0000')
+    if st.button('印刷', key=btn_key):
+        print('==FLAG__0001')
+        st.write("▶︎ 印刷処理を開始します")
+        MAX_WIDTH = 400  # お使いのプリンタの最大ドット幅に合わせる
+        print('==FLAG__0002')
         if img.width > MAX_WIDTH:
             ratio = MAX_WIDTH / img.width
             new_height = int(img.height * ratio)
@@ -84,7 +89,7 @@ def badge_draw(name, image_url):
                 else Image.LANCZOS
             )
             img = img.resize((MAX_WIDTH, new_height), resample=resample_filter)
-
+        print('==FLAG__0003')
         # ----------------------------
         # ③ ESC/POS プリンタへ送信
         # ----------------------------
@@ -120,8 +125,8 @@ else:
         badge_list = []
         for i in record_list:
             now_id = i[2]
-            now_badge = PDB.query(table = 'badgeList',column = 'badgeId',value = now_id)
-            badge_draw(now_badge[1], now_badge[2])
+            now_badge = PDB.query(table = 'badgeList',column = 'badgeId',value = now_id)[0]
+            badge_draw(now_badge[1], now_badge[2],now_badge[0])
             
             
 
@@ -139,7 +144,7 @@ else:
             # ----------------------------
             # ② プリンタの幅に合わせてリサイズ（必要に応じて）
             # ----------------------------
-            MAX_WIDTH = 512  # お使いのプリンタの最大ドット幅に合わせる
+            MAX_WIDTH = 400  # お使いのプリンタの最大ドット幅に合わせる
             if img.width > MAX_WIDTH:
                 ratio = MAX_WIDTH / img.width
                 new_height = int(img.height * ratio)
