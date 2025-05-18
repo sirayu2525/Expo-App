@@ -29,6 +29,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         <h1 className="text-2xl font-bold mb-6">予約可能なイベント一覧</h1>
         {events.length === 0 && <p>現在、予約可能なイベントはありません。</p>}
         {events.map((event) => (
+            <>
             <div key={event.eventId} className="mb-8 p-4 border rounded">
                           {/* バッジ表示 */}
             {event.badge && (
@@ -63,6 +64,15 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 ))}
             </div>
             </div>
+
+            <Link href={`/create?jwt=${jwt}`} className="text-sm text-blue-600 hover:underline">
+            イベントを作成する
+            </Link>
+            <Link href={`/me?jwt=${jwt}`} className="text-sm text-blue-600 hover:underline">
+                自分の予約一覧
+            </Link>
+            </>
+
         ))}
         </div>
     );

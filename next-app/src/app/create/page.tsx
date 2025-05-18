@@ -8,7 +8,7 @@ export default async function CreateEventPage({
 }: {
   searchParams: { jwt?: string };
 }) {
-  const token = searchParams.jwt;
+  const token = (await searchParams).jwt;
   if (!token) redirect('/login');
 
   let userId: string;

@@ -436,3 +436,11 @@ Next.js には サーバーでHTML生成と クライアントでJSによる描�
 App Routerでは server component が SSR、'use client' コンポーネントが CSR を担う。
 必要に応じて静的生成（SSG）や再生成（ISR）も使える。
 その理論でいうと、document.cookiesをuseEffectに囲わなくてもいけるはずだろう。なぜならJavaScriptをブラウザに送ってそこでdocument.を実行するなら成功するはずさ。なのになぜuseEffectで囲わなかったらエラーがでるのか
+
+/Users/siraiyuto/Projects/Expo-App/my-auth-server/main.go:33
+[error] failed to initialize database, got error failed to connect to `host=aws-0-ap-northeast-1.pooler.supabase.com user=postgres.yakiragneieptkwwnlvn database=postgres`: dial error (dial tcp 54.64.190.72:5432: connect: network is unreachable)
+2025/05/18 17:20:35 DB接続失敗:failed to connect to `host=aws-0-ap-northeast-1.pooler.supabase.com user=postgres.yakiragneieptkwwnlvn database=postgres`: dial error (dial tcp 54.64.190.72:5432: connect: network is unreachable)
+exit status 1
+
+https://qiita.com/hellomyzn/items/119c00344d18155adb43
+これかな
