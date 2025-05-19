@@ -194,7 +194,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/siraiyuto/Projects/Expo-App/next-app/src/generated/prisma",
+      "value": "/home/tyyti/Projects/Expo-App/next-app/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -203,12 +203,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/siraiyuto/Projects/Expo-App/next-app/prisma/schema.prisma",
+    "sourceFilePath": "/home/tyyti/Projects/Expo-App/next-app/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -222,11 +222,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres.yakiragneieptkwwnlvn:ExpoOsaka@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+        "value": null
       }
     }
   },

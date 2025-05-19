@@ -5,6 +5,14 @@ import Image from 'next/image';
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ jwt: string }> }) {
     const { jwt } = await searchParams;
     console.log(jwt)
+    if (!jwt) {
+        return (
+            <div className="max-w-4xl mx-auto p-6">
+                <h1 className="text-2xl font-bold mb-6">JWTがありません</h1>
+                <p>JWTが必要です。</p>
+            </div>
+        );
+    }
 
     const now = new Date();
     const events = await prisma.event.findMany({
@@ -29,7 +37,6 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
         <h1 className="text-2xl font-bold mb-6">予約可能なイベント一覧</h1>
         {events.length === 0 && <p>現在、予約可能なイベントはありません。</p>}
         {events.map((event) => (
-            <>
             <div key={event.eventId} className="mb-8 p-4 border rounded">
                           {/* バッジ表示 */}
             {event.badge && (
@@ -64,16 +71,18 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
                 ))}
             </div>
             </div>
-
+        ))}
+        <h2>
             <Link href={`/create?jwt=${jwt}`} className="text-sm text-blue-600 hover:underline">
             イベントを作成する
             </Link>
+
+        </h2>
+        <h2>
             <Link href={`/me?jwt=${jwt}`} className="text-sm text-blue-600 hover:underline">
                 自分の予約一覧
             </Link>
-            </>
-
-        ))}
+        </h2>
         </div>
     );
 }
