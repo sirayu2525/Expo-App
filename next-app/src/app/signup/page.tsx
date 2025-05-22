@@ -12,7 +12,7 @@ export default function SignupPage() {
 
   const handleSignup = async () => {
     try {
-      const res = await fetch('http://localhost:8080/signup', {
+      const res = await fetch('https://my-next-app-440582633184.asia-northeast2.run.app/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
