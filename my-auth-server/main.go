@@ -3,9 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
-	"net/url"
 	"os"
-	"strings"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -62,23 +60,7 @@ func main() {
 
 	// CORS 設定（プリフライトもこのミドルウェアでハンドル）
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOriginFunc: func(origin string) (bool, error) {
-			// origin が空なら拒否
-			if origin == "" {
-				return false, nil
-			}
-			// URL としてパースし、ホスト名部分を取り出す
-			u, err := url.Parse(origin)
-			if err != nil {
-				return false, nil
-			}
-			host := u.Hostname()
-			// localhost で動作確認する場合も許可
-			if host == "localhost" || strings.HasSuffix(host, ".vercel.app") {
-				return true, nil
-			}
-			return false, nil
-		},
+		AllowOrigins:     []string{"https://expo-app-m5bx-252k9i85h-sirayu2525s-projects.vercel.app"},
 		AllowMethods:     []string{http.MethodGet, http.MethodPost, http.MethodOptions},
 		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
 		AllowCredentials: true,
