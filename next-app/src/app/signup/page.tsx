@@ -12,7 +12,7 @@ export default function SignupPage() {
 
   const handleSignup = async () => {
     try {
-      const res = await fetch('https://my-go-app-4-5-440582633184.asia-northeast2.run.app/signup', {
+      const res = await fetch('http://localhost:8080/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -24,7 +24,6 @@ export default function SignupPage() {
         return;
       }
 
-      // サインアップ後、自動でログインさせる場合は /signin を叩く or トークン返すようにGoを修正
       setSuccess(true);
       setTimeout(() => {
         router.push('/login');

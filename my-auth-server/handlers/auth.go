@@ -100,7 +100,7 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 			Value:    signedToken,
 			HttpOnly: false,
 			Secure:   false, // ローカルならfalse、本番はtrue
-			Path:     "/top",
+			Path:     "/",
 			// SameSite: http.SameSiteNoneMode,
 			// Partitioned: true,
 			MaxAge: 60 * 60 * 24, // 1日
@@ -112,18 +112,6 @@ func SigninHandler(db *gorm.DB) echo.HandlerFunc {
 }
 
 func ExtractUserIDFromToken(c echo.Context) (string, error) {
-	// authHeader := c.Request().Header.Get("Authorization")
-	// if authHeader == "" {
-	// 	return "", echo.NewHTTPError(http.StatusUnauthorized, "missing Authorization header")
-	// }
-	// fmt.Println("受信:", authHeader)
-
-	// tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
-	// if tokenStr == authHeader {
-	// 	return "", echo.NewHTTPError(http.StatusUnauthorized, "invalid Authorization format")
-	// }
-	// fmt.Println("受信:", tokenStr)
-
 	cookie, err := c.Cookie("jwt")
 	if err != nil {
 		return "", echo.NewHTTPError(http.StatusUnauthorized, "missing JWT cookie")

@@ -25,6 +25,7 @@ async function createEventAction(formData: FormData) {
 
   // 1. ログインチェック
   const token = (await cookies()).get('jwt')?.value;
+  console.log(token);
   if (!token) redirect('/login');
   const { sub: userId } = jwt.verify(token, process.env.SECRET_KEY!) as { sub: string };
 
