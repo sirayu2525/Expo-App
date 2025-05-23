@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 
-export async function GET() {
+export async function GET(req : NextRequest) {
   const token = (await cookies()).get('jwt')?.value;
   console.log('Token:', token);
 
