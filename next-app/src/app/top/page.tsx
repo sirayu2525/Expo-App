@@ -27,6 +27,7 @@ export default async function HomePage() {
     // console.log(events)
 
     return (
+        <>
         <div className="max-w-4xl mx-auto p-6">
         <h1 className="text-2xl font-bold mb-6">予約可能なイベント一覧</h1>
         {events.length === 0 && <p>現在、予約可能なイベントはありません。</p>}
@@ -67,5 +68,9 @@ export default async function HomePage() {
             </div>
         ))}
         </div>
+        <Link href="/create" className="fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">イベント作成</Link>
+        <Link href="/me_client" className="fixed bottom-4 left-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">クライアントのもの</Link>
+        <Link href="/cookie" className="fixed bottom-4 left-24 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">クッキーのもの</Link>
+        </>
     );
 }

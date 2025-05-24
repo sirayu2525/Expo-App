@@ -70,3 +70,9 @@ npx prisma generate     // Prismaクライアントの生成
 npx prisma migrate reset // 必要に応じてデータ消去
 ```
 
+### GoogleCloud
+```
+ gcloud config get-value project
+gcloud builds submit \
+  --tag asia-northeast1-docker.pkg.dev/hackathon-460114/my-docker-repo/my-app:latest
+```
