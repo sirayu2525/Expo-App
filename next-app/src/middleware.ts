@@ -46,5 +46,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/me', '/top', '/create', '/me_client'], // ミドルウェアを適用するルート
+    matcher: ['/me', '/create', '/me_client'], // ミドルウェアを適用するルート
 };
